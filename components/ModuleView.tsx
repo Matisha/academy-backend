@@ -28,13 +28,13 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
           ></iframe>
         </div>
       );
-    case 'lab':
-      return (
-        <div className="my-8">
-          {block.title && <h3 className="text-xl font-bold mb-4 text-gray-800">{block.title}</h3>}
-          <LabRenderer labId={block.content} />
-        </div>
-      );
+    // case 'lab':
+    //   return (
+    //     <div className="my-8">
+    //       {block.title && <h3 className="text-xl font-bold mb-4 text-gray-800">{block.title}</h3>}
+    //       <LabRenderer labId={block.content} />
+    //     </div>
+    //   );
     case 'note':
       return (
         <div className="my-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
@@ -47,10 +47,29 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
       );
 
     case 'image':
+      // local images stored in public/images are copied to dist at build time
+      // the `content` field should be the filename (e.g. "diagram.png").
       return (
         <div className="my-8">
+          {/* max-w-full: prevent the image from exceeding its container width */}
+          {/* rounded-2xl: apply large rounded corners to the image */}
+          {/* shadow-xl: add an extra-large box shadow for visual depth */}
           <img
-            className="max-w-full rounded-2xl shadow-xl border border-gray-200"
+            className="max-w-full rounded-2xl shadow-xl"
+            src={`/images/${block.content}`}
+            alt={block.metadata?.alt || ''}
+          />
+        </div>
+      );
+
+    case 'webimage':
+      return (
+        <div className="my-8">
+          {/* max-w-full: prevent the image from exceeding its container width */}
+          {/* rounded-2xl: apply large rounded corners to the image */}
+          {/* shadow-xl: add an extra-large box shadow for visual depth */}
+          <img
+            className="max-w-full rounded-2x1 shadow-x2"
             src={block.content}
             alt={block.metadata?.alt || ''}
           />

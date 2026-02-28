@@ -32,6 +32,8 @@ export const CATEGORIES: Category[] = [
           { id: 'h-mod-2', title: 'Pumps & Actuators', description: 'Moving heavy loads with precision.', blocks: [] }
         ]
       },
+
+      // COURSE: Microcontrollers & Embedded Systems
       {
         id: 'microcontrollers',
         title: 'Microcontrollers & Embedded Systems',
@@ -52,17 +54,21 @@ export const CATEGORIES: Category[] = [
             title: 'Installing the Arduin IDE',
             description: 'Setting up the development environment for Arduino programming.',
             blocks: [
-              {id: 'b1', type: 'text', content: 'The Arduino IDE, known as Arduino Integrated Development Environment, provides all the software support needed to complete an Arduino project. It is a programming software specifically designed for Arduino, provided by the Arduino team, that allows us to write programs and upload them to the Arduino board.'},
+              {id: 'b1', type: 'markdown', content: '## What is the Arduino IDE?\n\nThe Arduino IDE, known as Arduino Integrated Development Environment, provides all the software support needed to complete an Arduino project. It is a programming software specifically designed for Arduino, provided by the Arduino team, that allows us to write programs and upload them to the Arduino board.'},
               {id: 'b2', type: 'text', content: 'The Arduino IDE 2.0 is an open-source project. It is a big step from its sturdy predecessor, Arduino IDE 1.x, and comes with revamped UI, improved board & library manager, debugger, autocomplete feature and much more.'},
-              {id: 'b3', type: 'text', content: 'TIn this tutorial, we will show how to download and install the Arduino IDE 2.0 on your Windows, Mac, or Linux computer.'},
-
-              {id: 'b4', type: 'markdown', content: '1. Visit [Arduino Software](https://www.arduino.cc/en/software/) page.'}
-
+              {id: 'b3', type: 'text', content: 'In this tutorial, we will show how to download and install the Arduino IDE 2.0 on your Windows, Mac, or Linux computer.'},
+              {id: 'b4', type: 'markdown', content: '1. Visit [Arduino Software](https://www.arduino.cc/en/software/) page. \n2. Download the IDE for your OS version.'},
+              {id: 'b5', type: 'webimage', content: 'https://docs.sunfounder.com/projects/kepler-kit/en/latest/_images/sp_001.png'},
+              {id: 'b6', type: 'markdown', content: '## Installation\n 1. Run the downloaded installer. \n2. Read the License Agreement and agree to it.'},
+              {id: 'b7', type: 'webimage', content: 'https://docs.sunfounder.com/projects/kepler-kit/en/latest/_images/sp_002.png'},
+              {id: 'b8', type: 'markdown', content: '3. Choose the Install Option. \n4. Choose install location. It is recommended that the software be installed on a drive other than the system drive. \n5. Finally, click the **Finish** button.'},
+              {id: 'b9', type: 'image', content: 'plcs_festo_mpvea12m8.png', metadata: { alt: 'Pinout diagram of FESTO MPV-E-A12-M8'}}
             ]
           }
         ]
       },
 
+      // COURSE: PLCs & Industrial Automation
       { id: 'plcs-adv',
         title: 'Programmable Logic Controllers (PLCs)',
         emoji: '📟',
@@ -70,12 +76,14 @@ export const CATEGORIES: Category[] = [
         modules: [] 
       },
 
+      // COURSE: Motor Controls & Drives
       { id: 'motor-ctrl', 
         title: 'Motor Controls', 
         emoji: '⚡', description: 'AC/DC motor theory and variable frequency drives.', 
         modules: [] 
       },
 
+      // COURSE: Industrial Networking
       { id: 'ind-net', 
         title: 'Industrial Networking', 
         emoji: '🌐', 

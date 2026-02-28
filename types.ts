@@ -1,5 +1,5 @@
 
-export type ContentBlockType = 'text' | 'video' | 'lab' | 'assignment' | 'note' | 'image' | 'markdown' | 'markdownfile';
+export type ContentBlockType = 'text' | 'webimage' | 'image' | 'video' | 'lab' | 'assignment' | 'note' |  'markdown' | 'markdownfile';
 
 export interface ContentBlock {
   id: string;

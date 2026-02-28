@@ -16,9 +16,10 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({ course, currentMod
   return (
     <div className="min-h-screen bg-white">
       {/* Top Header */}
-      <div className="bg-slate-900 text-white py-12 px-6 sticky top-0 z-10 shadow-lg">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex items-center gap-6">
+      {/* - Note, height is based on `py` and `gap` */}
+      <div className="bg-slate-900 text-white py-6 px-6 sticky top-0 z-10 shadow-lg">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
             <button 
               onClick={onBack}
               className="p-3 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors group"
@@ -34,14 +35,14 @@ export const CourseLanding: React.FC<CourseLandingProps> = ({ course, currentMod
               <h1 className="text-3xl md:text-4xl font-black">{course.title}</h1>
             </div>
           </div>
-          <div className="hidden lg:flex items-center gap-4 bg-slate-800 p-2 rounded-2xl">
+          {/* <div className="hidden lg:flex items-center gap-4 bg-slate-800 p-2 rounded-2xl">
              <div className="px-4 py-2 bg-slate-700 rounded-xl text-sm font-bold flex items-center gap-2">
                <span>📊</span> Progress: 0%
              </div>
              <div className="px-4 py-2 hover:bg-slate-700 cursor-pointer rounded-xl text-sm font-bold flex items-center gap-2 transition-colors">
                <span>📁</span> Materials
              </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
