@@ -4,6 +4,8 @@
 // functional components. In this file we primarily use useState.
 import React, { useState, useEffect } from 'react';
 
+import './index.css'; // Importing our global CSS file where Tailwind is included
+
 // CATEGORIES is just a constant list of data defined in data.ts. It's the
 // source of truth for what categories and courses our app can show.
 import { CATEGORIES } from './data';
