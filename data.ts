@@ -87,6 +87,15 @@ export const CATEGORIES: Category[] = [
               {id: 'b6', type: 'image', content: 'plcs_festo_mpvea12m8_connector_pinout.png', metadata: { alt: 'Pinout diagram of FESTO MPV-E-A12-M8', format: 'no-shadow'}},
               {id: 'b7', type: 'markdown', content: ''},
             ]
+          },
+
+          { id: 'plcs-mod-2',
+            title: 'FESTO MecLab Stations',
+            description: 'Programming and controlling the FESTO MecLab stations for automation projects.',
+            blocks: [
+              {id: 'b1', type: 'markdown', content: '# Overview of the FESTO MecLab Stations\n\nThe FESTO MecLab stations are modular training systems designed for hands-on learning in automation and mechatronics. Each station focuses on a specific aspect of industrial automation, such as pneumatics, hydraulics, or electrical control. For our purposes, we will be connecting the FESTO brand PLCs to the MecLab trainer systems and programming in their functionality.'},
+              {id: 'b2', type: 'image', content: 'plcs_festo_stations.png', metadata: { alt: 'Image of FESTO MecLab Trainer Station', format: 'no-shadow'}},
+            ]
           }
         ] 
       },
