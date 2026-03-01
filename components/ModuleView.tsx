@@ -3,6 +3,8 @@ import React from 'react';
 import { Module, ContentBlock } from '../types';
 import { LabRenderer } from './InteractiveLabs';
 import ReactMarkdown from 'react-markdown';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 interface ModuleViewProps {
   module: Module;
@@ -68,6 +70,20 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
           </div>
         </details>
       );
+
+    case 'latex': {
+      const html = katex.renderToString(block.content, {
+        throwOnError: false,
+        displayMode: Boolean(block.metadata?.displayMode),
+        output: 'html',
+      });
+
+      return (
+        <div className="my-6 overflow-x-auto rounded-xl bg-white p-4 border border-slate-200">
+          <div className="flex justify-center text-slate-900 [&_.katex]:text-3xl" dangerouslySetInnerHTML={{ __html: html }} />
+        </div>
+      );
+    }
 
     case 'image':
       // local images stored in public/images are copied to dist at build time

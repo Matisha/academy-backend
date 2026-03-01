@@ -31,10 +31,13 @@ export const CATEGORIES: Category[] = [
               {id: 'b4', type: 'markdown', content: '# Pinout Diagram\n\nThe datasheet & the color codes for the wires of the multi-port connector are shown below.\n- Starting from the center of the datasheet, you\'ll notice there are a total of 15 pins on the **multi-pin connector**. Each of these pins connect to a specifically-colored wire within the main cable, shown in the second image. Within the first diagram, on either side of the multi-pin connector, each pin is layed out and described, which relates to... \n- The outer sides of the wiring diagram, where we find several **3-prong connections**, with ports labelled as 1, 3, and 4.\n- The **allocation** column shows how these two connection types are related, and describes their function, which will always be **`24V`**, **`0V`**, or a **`signal`** connection. \n\nFor example, notice that in the **allocation** column **`24 V DC`** and **`0 V`** are always shown for every circular connector, and always correspond to **`pin 1`** and **`pin 3`**. On the multi-pin connector, these always correspond to pin 13 and pin 14/15 respectively.\n\nThis means that we want to feed **`24V`** from our **CLICK Power Module** to **`pin 13`** of the multiport connector (which corresponds to the **white-green** wire within the main cable), and connect **`pin 14`** or **`15`** (white-yellow wire) to the **`0V`** terminal of our power supply.'},
               {id: 'b5', type: 'image', content: 'plcs_festo_mpvea12m8.png', metadata: { alt: 'Pinout diagram of FESTO MPV-E-A12-M8', format: 'no-shadow'}},
               {id: 'b6', type: 'image', content: 'plcs_festo_mpvea12m8_connector_pinout.png', metadata: { alt: 'Pinout diagram of FESTO MPV-E-A12-M8', format: 'no-shadow'}},
+              // Dropdown example of 0V connection
               {id: 'b7', type: 'dropdown', content: 'Example of 0V Connection', children: [
                 {id: 'b7-1', type: 'markdown', content: 'If we wish to provide a 0V connection to ***all connected field devices***, we must provide a 0V connection to **`pin 14`** or **`pin 15`** of the multi-pin header.'},
                 {id: 'b7-2', type: 'image', content: 'plcs_festo_mpvea12m8_0V_example.png', metadata: { alt: 'Example of 0V Connection on FESTO MPV-E-A12-M8', format: 'no-shadow'}}
               ]},
+              {id: 'b8', type: 'markdown', content: '# 📺Video example of FESTO being integrated with a separate PLC'},
+              {id: 'b9', type: 'video', content: 'https://www.youtube.com/embed/eqwZvAop6L0?si=Y-F_yeXRj71PBX_N'},
             ]
           },
 
@@ -135,12 +138,17 @@ export const CATEGORIES: Category[] = [
         description: 'Efficiently handling sensor data and decision trees in real-time.',
         modules: [
           {
-            id: 'ai-mod-1',
-            title: 'Sensor Fusion Algorithms',
-            description: 'Combining multiple sensors for environmental awareness.',
+            id: 'ai-mod-temp',
+            title: 'Gradient Descent',
+            description: 'Utilize gradient descent for optimizing machine learning models.',
             blocks: [
-              { id: 'b4', type: 'text', content: 'Sensor fusion is the process of combining data derived from disparate sources such that the resulting information has less uncertainty than would be possible when these sources were used individually.' },
-              { id: 'b5', type: 'lab', content: 'kalman-filter-demo', title: 'Kalman Filter Simulator' }
+              { id: 'b1', type: 'markdown', content: '# Introduction to Gradient Descent\n\nGradient descent is an optimization algorithm used to minimize the cost function in machine learning models by iteratively adjusting the model parameters.\n\nLet\'s start by examining a model we\'d like to optimize:' },
+              { id: 'b3', type: 'latex', content: 'f_\\theta(x) = \\theta_1x + sin(\\theta_2x)'},
+              { id: 'b4', type: 'markdown', content: 'Here, we find that `theta_1` and `theta_2` are the parameters we want to optimize. We can use gradient descent to find the optimal values for these parameters that minimize our cost function. Recall that our **cost function** is defined as the MSE, or rather...' },
+              { id: 'b5', type: 'latex', content: 'MSE = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y_i})^2 \\space where \\space \\hat{y_i} = f_\\theta(x_i)' },
+              { id: 'b6', type: 'markdown', content: 'where...'},
+              { id: 'b7', type: 'latex', content: '\\hat{y_i} = f_\\theta(x_i)x' },
+              { id: 'bv', type: 'video', content: 'https://www.youtube.com/embed/eI8M9MEA5lA?si=TCNQV2trdCHNY_T3' },
             ]
           }
         ]
