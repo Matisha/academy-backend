@@ -57,7 +57,7 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
             {/* shadow-xl: add an extra-large box shadow for visual depth */}
             <img
               className="rounded-2xl"
-              src={`/images/${block.content}`}
+              src={`./images/${block.content}`}
               alt={block.metadata?.alt || ''}
             />
           </div>
@@ -71,7 +71,7 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
             {/* shadow-xl: add an extra-large box shadow for visual depth */}
             <img
               className="rounded-2xl shadow-xl"
-              src={`/images/${block.content}`}
+              src={`./images/${block.content}`}
               alt={block.metadata?.alt || ''}
             />
           </div>
