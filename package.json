@@ -27,5 +27,6 @@
     "tailwindcss": "^4.2.1",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
-  }
+  },
+  "script-shell": "C:\\Program Files\\git\\bin\\bash.exe"
 }
