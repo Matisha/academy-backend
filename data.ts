@@ -73,7 +73,19 @@ export const CATEGORIES: Category[] = [
         title: 'Programmable Logic Controllers (PLCs)',
         emoji: '📟',
         description: 'Industrial automation using standard logic controllers.',
-        modules: [] 
+        modules: [
+          {id: `plcs-mod-1`,
+            title: 'FESTO MPV-E-A12-M8',
+            description: 'Getting started with the FESTO MPV-E-A12-M8 for automation projects.',
+            blocks: [
+              {id: 'b1', type: 'markdown', content: '## Overview of the FESTO MPV-E-A12-M8\n\nTraditionally, in our labs, we\'ve constructed our \'power distributers\' using simple terminal blocks *(one with +24V, and another with 0V)*. However, the FESTO MPV-E-A12-M8 PLC offers a more integrated solution, combining power distribution with control capabilities in a single compact unit. This PLC is designed for educational and prototyping purposes, making it ideal for our lab environment.'},
+              {id: 'b2', type: 'image', content: 'plcs_festo_mpvea12m8_component.png', metadata: { alt: 'Image of FESTO MPV-E-A12-M8 Power & Signal Distributor'}},
+              {id: 'b3', type: 'markdown', content: '## Pinout Diagram\n\nThe FESTO MPV-E-A12-M8 has a somewhat obscure pinout diagram that can be strange upon first look. As a general statement, the system **breaks out the multi-pin plug connection** into seperate, 3-prong ports *(labelled individual connection on the diagram)*.\n - Starting from the center of the datasheet, you\'ll notice there are a total of 15 pins on the **multi-pin connector**.\n- On the outer sides of the wiring diagram, we find several **3-prong connections**, with ports labelled as 1, 3, and 4.\n- The **allocation** column shows how these two connection types are related.'},
+              {id: 'b4', type: 'image', content: 'plcs_festo_mpvea12m8.png', metadata: { alt: 'Pinout diagram of FESTO MPV-E-A12-M8'}},
+              {id: 'b5', type: 'markdown', content: 'For each of the 3-prong connectors, you will notice that **`pin 1`** and **`pin 3`** are always labelled as **`24 V DC`** and **`0 V`**, respectively. On the multi-pin connector, these always correspond to pin 13 and pin 14/15 respectively.'}
+            ]
+          }
+        ] 
       },
 
       // COURSE: Motor Controls & Drives
