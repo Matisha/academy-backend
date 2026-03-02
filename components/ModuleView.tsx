@@ -104,6 +104,20 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
           </div>
         </AnimatedBlock>
       );
+    case 'youtubeplaylist':
+      return (
+        <AnimatedBlock>
+          <div className="my-8 aspect-video rounded-2xl overflow-hidden shadow-xl border border-gray-200 max-w-3xl">
+            <iframe
+              className="w-full h-full"
+              src={block.content}
+              title={block.title || "YouTube Playlist"}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </AnimatedBlock>
+      );
     case 'note':
       return (
         <AnimatedBlock>
