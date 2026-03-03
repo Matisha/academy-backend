@@ -166,8 +166,7 @@ export const CATEGORIES: Category[] = [
     description: 'Building the brains and bodies of the future.',
     color: 'purple',
     courses: [
-      {
-        id: 'ds-processing',
+      { id: 'ds-processing',
         title: 'Data Structures and Processing',
         emoji: '🌳',
         description: 'Efficiently handling sensor data and decision trees in real-time.',
@@ -242,7 +241,13 @@ export const CATEGORIES: Category[] = [
           }
         ]
       },
-      { id: 'robot-arch', title: 'Architecture of Robots', emoji: '🏛️', description: 'Kinematics, power distribution, and structural design.', modules: [] }
+
+      { id: 'robot-arch', 
+        title: 'Architecture of Robots', 
+        emoji: '🏛️', 
+        description: 'Kinematics, power distribution, and structural design.', 
+        modules: []
+      }
     ]
   },
 

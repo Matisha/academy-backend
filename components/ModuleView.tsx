@@ -88,31 +88,76 @@ const AnimatedBlock: React.FC<{ children: React.ReactNode }> = ({ children }) =>
  */
 const TooltipWrapper: React.FC<{ children: React.ReactNode; tooltipBlocks: ContentBlock[] }> = ({ children, tooltipBlocks }) => {
   const [isVisible, setIsVisible] = React.useState(false);
+  const [tooltipPos, setTooltipPos] = React.useState({ top: 0, left: 0 });
+  const triggerRef = React.useRef<HTMLSpanElement>(null);
+  const containerRef = React.useRef<HTMLSpanElement>(null);
+
+  const handleMouseEnter = () => {
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      // Position tooltip above the trigger element, centered horizontally
+      setTooltipPos({
+        top: rect.top - 10, // Small gap above
+        left: rect.left + rect.width / 2, // Center horizontally
+      });
+    }
+    setIsVisible(true);
+  };
 
   return (
     <span 
+      ref={containerRef}
       className="relative inline-block"
-      onMouseEnter={() => setIsVisible(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setIsVisible(false)}
-      style={{ zIndex: isVisible ? 100 : 'auto' }}
     >
-      <span className="cursor-help border-b-2 border-dotted border-blue-500 hover:border-blue-700 hover:bg-blue-50 transition-all duration-200 px-1">
+      <span 
+        ref={triggerRef}
+        className="cursor-help border-b-2 border-dotted border-blue-500 hover:border-blue-700 hover:bg-blue-50 transition-all duration-200 px-1"
+      >
         {children}
       </span>
       {isVisible && (
-        <div className="fixed animate-fadeIn" style={{
-          zIndex: 9999,
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          maxWidth: '90vw',
-          maxHeight: '80vh'
-        }}>
-          <div className="bg-white rounded-lg shadow-2xl border-2 border-blue-200 p-4 overflow-y-auto max-h-[80vh]">
+        <div 
+          className="fixed animate-fadeIn z-50"
+          style={{
+            top: `${tooltipPos.top}px`,
+            left: `${tooltipPos.left}px`,
+            transform: 'translate(-50%, -100%)',
+            pointerEvents: 'auto'
+          }}
+          onMouseEnter={() => setIsVisible(true)}
+          onMouseLeave={() => setIsVisible(false)}
+        >
+          <div className="bg-white rounded-lg shadow-2xl border-2 border-blue-200 p-4 overflow-y-auto max-h-96 pointer-events-auto" style={{ width: '320px' }}>
             {tooltipBlocks.map((block) => (
               <BlockRenderer key={block.id} block={block} />
             ))}
           </div>
+          {/* Chat bubble pointer arrow */}
+          <div 
+            className="absolute left-1/2 transform -translate-x-1/2"
+            style={{
+              top: '100%',
+              width: 0,
+              height: 0,
+              borderLeft: '8px solid transparent',
+              borderRight: '8px solid transparent',
+              borderTop: '8px solid rgb(229, 231, 235)', // border color
+              marginTop: '-2px'
+            }}
+          />
+          <div 
+            className="absolute left-1/2 transform -translate-x-1/2"
+            style={{
+              top: '100%',
+              width: 0,
+              height: 0,
+              borderLeft: '6px solid transparent',
+              borderRight: '6px solid transparent',
+              borderTop: '6px solid white', // bg color
+            }}
+          />
         </div>
       )}
     </span>
@@ -398,9 +443,11 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
       return (
         <AnimatedBlock>
           <div className="my-6 rounded-xl bg-slate-900 p-6 border border-slate-700 hover:shadow-lg hover:border-slate-600 transition-all duration-300">
-            <pre style={{ position: 'relative', overflow: 'visible' }}>
-              {renderCodeWithTooltips()}
-            </pre>
+            <div style={{ position: 'relative', overflow: 'visible' }}>
+              <pre style={{ position: 'relative', overflow: 'visible', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
+                {renderCodeWithTooltips()}
+              </pre>
+            </div>
           </div>
         </AnimatedBlock>
       );
