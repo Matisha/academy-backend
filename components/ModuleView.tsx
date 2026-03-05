@@ -291,46 +291,40 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
       );
     }
 
-    case 'image':
-      if (block.metadata?.format === 'no-shadow') {
-        return (
-          <AnimatedBlock>
-            <div className="my-8 max-w-3xl">
-              <img
-                className="rounded-2xl"
-                src={`./images/${block.content}`}
-                alt={block.metadata?.alt || ''}
-              />
-            </div>
-          </AnimatedBlock>
-        );
-      }
-      else {
-        return (
-          <AnimatedBlock>
-            <div className="my-8 max-w-3xl">
-              <img
-                className="rounded-2xl shadow-xl"
-                src={`./images/${block.content}`}
-                alt={block.metadata?.alt || ''}
-              />
-            </div>
-          </AnimatedBlock>
-        );
-      }
-
-    case 'webimage':
+    case 'image': {
+      const maxWidthClass = block.metadata?.maxWidth || '3xl';
+      const shadowClass = block.metadata?.format === 'no-shadow' ? '' : 'shadow-xl';
+      
       return (
         <AnimatedBlock>
-          <div className="my-8">
+          <div className={`my-8 max-w-${maxWidthClass}`}>
             <img
-              className="max-w-full rounded-2xl shadow-xl"
-              src={block.content}
+              className={`rounded-2xl ${shadowClass}`}
+              src={`./images/${block.content}`}
               alt={block.metadata?.alt || ''}
+              style={block.metadata?.width ? { maxWidth: block.metadata.width } : undefined}
             />
           </div>
         </AnimatedBlock>
       );
+    }
+
+    case 'webimage': {
+      const maxWidthClass = block.metadata?.maxWidth || 'full';
+      
+      return (
+        <AnimatedBlock>
+          <div className={`my-8 max-w-${maxWidthClass}`}>
+            <img
+              className="max-w-full rounded-2xl shadow-xl"
+              src={block.content}
+              alt={block.metadata?.alt || ''}
+              style={block.metadata?.width ? { maxWidth: block.metadata.width } : undefined}
+            />
+          </div>
+        </AnimatedBlock>
+      );
+    }
 
     case 'markdown':
       return (

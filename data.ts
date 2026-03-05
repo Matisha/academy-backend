@@ -25,7 +25,21 @@ export const CATEGORIES: Category[] = [
             title: 'CLICK PLC Documentation',
             emoji: '📟',
             modules: [
-              { id: 'plcs-click-1',
+              { id: 'plcs-click-comm',
+                title: 'CLICK PLC Communication Protocols',
+                description: 'Overview of the modbus communication protocol for the Click PLC.',
+                blocks: [
+                  {id: 'b1', type: 'markdown', content: '# Overview of Modbus Protocol\n\nModbus is a communication protocol developed for industrial applications. It allows devices to communicate over a network, typically using serial communication (RS-232, RS-485) or Ethernet. The Click PLC supports Modbus TCP/IP for Ethernet communication and Modbus RTU for serial communication.'},
+                  {id: 'b2', type: 'markdown', content: '## 📟↔💻Modbus TCP/IP\n\nModbus TCP/IP is a variant of the Modbus protocol that uses Ethernet for communication. It allows for faster data transfer and is commonly used in modern industrial applications. The Click PLC can be configured to communicate with other devices using Modbus TCP/IP, enabling integration with SCADA systems, HMIs, and other PLCs.'},
+                  {id: 'b3', type: 'markdown', content: '## 📟↔📟Modbus RTU\n\nModbus RTU is a serial communication protocol that uses a master-slave architecture. It is commonly used for communication between PLCs and field devices such as sensors and actuators. The Click PLC can be configured to communicate with other devices using Modbus RTU, allowing for integration with a wide range of industrial equipment.'},
+                  {id: 'b4', type: 'markdown', content: '# Click-to-Click with Modbus RTU\n\nTo allow two PLCs to talk to one another, the Modbus RTU protocal can be used by connecting two PLCs through the serial line, or **`port 3`**.\n When working with the **Modbus RTU Protocol**, all PLCs must serve as one of two roles: **Client** (*sometimes called master*) or **Server** (*sometimes called slave*).\n - The **Client PLC** initiates communication and sends requests to the server PLC, which responds to those requests. In a typical network, only one PLC can act as the client at a time.\n - The **Server PLC** listens for requests from the client and responds accordingly. Multiple server PLCs can be connected to a single client PLC, allowing for a network of devices to communicate with one another.'},
+                  {id: 'b5', type: 'image', content: 'plcs_click_networking.png', metadata: { alt: 'Diagram of Click PLC Modbus TCP/IP and RTU Communication', format: 'no-shadow'}},
+                  {id: 'b6', type: 'markdown', content: '## Choosing what Data to Send:\n\nData is exchanged between PLCs by a register-to-register basis. This means that the client PLC can read from or write to specific registers on the server PLC. For example, if the client PLC wants to read the value of a sensor connected to the server PLC, it would send a request to read from the register associated with that sensor. The server PLC would then respond with the current value of that register, allowing the client PLC to use that data in its control logic.\nModbus addresses have their **own unique register map**, which can be shown by opening the \`address picker\` and checking the \`Display Modbus Addresses\` checkbox.'},
+                  {id: 'b7', type: 'image', content: 'plcs_click_networking_addressing.png', metadata: { alt: 'Diagram of Click PLC Modbus Register Addressing', format: 'no-shadow', maxWidth: 'full'}},
+                  {id: 'b8', type: 'markdown', content: '## Modbus Communication Functions\n\nIn order to perform communication between two PLCs, the modbus settings ***must*** match between the two devices. '}
+                ]
+              },
+              { id: 'plcs-click-misc',
                 title: 'CLICK PLC Documentation',
                 description: 'Links for specific functionalities of the Click PLC',
                 blocks: [
