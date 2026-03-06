@@ -126,8 +126,7 @@ export const CATEGORIES: Category[] = [
       },
 
       // COURSE: Microcontrollers & Embedded Systems
-      {
-        id: 'microcontrollers',
+      { id: 'microcontrollers',
         title: 'Microcontrollers & Embedded Systems',
         emoji: '🖥️',
         description: 'Programming microcontrollers for real-time control and automation.',
@@ -282,7 +281,23 @@ export const CATEGORIES: Category[] = [
                       { expression: 'p_i \\log_2(p_i)', blocks: [{id: 'pi', type: 'latex', content: 'p_i = \\frac{|C_i|}{|S|}'}, {id: 'pi-2', type: 'markdown', content: '\`p_i`\ is a ratio of label i to the total number of examples (*or datapoints*) in S.'}] },
                     ]
                   }},
-                  { id: 'b4', type: 'markdown', content: '## Information Gain\n\n However, entropy simply tells us if a specific dataset is pure or impure. To decide the best feature to split on, we use **information gain**, which measures the reduction in entropy after a dataset is split on a feature.\n\n **Information Gain** is a **per-attribute** calculation - meaning that we calculate the Information Gain for **each attribute** separately and choose to split on the one with the most information gain.' },
+                  {id: 'b4', type: 'markdown', content: 'The value we get for entropy corresponds directly to how pure or impure our dataset is. Specifically, if the **\`labels\`** of our dataset are all the same or vary wildly. A few specific examples:\n- If all labels are the same (e.g. all examples are class A), then the entropy is 0, indicating a pure dataset.\n- If the labels are evenly distributed (e.g. 50% class A and 50% class B), then the entropy is at its maximum, indicating a highly impure dataset.'},
+                  { id: 'b5', type: 'markdown', content: '## Information Gain\n\n However, entropy simply tells us if a specific dataset is pure or impure. To decide the best feature to split on, we use **information gain**, which measures the reduction in entropy after a dataset is split on a feature.\n\n **Information Gain** is a **per-attribute** calculation - meaning that we calculate the Information Gain for **each attribute** separately and choose to split on the one with the most information gain.' },
+                  {id: 'b5', type: 'latextooltip', content: '', metadata: {
+                    displayMode: true,
+                    parts: [
+                      { expression: 'IG', blocks: [{id: 'IG', type: 'markdown', content: '\`IG\` stands for Information Gain, which measures the reduction in entropy after splitting a dataset on a specific feature.'}] },
+                      { expression: '(', blocks: [] },
+                      { expression: 'S', blocks: [{id: 'S', type: 'markdown', content: '\`S\` is the set of training examples at a given node. *i.e. your dataset*'}] },
+                      { expression: ',', blocks: [] },
+                      { expression: 'A', blocks: [{id: 'A', type: 'markdown', content: '\`A\` is the feature we are evaluating for the split.'}] },
+                      { expression: ') = ', blocks: [] },
+                      { expression: 'H(S)', blocks: [{id: 'HS', type: 'markdown', content: '\`H(S)\` is the entropy of the original dataset before the split. *This is what was calculated in the previous equation*'}] },
+                      { expression: '- \\sum_{v \\in Values(A)}', blocks: [{id: 'sum2', type: 'markdown', content: 'Effectively a **for** loop where we *add the results together*.\nHere, we itterate over all **possible values** of the **feature A** (not the labels but the feature itself!) and *perform the following operation...*'}] },
+                      { expression: '\\frac{|S_v|}{|S|}', blocks: [{id: 'Sv', type: 'markdown', content: '\`|S_v|\` is the **number of data points (rows) that have the value \`v\`** in attribute \`A\`. \`|S|\` is the total number of data points in the dataset. This fraction represents the proportion of the dataset that falls into this subset.'}]},
+                      { expression: 'H(S_v)', blocks: [{id: 'HSv', type: 'markdown', content: '\`H(S_v)\` is the entropy of the subset of the dataset where attribute \`A\` has value \`v\`. This measures the impurity of this subset.'}, {id: 'HSv2', type: 'note', content: 'Essentially, we want to crop our dataset down into a smaller subset where attribute \`A\` has a specific value of \`v\`, then re-run our entropy calculation on *just* that subset.'}]},
+                    ]
+                  }},
                 ]
               }
             ],
