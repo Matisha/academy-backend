@@ -312,7 +312,15 @@ export const CATEGORIES: Category[] = [
         emoji: '☕', 
         description: 'Variables, loops, and control flow in the Java language.', 
         modules: [
-
+          { id: 'java-1-1', 
+            title: 'Lecture Resources', 
+            description: 'Slides and notes from the introductory Java lectures.',
+            blocks: [
+              { id: 'b1', type: 'markdown', content: '# Java Basics\n\nThis module covers the fundamental concepts of Java programming.' },
+              { id: 'b2', type: 'note', content: 'These videos are brought to you by Professor Frank Shang from Edmonds College.'},
+              { id: 'b4', type: 'youtubeplaylist', content: 'https://www.youtube.com/embed/videoseries?si=SHPjut47HSx7CuMv&amp;list=PL0VQczlwfp6mrGJRBqmi9hB9QJJCl4Ck3'}
+            ]
+          }
         ] 
       },
 
