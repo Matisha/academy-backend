@@ -350,6 +350,181 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
         </AnimatedBlock>
       );
 
+    case 'markdowntooltip': {
+      const parts = block.metadata?.parts || [];
+
+      // Helper function to find and wrap tooltip text in any React node tree
+      const processNodeForTooltips = (node: React.ReactNode, keyPrefix: string = ''): React.ReactNode => {
+        if (parts.length === 0) {
+          return node;
+        }
+
+        // Handle string nodes - search for tooltip text
+        if (typeof node === 'string') {
+          return wrapTextWithTooltips(node, keyPrefix);
+        }
+
+        // Handle React elements (components like <code>, <em>, etc.)
+        if (React.isValidElement(node)) {
+          const element = node as React.ReactElement<any>;
+          const children = element.props.children;
+          
+          // Special handling for <code> elements - check if the entire code content matches a tooltip
+          if (element.type === 'code' && typeof children === 'string') {
+            const matchingPart = parts.find((part: any) => part.text === children);
+            if (matchingPart && matchingPart.blocks && matchingPart.blocks.length > 0) {
+              return (
+                <TooltipWrapper key={keyPrefix} tooltipBlocks={matchingPart.blocks}>
+                  {element}
+                </TooltipWrapper>
+              );
+            }
+            // Also check if the code content is contained within any tooltip text
+            return wrapTextWithTooltips(children, keyPrefix, (text) => 
+              React.cloneElement(element, {}, text)
+            );
+          }
+
+          // For other elements, recursively process their children
+          if (children) {
+            const processedChildren = React.Children.map(children, (child, idx) => 
+              processNodeForTooltips(child, `${keyPrefix}-${idx}`)
+            );
+            return React.cloneElement(element, {}, processedChildren);
+          }
+        }
+
+        return node;
+      };
+
+      // Helper function to wrap text segments with tooltip wrappers
+      const wrapTextWithTooltips = (
+        text: string, 
+        keyPrefix: string,
+        wrapper?: (content: React.ReactNode) => React.ReactNode
+      ): React.ReactNode => {
+        if (!text || parts.length === 0) {
+          return wrapper ? wrapper(text) : text;
+        }
+
+        // Find all matches of tooltip text in this string
+        const matches: Array<{ start: number; end: number; part: any }> = [];
+        
+        parts.forEach((part: any) => {
+          const partText = part.text || '';
+          let searchStart = 0;
+          let index;
+          
+          while ((index = text.indexOf(partText, searchStart)) !== -1) {
+            matches.push({
+              start: index,
+              end: index + partText.length,
+              part: part
+            });
+            searchStart = index + 1;
+          }
+        });
+
+        // If no matches found, return original text
+        if (matches.length === 0) {
+          return wrapper ? wrapper(text) : text;
+        }
+
+        // Sort matches by start position and remove overlaps
+        matches.sort((a, b) => a.start - b.start);
+        const nonOverlapping = matches.filter((match, idx) => {
+          if (idx === 0) return true;
+          return match.start >= matches[idx - 1].end;
+        });
+
+        // Build the result with tooltips
+        const elements: React.ReactNode[] = [];
+        let lastEnd = 0;
+
+        nonOverlapping.forEach((match, idx) => {
+          // Add text before this match
+          if (match.start > lastEnd) {
+            elements.push(text.substring(lastEnd, match.start));
+          }
+
+          // Add the tooltip-wrapped text
+          const matchText = text.substring(match.start, match.end);
+          if (match.part.blocks && match.part.blocks.length > 0) {
+            elements.push(
+              <TooltipWrapper key={`${keyPrefix}-tooltip-${idx}`} tooltipBlocks={match.part.blocks}>
+                <span>{matchText}</span>
+              </TooltipWrapper>
+            );
+          } else {
+            elements.push(matchText);
+          }
+
+          lastEnd = match.end;
+        });
+
+        // Add remaining text
+        if (lastEnd < text.length) {
+          elements.push(text.substring(lastEnd));
+        }
+
+        // If a wrapper function was provided, wrap all elements
+        if (wrapper) {
+          return wrapper(elements);
+        }
+
+        return elements;
+      };
+
+      // Custom components for ReactMarkdown that handle tooltips
+      const markdownComponents = {
+        h1: ({ node, ...props }: any) => <h1 className="text-3xl font-bold mt-6 mb-4 hover:text-gray-900 transition-colors" {...props} />,
+        h2: ({ node, ...props }: any) => <h2 className="text-2xl font-bold mt-5 mb-3 hover:text-gray-900 transition-colors" {...props} />,
+        h3: ({ node, ...props }: any) => <h3 className="text-xl font-bold mt-4 mb-2 hover:text-gray-900 transition-colors" {...props} />,
+        p: ({ node, children, ...props }: any) => (
+          <p className="text-gray-700 text-lg my-3 hover:text-gray-900 transition-colors" {...props}>
+            {React.Children.map(children, (child, idx) => processNodeForTooltips(child, `p-${idx}`))}
+          </p>
+        ),
+        a: ({ node, ...props }: any) => <a className="text-blue-600 text-lg underline hover:text-blue-800 hover:scale-105 transition-all duration-300 inline-block" {...props} />,
+        ul: ({ node, ...props }: any) => <ul className="text-lg list-disc list-inside my-3" {...props} />,
+        ol: ({ node, ...props }: any) => <ol className="text-lg list-decimal list-inside my-3" {...props} />,
+        li: ({ node, children, ...props }: any) => (
+          <li className="text-lg my-1 hover:text-gray-900 transition-colors" {...props}>
+            {React.Children.map(children, (child, idx) => processNodeForTooltips(child, `li-${idx}`))}
+          </li>
+        ),
+        code: ({ node, children, ...props }: any) => {
+          // Process children for tooltip matching
+          const processedChildren = processNodeForTooltips(children, 'code');
+          return (
+            <code className="text-lg bg-gray-100 px-2 py-1 rounded text-sm font-mono hover:bg-gray-200 transition-colors" {...props}>
+              {processedChildren}
+            </code>
+          );
+        },
+        strong: ({ node, children, ...props }: any) => (
+          <strong className="text-lg font-bold" {...props}>
+            {React.Children.map(children, (child, idx) => processNodeForTooltips(child, `strong-${idx}`))}
+          </strong>
+        ),
+        em: ({ node, children, ...props }: any) => (
+          <em {...props}>
+            {React.Children.map(children, (child, idx) => processNodeForTooltips(child, `em-${idx}`))}
+          </em>
+        ),
+      };
+
+      return (
+        <AnimatedBlock>
+          <div className="my-6 text-gray-700 leading-relaxed">
+            <ReactMarkdown components={markdownComponents}>
+              {block.content}
+            </ReactMarkdown>
+          </div>
+        </AnimatedBlock>
+      );
+    }
+
     case 'markdownfile':
       const [mdContent, setMdContent] = React.useState<string>('');
   

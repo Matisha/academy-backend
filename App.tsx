@@ -69,20 +69,20 @@ const CategoryCard: React.FC<{
       
       {/* show courses only when expanded */}
       {isExpanded && (
-        <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeInUp">
+        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fadeInUp">
           {category.courses.map((course, idx) => (
             // each course is rendered as a button so it can be clicked
             <button
               key={course.id}
               onClick={() => onSelectCourse(course)}
-              className="group text-left p-6 rounded-2xl border-2 border-slate-100 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-300 active:scale-95 animate-scaleIn hover:shadow-md"
+              className="group text-left p-4 rounded-2xl border-2 border-slate-100 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-300 active:scale-95 animate-scaleIn hover:shadow-md"
               style={{ animationDelay: `${idx * 50}ms` }}
             >
-              <div className="text-3xl mb-4 group-hover:scale-125 transition-transform duration-300 inline-block">{course.emoji}</div>
-              <h3 className="font-bold text-lg text-slate-900 group-hover:text-indigo-700 transition-colors">{course.title}</h3>
-              <p className="text-sm text-slate-500 mt-2 line-clamp-2 group-hover:text-slate-600 transition-colors">{course.description}</p>
+              <div className="text-2xl mb-2 group-hover:scale-125 transition-transform duration-300 inline-block">{course.emoji}</div>
+              <h3 className="font-bold text-base text-slate-900 group-hover:text-indigo-700 transition-colors">{course.title}</h3>
+              <p className="text-xs text-slate-500 mt-1 line-clamp-2 group-hover:text-slate-600 transition-colors">{course.description}</p>
               {/* simple hover effect for enrollment call to action */}
-              <div className="mt-4 flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
+              <div className="mt-3 flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
                 Enroll Now ➔
               </div>
             </button>

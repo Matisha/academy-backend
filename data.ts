@@ -39,8 +39,25 @@ export const CATEGORIES: Category[] = [
                   {id: 'b8', type: 'markdown', content: '## Modbus Communication Functions\n\nIn order to perform communication between two PLCs, the modbus settings ***must*** match between the two devices, save a signle setting called \`Node Address\`\n\n The **Node Address** is a unique identifier for each PLC on the Modbus network. It allows the client PLC to specify which server PLC it wants to communicate with. Each server PLC must have a unique Node Address to avoid conflicts on the network\n\n **All other settings** must be identical between the two PLCs to ensure proper communication. A few settings of note:\n - The \`Baudrate\` defines the speed at which the PLCs will transmit signals\n - The \`Parity\` setting ensures that the data integrity is maintained during transmission\n - The \`Stop Bits\` setting defines the end of a data packet\n - The \`Data Bits\` setting defines the size of each data packet.\n - The \`Time-out setting\` defines the maximum time the client PLC will wait for a response from the server PLC.'},
                   {id: 'b9', type: 'image', content: 'plcs_click_networking_comsetup.png', metadata: { alt: 'Diagram of Click PLC Modbus Communication Functions', format: 'no-shadow', maxWidth: 'full'} },
                   {id: 'b10', type: 'markdown', content: 'To actually send and recieve data, the **client PLC** will utilize the **\`Recieve\`** and **\`Send\`** instructions found in the **Instruction List**.'},
-                  {id: 'b11', type: 'markdown', content: '## Recieving Data\n\nThe **\`Recieve\`** instruction allows the client PLC to read data from the server PLC. To correctly set up the recieve instruction, the client PLC must specify the following parameters:\n- The **Node Address** of the server PLC it wants to communicate with.\n- The **Function Code** that specifies the type of Modbus operation. This could be \`Reading a Coil\`, \`Reading an Input\`, \`Reading a Register\`, or \`Reading an Input Register\`. *Note, coils and inputs will transmit \`single booleans\`, while registers transmit \`bytes or words\`.\n- The **Starting Register Address** on the server PLC from which to begin reading data.\n- The **Number of Registers** to read from the server PLC. (i.e. how many registers after the starting register address should be read? This can be thought of as the size of the data packet being sent.)'},
+                  {id: 'b11', type: 'markdowntooltip', content: '## Recieving Data\n\nThe **\`Recieve\`** instruction allows the client PLC to read data from the server PLC. To correctly set up the recieve instruction, the client PLC must specify the following parameters:\n- The **Node Address** of the server PLC it wants to communicate with.\n- The **Function Code** that specifies the type of Modbus operation. This could be \`Reading a Coil\`, \`Reading an Input\`, \`Reading a Register\`, or \`Reading an input Register\`.\n- The **Starting Register Address** on the server PLC from which to begin reading data.\n- The **Number of Registers** to read from the server PLC. (i.e. how many registers after the starting register address should be read? This can be thought of as the size of the data packet being sent.)', metadata: {
+                    'parts' : [
+                      {
+                        text: 'Reading a Coil',
+                        blocks: [{type: 'markdown', content: 'Reads a single \`boolean\` value from a \`coil\` (*such as C1*).'}]
+                      },
+                      {
+                        text: 'Reading an Input',
+                        blocks: [{type: 'markdown', content: 'Reads a single \`boolean\` value from an \`input\` (*such as X1*).'}]
+                      },
+                      {text: 'Reading a Register', blocks: [{type: 'markdown', content: 'Reads a \`byte\` or \`word\` value from a \`register\` (*such as R1*).'}]},
+                      {text: 'Reading an input Register', blocks: [{type: 'markdown', content: 'Reads a \`byte\` or \`word\` value from an \`input register\` (*such as IR1*). This is useful for sending over a **list** of several inputs (i.e. X1, X2, X3, ...)'}]}
+                    ]
+                  }},
                   {id: 'b12', type: 'image', content: 'plcs_click_networking_recievecmd.png', metadata: { alt: 'Diagram of Click PLC Recieve Command', format: 'no-shadow', maxWidth: 'full'}},
+                  {id: 'b13', type: 'markdown', content: '## Sending Data\n\nThe **\`Send\`** instruction allows the client PLC to write data to the server PLC. The parameters are nearly identical to those of the **\`Recieve\`** instruction.\n\nBelow is an illustration of an example program that will take a piece of data from.'},
+                  {id: 'b14', type: 'image', content: 'plcs_click_networking_lld.png', metadata: { alt: 'Diagram of Click PLC Send Command', format: 'no-shadow', maxWidth: 'full'}},
+                  {id: 'b15', type: 'markdown', content: '## 📺Youtube Video Demonstration\n\nBelow is a youtube video demonstration showing how RS-485 can be used to communicate between two videos, as well as an elaboration on the \`status flags\` properties of the send and recieve commands.'},
+                  {id: 'b16', type: 'video', content: 'https://www.youtube.com/embed/EySxKZjm6uE?si=hf8fRJxWRFEAXDxk'}
                 ]
               },
               { id: 'plcs-click-misc',
@@ -110,18 +127,30 @@ export const CATEGORIES: Category[] = [
         emoji: '💧',
         description: 'Master the principles of fluid power systems and pneumatic controls.',
         modules: [
+
           {
             id: 'h-mod-1',
             title: 'Basics of Fluid Pressure',
             description: 'Understanding Pascal\'s Law and its applications.',
-            blocks: [
-              { id: 'b1', type: 'text', content: 'Pascal\'s principle states that pressure applied to an enclosed fluid is transmitted undiminished to every portion of the fluid and to the walls of the containing vessel.' },
-              { id: 'b2', type: 'video', content: 'https://www.youtube.com/embed/SmdX2fOAs-Y' },
-              { id: 'b3', type: 'text', content: 'Hey is this working'},
-              { id: 'b4', type: 'lab', content: 'pressure-calculator', title: 'Interactive Pressure Lab' }
-            ]
+            blocks: []
           },
-          { id: 'h-mod-2', title: 'Pumps & Actuators', description: 'Moving heavy loads with precision.', blocks: [] }
+
+          { id: 'h-mod-2', 
+            title: 
+            'Bernoulli\'s Equation', 
+            description: 'Understanding the principles energy conservation.', 
+            blocks: [
+              {id: 'bern-1', type: 'markdown', content: '# Bernoulli\'s Equation\n\nBernoulli\'s equation is a fundamental principle in fluid dynamics that describes the behavior of a fluid under varying conditions of flow and height. At it\'s core, Bernoulli\'s Equation compares a fluid\'s **pressure**, **velocity**, and **height** energies at two different points in a system. '},
+              {id: 'bern-2', type: 'latextooltip', content: '', metadata: {
+                displayMode: true,
+                parts: [
+                  {expression: '\\frac{P_1}{\\gamma}', blocks: [{id: 'p1', type: 'text', content: 'The pressure energy per unit weight at point 1.'}, {id: 'p2', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
+                  {expression: '\\frac{v_1^2}{2g}', blocks: [{id: 'v1', type: 'text', content: 'The velocity energy per unit weight at point 1.'}, {id: 'v2', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
+                ]
+              }}
+            ] 
+          }
+
         ]
       },
 
@@ -345,41 +374,116 @@ export const CATEGORIES: Category[] = [
         description: 'Kinematics, Structural Design, and Principles of Robotics.', 
         modules: [],
         moduleCategories: [
-          { id: '',
-            title: 'Mathematics Review for Robotics',
-            emoji: '➗',
+
+          { id: 'robai-arch-intro',
+            title: 'Foundations of Spatial Architecture',
+            emoji: '👍',
             modules: [
-              { id: 'robai-arch-math-1',
-                title: 'Trigonometry Review',
-                description: 'Sine, cosine, and tangent functions in robotic motion and control.',
+              { id: 'robai-arch-intro-intro',
+                title: 'Configuration Space',
+                description: 'Understanding the configuration space (C-space) for robot motion planning.',
                 blocks: [
-                  
+                
                 ]
               },
 
-              { id: 'robai-arch-math-2',
-                title: 'Linear Algebra for Robotics',
-                description: 'Vectors, matrices, and transformations in robotic systems.',
+              { id: 'robai-arch-intro-rbs',
+                title: 'Rigid Bodies & Rotation Matricies',
+                description: 'Modeling robot components as rigid bodies and using rotation matrices for orientation.',
                 blocks: [
-                  
+                
+                ]
+              },
+
+              { id: 'robai-arch-intro-trans',
+                title: 'Homogeneous Transformations',
+                description: 'Combining rotation and translation in homogeneous transformation matrices.',
+                blocks: [
+                
                 ]
               },
             ]
           },
 
-          { id: '',
-            title: 'Kinematics of Robotic Arms',
+          { id: 'robai-arch-kinematics',
+            title: 'Kinematics of Robotic Systems',
             emoji: '🦾',
             modules: [
+              { id: 'robai-arch-kinematics-forward',
+                title: 'Forward Kinematics',
+                description: 'Calculating the position and orientation of the robot\'s end-effector from joint parameters.',
+                blocks: [
+              
+                ]
+              },
 
+              { id: 'robai-arch-kinematics-jacobian',
+                title: 'Jacobian Matrix',
+                description: 'Relating joint velocities to end-effector velocities using the Jacobian matrix.',
+                blocks: [
+
+                ]
+              },
+
+              { id: 'robai-arch-kinematics-inverse',
+                title: 'Inverse Kinematics',
+                description: 'Determining the joint parameters needed to achieve a desired end-effector position and orientation.',
+                blocks: [
+
+                ]
+              }
             ]
           },
 
-          { id: '',
-            title: 'Structural Design Principles',
-            emoji: '🏗️',
+          { id: 'robai-arch-dyn',
+            title: 'Dynamics & Planning',
+            emoji: '⚽',
             modules: [
+              { id: 'robai-arch-dyn-open',
+                title: 'Dynamics of Open Chains',
+                description: 'Modeling the dynamics of robotic arms and manipulators with open kinematic chains.',
+                blocks: [
 
+                ]
+              },
+
+              { id: 'robai-arch-dyn-traj',
+                title: 'Trajectory Planning',
+                description: 'Planning and optimizing the path of a robot\'s end-effector.',
+                blocks: [
+
+                ]
+              },
+
+              { id: 'robai-arch-dyn-mp',
+                title: 'Motion Planning',
+                description: 'Algorithms for motion planning in complex environments, including obstacle avoidance.',
+                blocks: [
+
+                ]
+              },
+            ]
+          },
+
+          { id: 'robai-arch-control',
+            title: 'Control Systems for Robotics',
+            emoji: '🎮',
+            modules: [
+              { id: 'robai-arch-control-feedback',
+                title: 'Feedback Control',
+                description: 'Designing feedback control systems for stable and responsive robot behavior.',
+                blocks: [
+
+                ]
+              },
+
+              { id: 'robai-arch-control-march',
+                title: 'Modern Robotic Architecture',
+                description: 'Exploring modern robotic architectures and their applications in industry.',
+                blocks: [
+
+                ]
+              }
             ]
           }
         ]
