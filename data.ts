@@ -135,7 +135,25 @@ export const CATEGORIES: Category[] = [
             blocks: []
           },
 
-          { id: 'h-mod-2', 
+          { id: 'h-mod-cont',
+            title: 'Continuity Equation',
+            description: 'Understanding the principle of mass conservation in fluid flow.',
+            blocks: [
+              {id: 'h-mod-cont-1', type: 'markdown', content: '# Continuity Equation\n\nThe continuity equation is a fundamental principle in fluid dynamics that describes the conservation of mass in a fluid flow. It states that the mass flow rate of a fluid must remain constant from one cross-section of a pipe to another, assuming incompressible flow. '},
+              {id: 'h-mod-cont-2', type: 'latextooltip', content: '', metadata: {
+                displayMode: true,
+                parts: [
+                  {expression: 'A_1 ', blocks: [{id: 'a1', type: 'markdown', content: '**A1** is the cross-sectional area of the pipe at point 1.'}]},
+                  {expression: 'v_1 ', blocks: [{id: 'v2', type: 'markdown', content: '**v1** is the velocity of the fluid at the point of interest.'}]},
+                  {expression: ' = ', blocks: []},
+                  {expression: 'A_2 ', blocks: [{id: 'c3', type: 'markdown', content: '**A2** is the cross-sectional area of the pipe at point 2.'}]},
+                  {expression: 'v_2', blocks: [{id: 'v3', type: 'markdown', content: '**v2** is the velocity of the fluid at the point of interest.'}]}
+                ]
+              }}
+            ]
+          },
+
+          { id: 'h-mod-3', 
             title: 
             'Bernoulli\'s Equation', 
             description: 'Understanding the principles energy conservation.', 
@@ -145,7 +163,16 @@ export const CATEGORIES: Category[] = [
                 displayMode: true,
                 parts: [
                   {expression: '\\frac{P_1}{\\gamma}', blocks: [{id: 'p1', type: 'text', content: 'The pressure energy per unit weight at point 1.'}, {id: 'p2', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
+                  {expression: ' + ', blocks: []},
                   {expression: '\\frac{v_1^2}{2g}', blocks: [{id: 'v1', type: 'text', content: 'The velocity energy per unit weight at point 1.'}, {id: 'v2', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
+                  {expression: ' + '},
+                  {expression: ' h_1 ', blocks: [{id: 'h1', type: 'text', content: 'The height energy per unit weight at point 1.'}, {id: 'h2', type: 'markdown', content: '**h** is the height of the fluid at the point of interest. This term represents the potential energy of the fluid due to its elevation.'}]},
+                  {expression: ' = ', blocks: []},
+                  {expression: '\\frac{P_2}{\\gamma}', blocks: [{id: 'p3', type: 'text', content: 'The pressure energy per unit weight at point 2.'}, {id: 'p4', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
+                  {expression: ' + ', blocks: []},
+                  {expression: '\\frac{v_2^2}{2g}', blocks: [{id: 'v3', type: 'text', content: 'The velocity energy per unit weight at point 2.'}, {id: 'v4', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
+                  {expression: ' + '},
+                  {expression: ' h_2 ', blocks: [{id: 'h3', type: 'text', content: 'The height energy per unit weight at point 2.'}, {id: 'h4', type: 'markdown', content: '**h** is the height of the fluid at the point of interest. This term represents the potential energy of the fluid due to its elevation.'}]}
                 ]
               }}
             ] 
@@ -159,31 +186,18 @@ export const CATEGORIES: Category[] = [
         title: 'Microcontrollers & Embedded Systems',
         emoji: '🖥️',
         description: 'Programming microcontrollers for real-time control and automation.',
-        modules: [
-          { id: 'mc-mod-1',
-            title: 'Intro to Microcontrollers',
-            description: 'Architecture and programming basics of microcontrollers.',
-            blocks: [
-              { id: 'b1', type: 'text', content: 'Microcontrollers are compact integrated circuits designed to govern specific operations in embedded systems.' },
-              { id: 'b2', type: 'text', content: 'They typically include a processor, memory, and input/output peripherals on a single chip.' }
-            ]
+        modules: [],
+        moduleCategories: [
+          { id: 'mc-cat-1',
+            title: 'Getting Started with Microcontrollers',
+            emoji: '🛠️',
+            modules: []
           },
 
-          {
-            id: 'mc-mod-2',
-            title: 'Installing the Arduin IDE',
-            description: 'Setting up the development environment for Arduino programming.',
-            blocks: [
-              {id: 'b1', type: 'markdown', content: '## What is the Arduino IDE?\n\nThe Arduino IDE, known as Arduino Integrated Development Environment, provides all the software support needed to complete an Arduino project. It is a programming software specifically designed for Arduino, provided by the Arduino team, that allows us to write programs and upload them to the Arduino board.'},
-              {id: 'b2', type: 'text', content: 'The Arduino IDE 2.0 is an open-source project. It is a big step from its sturdy predecessor, Arduino IDE 1.x, and comes with revamped UI, improved board & library manager, debugger, autocomplete feature and much more.'},
-              {id: 'b3', type: 'text', content: 'In this tutorial, we will show how to download and install the Arduino IDE 2.0 on your Windows, Mac, or Linux computer.'},
-              {id: 'b4', type: 'markdown', content: '1. Visit [Arduino Software](https://www.arduino.cc/en/software/) page. \n2. Download the IDE for your OS version.'},
-              {id: 'b5', type: 'webimage', content: 'https://docs.sunfounder.com/projects/kepler-kit/en/latest/_images/sp_001.png'},
-              {id: 'b6', type: 'markdown', content: '## Installation\n 1. Run the downloaded installer. \n2. Read the License Agreement and agree to it.'},
-              {id: 'b7', type: 'webimage', content: 'https://docs.sunfounder.com/projects/kepler-kit/en/latest/_images/sp_002.png'},
-              {id: 'b8', type: 'markdown', content: '3. Choose the Install Option. \n4. Choose install location. It is recommended that the software be installed on a drive other than the system drive. \n5. Finally, click the **Finish** button.'},
-              {id: 'b9', type: 'image', content: 'plcs_festo_mpvea12m8.png', metadata: { alt: 'Pinout diagram of FESTO MPV-E-A12-M8'}}
-            ]
+          { id: 'mc-cat-2',
+            title: 'Advanced Microcontroller Programming',
+            emoji: '🚀',
+            modules: []
           }
         ]
       },
@@ -497,6 +511,8 @@ export const CATEGORIES: Category[] = [
     description: 'The foundation of modern software systems.',
     color: 'emerald',
     courses: [
+
+      // COURSE: Java 1
       { id: 'java-1', 
         title: 'Intro to Java: Foundations', 
         emoji: '☕', 
@@ -514,6 +530,7 @@ export const CATEGORIES: Category[] = [
         ] 
       },
 
+      // COURSE: Java 2
       { id: 'java-2', 
         title: 'Intro to Java: Objects', 
         emoji: '📦', 
@@ -523,6 +540,7 @@ export const CATEGORIES: Category[] = [
         ] 
       },
 
+      // COURSE: Java 3
       { id: 'java-3',
         title: 'Intro to Java: Advanced',
         emoji: '🔥', description: 'Generics, streams, and functional interfaces.',
@@ -531,6 +549,7 @@ export const CATEGORIES: Category[] = [
         ] 
       },
       
+      // Course: Java Data Structures
       { id: 'java-ds', 
         title: 'Data Structures in Java', 
         emoji: '🧬', 
