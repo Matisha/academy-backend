@@ -253,17 +253,17 @@ export const CATEGORIES: Category[] = [
         description: 'Programming microcontrollers for real-time control and automation.',
         modules: [],
         moduleCategories: [
-          { id: 'mc-start',
-            title: 'Getting Started with Microcontrollers',
-            emoji: '🛠️',
-            modules: []
-          },
+          // { id: 'mc-start',
+          //   title: 'Getting Started with Microcontrollers',
+          //   emoji: '🛠️',
+          //   modules: []
+          // },
 
-          { id: 'mc-hardware',
-            title: 'Microcontroller Hardware',
-            emoji: '🚀',
-            modules: []
-          },
+          // { id: 'mc-hardware',
+          //   title: 'Microcontroller Hardware',
+          //   emoji: '🚀',
+          //   modules: []
+          // },
 
           { id: 'mc-programming',
             title: 'Microcontroller Programming: C/C++',
@@ -434,6 +434,8 @@ export const CATEGORIES: Category[] = [
                     ]
                   }},
 
+                  { id: 'mc-prog-cond-1-5', type: 'note', content: 'When the microcontroller encounters an expression as part of a conditional statement, it **evaluates the expression** to determine whether it is true or false. So, say you type \`if (4 == 4) {...}\`, then the condition evalues and turns into \`if (true) {...}\`, which runs!\n\nYou can also store the result of a comparison in a variable - as an example: \`bool is_4_more_than_5 = (4 > 5);\`. This would evaluate to **false**, meaning the variable \`is_4_more_than_5\` would equal \`false\` or \`LOW\`.' },
+
                   { id: 'mc-prog-cond-3', type: 'markdown', content: '# if-else statement\n\nAn `if-else` statement allows you to execute one block of code if a condition is true, and a different block of code if the condition is false. The structure looks like this:' },
                   { id: 'mc-prog-cond-4', type: 'codetooltip', content: 'if (buttonState == HIGH) \n{\n  // Code to execute if the button is pressed\n} \nelse \n{\n  // Code to execute if the button is not pressed\n}', metadata: {
                     language: 'cpp',
@@ -462,9 +464,476 @@ export const CATEGORIES: Category[] = [
                 title: "Loops",
                 description: "Using for and while loops to repeat code blocks.",
                 blocks: [
+                  
                   { id: 'mc-prog-loops-1', type: 'markdown', content: '# For Loops\n\nA `for` loop is a control structure that allows you to repeat a block of code a specific number of times. It consists of three parts: the initialization, the condition, and the increment/decrement. The structure looks like this:' },
+
+
+                  { id: 'mc-prog-loops-2', type: 'codetooltip', content: 'for (int i = 0; i < 10; i++) \n{\n  // Code to repeat\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {text: 'int i = 0;', blocks: [{ id: 'mc-cat-3-4-loops-tip-1', type: 'markdown', content: '**Initialization**\n\nThis is where you define and initialize your loop variable. In this case, we\'re creating an integer variable `i` and setting it to 0. This variable can be called anything, so long as it follows the naming rules of C++ and does not overlap with other variable names in the same scope.' }]},
+                      {text: 'i < 10;', blocks: [{ id: 'mc-cat-3-4-loops-tip-2', type: 'markdown', content: '**Condition**\n\nThis is the condition that is checked before each iteration of the loop. If the condition is true, the code inside the loop will execute. If it is false, the loop will terminate and the program will continue with the next line of code *after the loop*.' }]},
+                      {text: 'i++', blocks: [{ id: 'mc-cat-3-4-loops-tip-3', type: 'markdown', content: '**Increment**\n\nThis is where you update your loop variable.\nIn this case, `i++` is shorthand for `i = i + 1`, which means that after each iteration of the loop, `i` will increase by 1.' }]},
+                      {text: 'Code to repeat', blocks: [{ id: 'mc-cat-3-4-loops-tip-4', type: 'note', content: 'You can actually read or write to the initialized variable i inside the loop, just be careful you don\'t create an infinate loop!' }]},
+                    ]
+                  }},
+
+                  { id: 'mc-prog-loops-3', type: 'markdown', content: '## For loop examples...' },
+                  { id: 'mc-prog-loops-4', type: 'dropdown', content: 'Example 1 of for loop: simple repeating print', children: [
+                    {
+                      id: 'mc-programming-loops-1-code',
+                      type: 'codetooltip',
+                      content: 'const int maxIterations = 10;\nconst unsigned long pauseMs = 3000;\n\nvoid setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  for (int i = 1; i <= maxIterations; i++) {\n    Serial.print("Loop iteration: ");\n    Serial.println(i);\n  }\n\n  Serial.println("Waiting before repeating...");\n  delay(pauseMs);\n}',
+                      metadata: {
+                        language: 'cpp',
+                        parts: [
+                          {
+                            text: 'const int maxIterations = 10;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-1', type: 'markdown', content: '**Maximum count value.**\n\nThis creates a constant integer named `maxIterations` and sets it to `10`, so the loop runs exactly ten times each cycle.' }
+                            ]
+                          },
+                          {
+                            text: 'const unsigned long pauseMs = 3000;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-2', type: 'markdown', content: '**Pause duration in milliseconds.**\n\n`3000` means a 3-second wait between batches of printed loop iterations.' }
+                            ]
+                          },
+                          {
+                            text: 'void setup() {',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-3', type: 'markdown', content: '**Arduino setup function.**\n\n`setup()` runs once when the board powers on or resets. It is used for one-time initialization.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.begin(9600);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-4', type: 'markdown', content: '**Start serial communication.**\n\nThis opens the serial connection at `9600` baud so messages can be printed to the Serial Monitor.' }
+                            ]
+                          },
+                          {
+                            text: 'void loop() {',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-5', type: 'markdown', content: '**Main repeating function.**\n\n`loop()` runs forever after `setup()`, so everything inside it repeats continuously.' }
+                            ]
+                          },
+                          {
+                            text: 'for',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-6', type: 'markdown', content: 'The for keyword tells our microcontroller we\'re about to start a loop.' }
+                            ]
+                          },
+                          {
+                            text: 'int i = 1;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-7', type: 'markdown', content: '**Initialize loop variable.**\n\nThis creates an integer variable `i` and sets it to `1` at the start of the loop.' }
+                            ]
+                          },
+                          {
+                            text: 'i <= maxIterations;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-8', type: 'markdown', content: '**Loop continuation condition.**\n\nThe loop will keep running as long as `i` is less than or equal to `maxIterations` (10). Once `i` exceeds 10, the loop will stop and the program will move on to the next lines of code after the loop.' },
+                              { id: 'mc-cat-3-4-loops-ex1-tip-9', type: 'note', content: 'While we could also just set this to 10 here, using `maxIterations` makes it easier to change the number of iterations in one place!' }
+                            ]
+                          },
+                          {
+                            text: 'i++',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-10', type: 'markdown', content: '**Increment loop variable.**\n\nAfter each iteration of the loop, `i++` increases the value of `i` by 1. This is what allows us to eventually meet the condition to exit the loop.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.print("Loop iteration: ");',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-7', type: 'markdown', content: '**Print label text without a new line.**\n\nThis writes the message prefix so the next print appears on the same line.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.println(i);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-8', type: 'markdown', content: '**Print the current loop number and end the line.**\n\nIf `i` is 4, the monitor shows `Loop iteration: 4`.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.println("Waiting before repeating...");',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-9', type: 'markdown', content: '**Status message after the ten prints.**\n\nThis indicates the loop batch is complete and a pause is about to happen.' }
+                            ]
+                          },
+                          {
+                            text: 'delay(pauseMs);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex1-tip-10', type: 'markdown', content: '**Pause before repeating.**\n\n`delay(pauseMs)` waits 3000 ms, then `loop()` starts again and prints the next set of 10 iterations.' }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    { id: 'mc-programming-loops-2-code', type: 'markdown', content: 'This example will generate the following response in the console of the arduino: \n\n -> Loop iteration: 1 \n\n -> Loop iteration: 2 \n\n ... \n\n -> Loop iteration: 10 \n\n -> Waiting before repeating... \n\nThen it will repeat this pattern indefinitely, printing "Loop iteration: X" for X from 1 to 10, followed by the waiting message, and then starting over at 1 again.'}
+                  ]},
+                  { id: 'mc-prog-loops-5', type: 'dropdown', content: 'Example 2 of for loop: Nested for loops', children: [
+                    { id: 'mc-programming-loops-3-intro', type: 'markdown', content: 'This example demonstrates a **nested for loop** pattern where the outer loop counts by `2` (2, 4, 6, 8, 10), and for each outer step, an inner loop runs twice. It prints both loop values to the Serial Monitor so you can see how nested loops generate repeated grouped output before pausing and repeating.' },
+                    {
+                      id: 'mc-programming-loops-3-code',
+                      type: 'codetooltip',
+                      content: 'const int maxOuter = 10;\nconst int stepSize = 2;\nconst int repeatsPerStep = 2;\nconst unsigned long pauseMs = 4000;\n\nvoid setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  int totalCount = 0;\n\n  for (int outer = 2; outer <= maxOuter; outer += stepSize) \n  {\n    for (int inner = 1; inner <= repeatsPerStep; inner++) \n    {\n      totalCount++;\n      Serial.print("Print #");\n      Serial.print(totalCount);\n      Serial.print(" -> outer=");\n      Serial.print(outer);\n      Serial.print(", inner=");\n      Serial.println(inner);\n    }\n  }\n\n  Serial.println("Batch complete. Waiting before repeat...");\n  delay(pauseMs);\n}',
+                      metadata: {
+                        language: 'cpp',
+                        parts: [
+                          {
+                            text: 'const int maxOuter = 10;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-1', type: 'markdown', content: '**Outer loop upper limit.**\n\nThe outer counter will stop once it reaches `10`.' }
+                            ]
+                          },
+                          {
+                            text: 'const int stepSize = 2;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-2', type: 'markdown', content: '**Count by twos.**\n\nInstead of increasing by 1, the outer loop increases by `2` each time (`2, 4, 6, 8, 10`).' }
+                            ]
+                          },
+                          {
+                            text: 'const int repeatsPerStep = 2;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-3', type: 'markdown', content: '**Inner loop repeat count.**\n\nFor each outer value, the inner loop runs 2 times.' }
+                            ]
+                          },
+                          {
+                            text: 'const unsigned long pauseMs = 4000;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-4', type: 'markdown', content: '**Pause duration.**\n\n`4000` milliseconds means the program waits 4 seconds before repeating.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.begin(9600);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-5', type: 'markdown', content: '**Enable Serial Monitor output.**\n\nWithout this line, `Serial.print` and `Serial.println` will not display correctly.' }
+                            ]
+                          },
+                          {
+                            text: 'int totalCount = 0;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-6', type: 'markdown', content: '**Track total printed lines.**\n\nThis counter increments every time the nested loop prints one row.' }
+                            ]
+                          },
+                          {
+                            text: 'for',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-7', type: 'markdown', content: '**Start of outer loop.**\n\nThis loop will run for `outer` values of `2, 4, 6, 8, 10`.' }
+                            ]
+                          },
+                          {
+                            text: 'int outer = 2;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-7', type: 'markdown', content: 'The new variable \`outer\` will keep track of the counts of our outer loop. We will initialize this one at \`2\`.' }
+                            ]
+                          },
+                          {
+                            text: 'outer <= maxOuter;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-7', type: 'markdown', content: '**Outer loop condition.**\n\nThe outer loop will continue as long as `outer` is less than or equal to `maxOuter` (10).' }
+                            ]
+                          },
+                          {
+                            text: 'outer += stepSize',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-7', type: 'markdown', content: '**Outer loop increment.**\n\nAfter each iteration of the outer loop, `outer` increases by `stepSize` (2), creating the sequence `2, 4, 6, 8, 10`.' }
+                            ]
+                          },
+                          {
+                            text: 'for',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-7', type: 'markdown', content: '**Start of inner loop.**\n\nThis loop will run once for each value of `outer`, creating a nested structure.' }
+                            ]
+                          },
+                          {
+                            text: 'int inner = 1;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-8', type: 'markdown', content: '**Initialize inner loop counter.**\n\nThis variable keeps track of the current iteration of the inner loop.' },
+                              { id: 'mc-cat-3-4-loops-ex2-tip-9', type: 'note', content: 'Remember, this value will RESET to 1 every time our outer loop runs. In this example, it will count from 1 to 2 for a single iteration of the outer loop, then switch back to 1 on the next itertion of the outer loop.' }
+                            ]
+                          },
+                          {
+                            text: 'inner <= repeatsPerStep;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-8', type: 'markdown', content: '**Inner loop condition.**\n\nThe inner loop will continue as long as `inner` is less than or equal to `repeatsPerStep` (2).' }
+                            ]
+                          },
+                          {
+                            text: 'inner++',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-8', type: 'markdown', content: '**Inner loop increment.**\n\nAfter each iteration of the inner loop, `inner` increases by 1, counting from 1 to 2 for each value of `outer`.' }
+                            ]
+                          },
+                          {
+                            text: 'totalCount++;',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-9', type: 'markdown', content: '**Increase print number.**\n\nThis creates an easy-to-read running count of how many lines have been printed so far.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.print("Print #");',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-10', type: 'markdown', content: '**Print the line label.**\n\nUses `print` (no newline) so the next values appear on the same line.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.print(totalCount);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-11', type: 'markdown', content: '**Print current line number.**\n\nShows `1` through `10` across one full batch.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.print(" -> outer=");',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-12', type: 'markdown', content: '**Add outer-loop label text.**\n\nThis makes it obvious which outer-loop step produced the current line.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.print(outer);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-13', type: 'markdown', content: '**Print outer-loop value.**\n\nDisplays one of the step-by-2 values (`2, 4, 6, 8, 10`).' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.print(", inner=");',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-14', type: 'markdown', content: '**Add inner-loop label text.**\n\nKeeps output readable by clearly separating `outer` and `inner` values.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.println(inner);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-15', type: 'markdown', content: '**Print inner-loop value and finish the line.**\n\n`println` ends the current row in the Serial Monitor.' }
+                            ]
+                          },
+                          {
+                            text: 'Serial.println("Batch complete. Waiting before repeat...");',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-16', type: 'markdown', content: '**Print completion message.**\n\nSignals that all nested-loop prints for this cycle are done.' }
+                            ]
+                          },
+                          {
+                            text: 'delay(pauseMs);',
+                            blocks: [
+                              { id: 'mc-cat-3-4-loops-ex2-tip-17', type: 'markdown', content: '**Pause and repeat forever.**\n\nWaits 4 seconds, then the Arduino `loop()` function starts the next batch again.' }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    { id: 'mc-programming-loops-4-code', type: 'markdown', content: 'If this code runs, the Serial Monitor output for one full cycle would look like:\n\n```\nPrint #1 -> outer=2, inner=1\nPrint #2 -> outer=2, inner=2\nPrint #3 -> outer=4, inner=1\nPrint #4 -> outer=4, inner=2\nPrint #5 -> outer=6, inner=1\nPrint #6 -> outer=6, inner=2\nPrint #7 -> outer=8, inner=1\nPrint #8 -> outer=8, inner=2\nPrint #9 -> outer=10, inner=1\nPrint #10 -> outer=10, inner=2\nBatch complete. Waiting before repeat...\n```\n\nThen the program waits about **4 seconds** (`delay(4000)`) and prints the same pattern again from `Print #1`.' }
+                  ]},
+
+                  { id: 'mc-prog-loops-6', type: 'markdown', content: '# While Loops\n\nA `while` loop is another control structure that allows you to repeat a block of code, but it continues to run as long as a specified condition is true. To view the conditions, please refer to the previous section on conditional statements. The structure looks like this:' },
+                  { id: 'mc-prog-loops-7', type: 'codetooltip', content: 'while (condition) \n{\n  // Code to repeat\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {
+                        text: 'while',
+                        blocks: [
+                          { id: 'mc-cat-3-4-loops-tip-18', type: 'markdown', content: '**Start of while loop.**\n\nThis loop will continue to execute as long as the specified condition is true.' }
+                        ]
+                      },
+                      {
+                        text: 'condition',
+                        blocks: [
+                          { id: 'mc-cat-3-4-loops-tip-19', type: 'markdown', content: '**Loop continuation condition.**\n\nThe code inside the loop will keep running as long as this condition evaluates to true. Once it becomes false, the loop will stop and the program will continue with the next line of code after the loop.' }
+                        ]
+                      },
+                      {
+                        text: 'Code to repeat',
+                        blocks: [
+                          { id: 'mc-cat-3-4-loops-tip-20', type: 'markdown', content: 'Code to run \`while\` condition is true'}
+                        ]
+                      }
+                    ]
+                  }},
+
+                  {id: 'mc-prog-loops-8', type: 'note', content: 'Be careful with while loops! If the condition never becomes false, you will create an infinite loop that can crash your program. Always make sure there is a way for the condition to become false at some point.\n\nFor example, if you write `while (true) { ... }`, this loop will run forever because the condition is always true. To avoid this, you can include a statement inside the loop that changes the condition, such as `while (count < 10) { count++; }`.' },
+
+                  {id: 'mc-prog-loops-9', type: 'markdown', content: '## While loop examples...'},
+                  {id: 'mc-prog-loops-10',
+                    type: 'dropdown',
+                    content: 'While loop example 1: counting to 5',
+                    children: [
+                      {
+                        id: 'mc-prog-loops-10-code',
+                        type: 'codetooltip',
+                        content: 'void setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  int count = 1;\n\n  while (count <= 5) {\n    Serial.print("Count: ");\n    Serial.println(count);\n    count++;\n  }\n\n  Serial.println("Done counting. Restarting...");\n  delay(2000);\n}',
+                        metadata: {
+                          language: 'cpp',
+                          parts: [
+                            {
+                              text: 'void setup() {',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-1', type: 'markdown', content: '**Runs once at startup.**\n\n`setup()` is where we initialize hardware and communication before the repeated logic in `loop()` begins.' }
+                              ]
+                            },
+                            {
+                              text: 'Serial.begin(9600);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-2', type: 'markdown', content: '**Start Serial communication.**\n\nThis opens the Serial Monitor connection at `9600` baud so we can print text and numbers for debugging.' }
+                              ]
+                            },
+                            {
+                              text: 'void loop() {',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-3', type: 'markdown', content: '**Main repeating function.**\n\nArduino runs `loop()` continuously, so this whole counting example repeats forever.' }
+                              ]
+                            },
+                            {
+                              text: 'int count = 1;',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-4', type: 'markdown', content: '**Initialize the loop counter.**\n\n`count` starts at `1` and will be increased each time the while loop runs.' }
+                              ]
+                            },
+                            {
+                              text: 'while (count <= 5)',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-5', type: 'markdown', content: '**While-loop condition.**\n\nThe code inside this loop runs only while `count` is less than or equal to `5`.' },
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-6', type: 'note', content: 'This condition is checked before every iteration. Once `count` becomes `6`, the loop stops and execution moves to the next line after the loop.' }
+                              ]
+                            },
+                            {
+                              text: 'Serial.print("Count: ");',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-7', type: 'markdown', content: '**Print a label without a newline.**\n\n`print` keeps the cursor on the same line so the next value appears beside this text.' }
+                              ]
+                            },
+                            {
+                              text: 'Serial.println(count);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-8', type: 'markdown', content: '**Print the current count value.**\n\n`println` outputs `count` and then moves to a new line in the Serial Monitor.' }
+                              ]
+                            },
+                            {
+                              text: 'count++;',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-9', type: 'markdown', content: '**Increment the counter.**\n\n`count++` is shorthand for `count = count + 1`; this is what eventually makes the while condition false.' },
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-10', type: 'note', content: 'If you forget this line, `count` never changes and the loop becomes infinite (`count <= 5` stays true forever).' }
+                              ]
+                            },
+                            {
+                              text: 'Serial.println("Done counting. Restarting...");',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-11', type: 'markdown', content: '**Post-loop status message.**\n\nThis line runs after the `while` finishes, confirming that counting is complete for this cycle.' }
+                              ]
+                            },
+                            {
+                              text: 'delay(2000);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex1-tip-12', type: 'markdown', content: '**Pause before restarting.**\n\nWaits 2000 milliseconds (2 seconds), then `loop()` starts over and counts from 1 to 5 again.' }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+
+                      { id: 'mc-prog-loops-11', type: 'note', content: 'Conditionals operate in the same way here as they do in \`if\` statements - that is, each loop iteration, the conditional is **evaluated** to either \`true\` or \`false\`, and the loop behaves accordingly.' }
+                    ]
+                  },
+
+                  {
+                    id: 'mc-prog-loops-12',
+                    type: 'dropdown',
+                    content: 'While loop example 2: pause until button is pressed',
+                    children: [
+                      {
+                        id: 'mc-prog-loops-12-code',
+                        type: 'codetooltip',
+                        content: 'const int buttonPin = 2;\nconst int ledPin = 13;\n\nvoid setup() {\n  pinMode(buttonPin, INPUT_PULLUP);\n  pinMode(ledPin, OUTPUT);\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  Serial.println("Waiting for button press...");\n\n  while (digitalRead(buttonPin) == HIGH) {\n    delay(10);\n  }\n\n  Serial.println("Button pressed! Running action...");\n  digitalWrite(ledPin, HIGH);\n  delay(500);\n  digitalWrite(ledPin, LOW);\n\n  while (digitalRead(buttonPin) == LOW) {\n    delay(10);\n  }\n}',
+                        metadata: {
+                          language: 'cpp',
+                          parts: [
+                            {
+                              text: 'const int buttonPin = 2;',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-1', type: 'markdown', content: '**Define the button input pin.**\n\nThis constant stores which GPIO pin the button is connected to.' }
+                              ]
+                            },
+                            {
+                              text: 'const int ledPin = 13;',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-2', type: 'markdown', content: '**Define the LED output pin.**\n\nWe will blink this LED after the button is pressed so there is visible feedback.' }
+                              ]
+                            },
+                            {
+                              text: 'pinMode(buttonPin, INPUT_PULLUP);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-3', type: 'markdown', content: '**Configure button as pull-up input.**\n\nWith `INPUT_PULLUP`, the pin reads `HIGH` when idle and `LOW` when the button is pressed to ground.' },
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-4', type: 'note', content: 'This is why the while conditions use `== HIGH` for waiting and `== LOW` for waiting-release.' }
+                              ]
+                            },
+                            {
+                              text: 'pinMode(ledPin, OUTPUT);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-5', type: 'markdown', content: '**Configure LED pin as output.**\n\nThis lets us drive the LED `HIGH` and `LOW` later in the program.' }
+                              ]
+                            },
+                            {
+                              text: 'Serial.begin(9600);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-6', type: 'markdown', content: '**Start Serial Monitor output.**\n\nUseful for debugging and for seeing exactly when the code is waiting or reacting.' }
+                              ]
+                            },
+                            {
+                              text: 'while (digitalRead(buttonPin) == HIGH)',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-7', type: 'markdown', content: '**Pause here until press.**\n\nAs long as the button is not pressed, the pin stays `HIGH` and this while loop keeps running.' },
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-7b', type: 'note', content: 'Since we perform a \`digitalRead\` every time in the condition, we get **fresh data from the button**. This ensures the program responds immediately when the button state changes. If we instead used a variable to store the button state before the loop, the program might miss a press unless we update the variable inside the loop itself.' }
+                              ]
+                            },
+                            {
+                              text: 'delay(10);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-8', type: 'markdown', content: '**Short wait inside polling loop.**\n\nThis reduces CPU usage and helps avoid overly aggressive pin polling.' }
+                              ]
+                            },
+                            {
+                              text: 'digitalWrite(ledPin, HIGH);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-9', type: 'markdown', content: '**Trigger action after press.**\n\nOnce the wait loop ends, we know the button was pressed, so we turn the LED on.' }
+                              ]
+                            },
+                            {
+                              text: 'delay(500);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-10', type: 'markdown', content: '**Keep LED on briefly.**\n\nThis makes the action visible and clearly tied to the button press event.' }
+                              ]
+                            },
+                            {
+                              text: 'digitalWrite(ledPin, LOW);',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-11', type: 'markdown', content: '**Turn LED back off.**\n\nCompletes one full response cycle for a single button press.' }
+                              ]
+                            },
+                            {
+                              text: 'while (digitalRead(buttonPin) == LOW)',
+                              blocks: [
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-12', type: 'markdown', content: '**Wait for button release.**\n\nThis prevents retriggering repeatedly while the button is still being held down.' },
+                                { id: 'mc-cat-3-4-loops-while-ex2-tip-13', type: 'note', content: 'A common pattern is: **wait-for-press**, run action once, then **wait-for-release** before allowing the next trigger.' }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+
+                  
+                  
                 ]
-              }
+              },
+
+              { id: "mc-prog-uart",
+                title: "UART / Serial Communication",
+                description: "Sending and receiving data over serial connections.",
+                blocks: [
+
+                ]
+              },
+
             ]
           },
 

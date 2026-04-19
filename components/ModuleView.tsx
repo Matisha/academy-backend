@@ -420,7 +420,22 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
               <span className="text-lg">💡</span>
               <span className="font-bold text-yellow-800">Pro Tip</span>
             </div>
-            <p className="text-yellow-900">{block.content}</p>
+            <div className="text-yellow-900">
+              <ReactMarkdown
+                components={{
+                  p: ({ node, ...props }) => <p className="text-yellow-900 my-1" {...props} />,
+                  strong: ({ node, ...props }) => <strong className="font-bold" {...props} />,
+                  em: ({ node, ...props }) => <em {...props} />,
+                  code: ({ node, ...props }) => <code className="bg-yellow-100 px-1 py-0.5 rounded text-sm font-mono" {...props} />,
+                  a: ({ node, ...props }) => <a className="text-yellow-700 underline hover:text-yellow-900" {...props} />,
+                  ul: ({ node, ...props }) => <ul className="list-disc list-inside my-1" {...props} />,
+                  ol: ({ node, ...props }) => <ol className="list-decimal list-inside my-1" {...props} />,
+                  li: ({ node, ...props }) => <li className="my-0.5" {...props} />,
+                }}
+              >
+                {block.content}
+              </ReactMarkdown>
+            </div>
           </div>
         </AnimatedBlock>
       );
