@@ -269,6 +269,14 @@ export const CATEGORIES: Category[] = [
             title: 'Microcontroller Programming: C/C++',
             emoji: '💻',
             modules: [
+
+              // { id: 'mc-prog-terminology',
+              //   title: 'Programming Terminology',
+              //   description: 'Key programming concepts and terminology for microcontroller development.',
+              //   blocks: [
+              //     { id: 'mc-prog-term-1', type: 'markdown', content: '# Key Programming Concepts\n\nWhen programming microcontrollers, there are several key concepts and terminologies that are important to understand:\n\n- **Variable**: A storage location in memory that can hold a value. Variables have a name, a data type, and a value.\n- **Data Type**: The type of data that a variable can hold (e.g., `int`, `float`, `boolean`).\n- **Function**: A block of code that performs a specific task. Functions can take input parameters and return a value.\n- **Control Structures**: Constructs that control the flow of the program (e.g., `if` statements, loops).\n- **Library**: A collection of pre-written code that provides additional functionality for your program.' }
+              //   ]
+              // },
               
               { id: "mc-prog-digio",
                 title: "Digital Reading and Writing",
@@ -930,7 +938,55 @@ export const CATEGORIES: Category[] = [
                 title: "UART / Serial Communication",
                 description: "Sending and receiving data over serial connections.",
                 blocks: [
+                  { id: 'mc-prog-uart-1', type: 'markdown', content: 'UART (Universal Asynchronous Receiver/Transmitter) (*sometimes called \`Serial Communication\`*) is a common protocol for serial communication between microcontrollers and other devices. It allows you to send and receive data one bit at a time over a single wire (plus ground). In Arduino, we use the `Serial` library to work with UART communication.\n\n- **Universal** refers to the wide compatability of this protocol\n- **Asynchronous** means data is sent without a clock signal, but *must agree on a data transmission rate (baudrate)*\n- **Receiver/Transmitter** indicates data can be both sent and receieved. This protocol uses two wires between devices - one for sending and one for recieving.' },
 
+                  { id: 'mc-prog-uart-2', type: 'markdown', content: '# How is data exchanged\n\nIn UART communication, 1s and 0s are sent one by one, typically packaged in small packets called **frames**. The 1s and 0s are represented by different voltages, which typically depend on the application: \n\n- Arduino/Raspberry pi use **TTL (Transistor-Transistor Logic)**, where a \`0\` is represented by \`0V\` and a \`1\` is represented by \`3.3V\` or \`5V\`. \n- In industrail equipment, the voltage levels match the **RS-232** standard, where \`0\` is represented by \`-12V\` and \`1\` is represented by \`+12V\`.\n\nWhen there is no communication happening on the line, the line holds at a positive voltage (*referred to as idle*). When communication happens, each of the **frames** typically consists of:\n\n1. **Start bit**: Indicates the beginning of a new data packet (always `LOW`)\n2. **Data bits**: The actual data being sent (usually 8 bits, i.e. a *byte*)\n3. **Parity bit**: An optional bit used for error checking\n4. **Stop bit(s)**: Indicates the end of the data packet (always `HIGH`)' },
+
+                  { id: 'mc-prog-uart-3', type: 'webimage', content: 'https://controllerstech.com/wp-content/uploads/2025/10/arduino2_1.webp', },
+
+                  { id: 'mc-prog-uart-4', type: 'markdown', content: '# How fast is data exchanged?\n\nThe speed of UART communication is determined by the **baud rate**, which is the number of bits transmitted per second. Common baud rates include `9600`, `115200`, and `250000` bits per second. **Both devices communicating over UART must be set to the same baud rate to understand each other correctly**. If we want to find the amount of time it takes to send a single byte, we can use the formula:\n\n```\nTime per byte = (Start bit + Data bits + Parity bit + Stop bit) / Baud rate\n```\n\nFor example, with 8 data bits, no parity, 1 stop bit, and a baud rate of 9600:\n\n```\nTime per byte = (1 + 8 + 0 + 1) / 9600 ≈ 0.001 seconds (1 ms)\n```' },
+
+                  { id: 'mc-prog-uart-5', type: 'markdown', content: '# The ASCII Table\n\nAt this point, you\'ve likely used Arduino\'s \`Serial.println("Hello World!");\` command to send data. If our communication only supports sending \`1\`s and \`0\`s, how are characters or integers sent? The answer lies in a *standardized format* known as the **ASCII Table**.' },
+
+                  { id: 'mc-prog-uart-6', type: 'webimage', content: 'https://web.alfredstate.edu/faculty/weimandn/miscellaneous/ascii/ASCII%20Conversion%20Chart.gif' },
+
+                  { id: 'mc-prog-uart-7', type: 'markdown', content: 'To illustrate this example, let\'s say that we have some arbitrary \`binary number\`, such as \`01001101\`. From the perspective of the microcontroller, this is just a series of transistors that are flipped on and off. However, we can tell the microcontroller **how to interpret this number** by storing in in an appropriate variable:'},
+
+                  { id: 'mc-prog-uart-7b', type: 'codetooltip', content: 'byte myByte = 0b01001101;  // The microcontroller interprets this as literally the 1s and 0s', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {
+                        text: 'byte',
+                        blocks: [
+                          { id: 'mc-prog-uart-7b-tip-1', type: 'markdown', content: '**Data type** for 8 bits. Simply holds binary numbers.' }
+                        ]
+                      },
+                      {
+                        text: 'myByte',
+                        blocks: [
+                          { id: 'mc-prog-uart-7b-tip-2', type: 'markdown', content: '**Variable name**. We can choose any name we want here to refer to this byte of data.' }
+                        ]
+                      },
+                      {
+                        text: '0b',
+                        blocks: [
+                          { id: 'mc-prog-uart-7b-tip-3', type: 'markdown', content: '**Binary literal prefix.**\n\nThis tells the compiler that the number is in binary format. Essentially, this is instructions to interpret this number as a binary value rather than an integer or hexadecimal value.' }
+                        ]
+                      },
+                      {
+                        text: '01001101',
+                        blocks: [
+                          { id: 'mc-prog-uart-7b-tip-4', type: 'markdown', content: '**The binary value itself.**' }
+                        ]
+                      }
+                    ]
+                  }},
+
+                  { id: 'mc-prog-uart-7c', type: 'markdown', content: 'However, by setting a *different variable type* to the same value, the microcontroller interprets it differently, according to the ASCII Table:'},
+
+                  { id: 'mc-prog-uart-7d', type: 'codetooltip', content: 'char myChar = 0b01001101;  // The microcontroller interprets this as the character "M" according to the ASCII Table', metadata: {language: 'cpp'}},
+
+                  { id: 'mc-prog-uart-7e', type: 'codetooltip', content: 'int myInt = 0b01001101;  // The microcontroller interprets this as the integer 77', metadata: {language: 'cpp'}},
                 ]
               },
 

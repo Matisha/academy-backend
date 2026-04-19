@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Course, Module } from '../types';
 import { ModuleView } from './ModuleView';
 import { useInView } from '../hooks/useInView';
@@ -13,6 +13,30 @@ interface CourseLandingProps {
 
 export const CourseLanding: React.FC<CourseLandingProps> = ({ course, currentModuleId, onSelectModule, onBack }) => {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    if (!currentModuleId || !course.moduleCategories?.length) {
+      return;
+    }
+
+    const containingCategory = course.moduleCategories.find((category) =>
+      category.modules.some((module) => module.id === currentModuleId)
+    );
+
+    if (!containingCategory) {
+      return;
+    }
+
+    setExpandedCategories((prev) => {
+      if (prev.has(containingCategory.id)) {
+        return prev;
+      }
+
+      const next = new Set(prev);
+      next.add(containingCategory.id);
+      return next;
+    });
+  }, [course.moduleCategories, currentModuleId]);
   
   // Get all modules from both flat list and categories
   const allModules = [

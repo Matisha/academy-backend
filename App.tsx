@@ -19,6 +19,61 @@ import { Category, Course, AppState } from './types';
 import { CourseLanding } from './components/CourseLanding';
 import { LandingBackground } from './components/LandingBackground';
 
+const findCategoryByCourseId = (courseId: string) => {
+  return CATEGORIES.find((category) => category.courses.some((course) => course.id === courseId));
+};
+
+const findCourseById = (courseId: string) => {
+  const category = findCategoryByCourseId(courseId);
+  return category?.courses.find((course) => course.id === courseId) || null;
+};
+
+const doesCourseContainModule = (course: Course, moduleId: string) => {
+  if (course.modules.some((module) => module.id === moduleId)) {
+    return true;
+  }
+
+  return (course.moduleCategories || []).some((moduleCategory) =>
+    moduleCategory.modules.some((module) => module.id === moduleId)
+  );
+};
+
+const parseViewFromUrl = (): AppState => {
+  const params = new URLSearchParams(window.location.search);
+  const courseIdFromUrl = params.get('course');
+  const moduleIdFromUrl = params.get('module');
+
+  if (!courseIdFromUrl) {
+    return {
+      currentCategoryId: null,
+      currentCourseId: null,
+      currentModuleId: null,
+    };
+  }
+
+  const category = findCategoryByCourseId(courseIdFromUrl);
+  const course = findCourseById(courseIdFromUrl);
+
+  if (!category || !course) {
+    return {
+      currentCategoryId: null,
+      currentCourseId: null,
+      currentModuleId: null,
+    };
+  }
+
+  const moduleId =
+    moduleIdFromUrl && doesCourseContainModule(course, moduleIdFromUrl)
+      ? moduleIdFromUrl
+      : null;
+
+  return {
+    currentCategoryId: category.id,
+    currentCourseId: course.id,
+    currentModuleId: moduleId,
+  };
+};
+
 // CategoryCard is a reusable component that shows one curriculum category
 // (e.g. "AI" or "Mechatronics"). It can be expanded to reveal the courses
 // inside that category. We type the props so that TypeScript will catch
@@ -98,15 +153,48 @@ export default function App() {
   // "view" holds the current position of the user in our app. We store
   // which category/course/module is selected. Initially nothing is selected
   // (everything is null). setView lets us update this state.
-  const [view, setView] = useState<AppState>({
-    currentCategoryId: null,
-    currentCourseId: null,
-    currentModuleId: null
-  });
+  const [view, setView] = useState<AppState>(() => parseViewFromUrl());
 
   // This piece of state tracks which category card (if any) is currently
   // expanded to show its courses. We use null to mean "none expanded".
   const [expandedCategoryId, setExpandedCategoryId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setView(parseViewFromUrl());
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (!view.currentCourseId) {
+      params.delete('course');
+      params.delete('module');
+    } else {
+      params.set('course', view.currentCourseId);
+
+      if (view.currentModuleId) {
+        params.set('module', view.currentModuleId);
+      } else {
+        params.delete('module');
+      }
+    }
+
+    const nextQuery = params.toString();
+    const nextUrl = `${window.location.pathname}${nextQuery ? `?${nextQuery}` : ''}${window.location.hash}`;
+    const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+    if (nextUrl !== currentUrl) {
+      window.history.replaceState(null, '', nextUrl);
+    }
+  }, [view.currentCourseId, view.currentModuleId]);
 
   // Called when the user clicks on a course inside an expanded category.
   // We need to figure out which category the course belongs to (by searching
