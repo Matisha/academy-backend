@@ -277,6 +277,77 @@ export const CATEGORIES: Category[] = [
               //     { id: 'mc-prog-term-1', type: 'markdown', content: '# Key Programming Concepts\n\nWhen programming microcontrollers, there are several key concepts and terminologies that are important to understand:\n\n- **Variable**: A storage location in memory that can hold a value. Variables have a name, a data type, and a value.\n- **Data Type**: The type of data that a variable can hold (e.g., `int`, `float`, `boolean`).\n- **Function**: A block of code that performs a specific task. Functions can take input parameters and return a value.\n- **Control Structures**: Constructs that control the flow of the program (e.g., `if` statements, loops).\n- **Library**: A collection of pre-written code that provides additional functionality for your program.' }
               //   ]
               // },
+
+              { id: 'mc-prog-variables',
+                title: 'Variables and Data Types',
+                description: 'Understanding variables, data types, and how to use them in microcontroller programming.',
+                blocks: [
+                  { id: 'mc-prog-var-1', type: 'markdown', content: '# Variables and Data Types\n\nIn microcontroller programming, the processor can only understand \`1\`s and \`0\`s. As such, we have to manually tell the processor what **type** a variable is. Common data types include:\n\n- `int`: Used to store whole numbers (e.g., 1, -5, 100).\n- `float`: Used to store decimal numbers (e.g., 3.14, -0.001).\n- `boolean`: Used to store true/false values. (Note, we can also write \`HIGH\` or \`LOW\`, or \`1\` and \`0\`, which mean the same thing here).\n- `char`: Used to store single characters (e.g., \'A\', \'b\').\n\nWhen declaring a variable, you must specify its data type and name. For example:' },
+
+                  { id: 'mc-prog-var-2', type: 'codetooltip', content: 'int sensorValue;\nfloat temperature;\nbool isActive;\nchar grade;', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'sensorValue;', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is an integer variable that can store whole numbers.' }]},
+                      { text: 'temperature;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is a float variable that can store decimal numbers.' }]},
+                      { text: 'isActive;', blocks: [{ id: 'mc-cat-3-3-var-tip-3', type: 'markdown', content: 'This is a boolean variable that can store true/false values.' }]},
+                      { text: 'grade;', blocks: [{ id: 'mc-cat-3-3-var-tip-4', type: 'markdown', content: 'This is a char variable that can store single characters.' }]},
+                    ]
+                  }},
+
+                  { id: 'mc-prog-var-3', type: 'markdown', content: '## Where do we put variables in our code?\n\nVariables can be declared in different parts of your code, and their location determines their **scope** (i.e., where they can be accessed from). The two main types of variable scope are:\n\n- **Global Variables**: Declared outside of any function, usually at the top of the program. They can be accessed from any part of the program.\n- **Local Variables**: Declared inside a function. They can only be accessed within that function.' },
+
+                  { id: 'mc-prog-var-4', type: 'codetooltip', content: 'int globalVar = 10;\n\nvoid setup() {\n  int localVar = 5;\n}\n\nvoid loop() {\n  // globalVar can be accessed here (it exists everywhere in the program)\n  Serial.println(globalVar);  // This will work!\n\n  // localVar cannot be accessed here (it does not exist in the eyes of the void loop() {} function)\n  Serial.println(localVar);  // This will throw an error!\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'globalVar', blocks: [{ id: 'mc-cat-3-3-var-tip-5', type: 'markdown', content: 'This is a global variable that can be accessed from anywhere in the program.' }]},
+                      { text: 'localVar', blocks: [{ id: 'mc-cat-3-3-var-tip-6', type: 'markdown', content: 'This is a local variable that can only be accessed within the setup() function.' }]},
+                    ]
+                  }},
+
+                  { id: 'mc-prog-var-5', type: 'markdown', content: '# The ASCII Table\n\nTo avoid confusion between different systems, a standardized method of representing characters as numbers was created. This is known as the **ASCII (American Standard Code for Information Interchange) Table**.\n\nThe ASCII Table is centered specifically around what specific \`binary numbers\` should represent - of note, which \`characters\` are represented by which combinations of \`1\`s and \`0\`s.' },
+
+                  { id: 'mc-prog-var-6', type: 'webimage', content: 'https://web.alfredstate.edu/faculty/weimandn/miscellaneous/ascii/ASCII%20Conversion%20Chart.gif' },
+
+                  { id: 'mc-prog-var-7', type: 'markdown', content: 'To illustrate this example, let\'s say that we have some arbitrary \`binary number\`, such as \`01001101\`. From the perspective of the microcontroller, this is just a series of transistors that are flipped on and off. However, we can tell the microcontroller **how to interpret this number** by storing in in an appropriate variable:'},
+
+                  { id: 'mc-prog-var-7b', type: 'codetooltip', content: 'byte myByte = 0b01001101;  // The microcontroller interprets this as literally the 1s and 0s', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {
+                        text: 'byte',
+                        blocks: [
+                          { id: 'mc-prog-var-7b-tip-1', type: 'markdown', content: '**Data type** for 8 bits. Simply holds binary numbers.' }
+                        ]
+                      },
+                      {
+                        text: 'myByte',
+                        blocks: [
+                          { id: 'mc-prog-var-7b-tip-2', type: 'markdown', content: '**Variable name**. We can choose any name we want here to refer to this byte of data.' }
+                        ]
+                      },
+                      {
+                        text: '0b',
+                        blocks: [
+                          { id: 'mc-prog-var-7b-tip-3', type: 'markdown', content: '**Binary literal prefix.**\n\nThis tells the compiler that the number is in binary format. Essentially, this is instructions to interpret this number as a binary value rather than an integer or hexadecimal value.' }
+                        ]
+                      },
+                      {
+                        text: '01001101',
+                        blocks: [
+                          { id: 'mc-prog-var-7b-tip-4', type: 'markdown', content: '**The binary value itself.**' }
+                        ]
+                      }
+                    ]
+                  }},
+
+                  { id: 'mc-prog-var-7c', type: 'markdown', content: 'However, by setting a *different variable type* to the same value, the microcontroller interprets it differently, according to the ASCII Table:'},
+
+                  { id: 'mc-prog-var-7d', type: 'codetooltip', content: 'char myChar = 0b01001101;  // The microcontroller interprets this as the character "M" according to the ASCII Table', metadata: {language: 'cpp'}},
+
+                  { id: 'mc-prog-var-7e', type: 'codetooltip', content: 'int myInt = 0b01001101;  // The microcontroller interprets this as the integer 77', metadata: {language: 'cpp'}},
+
+                ]
+              },
               
               { id: "mc-prog-digio",
                 title: "Digital Reading and Writing",
@@ -946,47 +1017,9 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-uart-4', type: 'markdown', content: '# How fast is data exchanged?\n\nThe speed of UART communication is determined by the **baud rate**, which is the number of bits transmitted per second. Common baud rates include `9600`, `115200`, and `250000` bits per second. **Both devices communicating over UART must be set to the same baud rate to understand each other correctly**. If we want to find the amount of time it takes to send a single byte, we can use the formula:\n\n```\nTime per byte = (Start bit + Data bits + Parity bit + Stop bit) / Baud rate\n```\n\nFor example, with 8 data bits, no parity, 1 stop bit, and a baud rate of 9600:\n\n```\nTime per byte = (1 + 8 + 0 + 1) / 9600 ≈ 0.001 seconds (1 ms)\n```' },
 
-                  { id: 'mc-prog-uart-5', type: 'markdown', content: '# The ASCII Table\n\nAt this point, you\'ve likely used Arduino\'s \`Serial.println("Hello World!");\` command to send data. If our communication only supports sending \`1\`s and \`0\`s, how are characters or integers sent? The answer lies in a *standardized format* known as the **ASCII Table**.' },
+                  
 
-                  { id: 'mc-prog-uart-6', type: 'webimage', content: 'https://web.alfredstate.edu/faculty/weimandn/miscellaneous/ascii/ASCII%20Conversion%20Chart.gif' },
-
-                  { id: 'mc-prog-uart-7', type: 'markdown', content: 'To illustrate this example, let\'s say that we have some arbitrary \`binary number\`, such as \`01001101\`. From the perspective of the microcontroller, this is just a series of transistors that are flipped on and off. However, we can tell the microcontroller **how to interpret this number** by storing in in an appropriate variable:'},
-
-                  { id: 'mc-prog-uart-7b', type: 'codetooltip', content: 'byte myByte = 0b01001101;  // The microcontroller interprets this as literally the 1s and 0s', metadata: {
-                    language: 'cpp',
-                    parts: [
-                      {
-                        text: 'byte',
-                        blocks: [
-                          { id: 'mc-prog-uart-7b-tip-1', type: 'markdown', content: '**Data type** for 8 bits. Simply holds binary numbers.' }
-                        ]
-                      },
-                      {
-                        text: 'myByte',
-                        blocks: [
-                          { id: 'mc-prog-uart-7b-tip-2', type: 'markdown', content: '**Variable name**. We can choose any name we want here to refer to this byte of data.' }
-                        ]
-                      },
-                      {
-                        text: '0b',
-                        blocks: [
-                          { id: 'mc-prog-uart-7b-tip-3', type: 'markdown', content: '**Binary literal prefix.**\n\nThis tells the compiler that the number is in binary format. Essentially, this is instructions to interpret this number as a binary value rather than an integer or hexadecimal value.' }
-                        ]
-                      },
-                      {
-                        text: '01001101',
-                        blocks: [
-                          { id: 'mc-prog-uart-7b-tip-4', type: 'markdown', content: '**The binary value itself.**' }
-                        ]
-                      }
-                    ]
-                  }},
-
-                  { id: 'mc-prog-uart-7c', type: 'markdown', content: 'However, by setting a *different variable type* to the same value, the microcontroller interprets it differently, according to the ASCII Table:'},
-
-                  { id: 'mc-prog-uart-7d', type: 'codetooltip', content: 'char myChar = 0b01001101;  // The microcontroller interprets this as the character "M" according to the ASCII Table', metadata: {language: 'cpp'}},
-
-                  { id: 'mc-prog-uart-7e', type: 'codetooltip', content: 'int myInt = 0b01001101;  // The microcontroller interprets this as the integer 77', metadata: {language: 'cpp'}},
+                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# Sending data over UART\n\nBy default, '},
                 ]
               },
 
@@ -1201,223 +1234,230 @@ export const CATEGORIES: Category[] = [
         modules: [
           { id: 'robai-arch-intro',
             title: 'Introduction to Robot Architecture',
-            description: '',
+            description: 'An outline of the Robotics Architecture Course',
             blocks: [
-              {id: 'b1', type: 'markdown', content: '# What is Robot Architecture?\n\nRobot architecture refers to the overall design and structure of a robotic system, encompassing the \`mathematical representation\`, the \`physical construction\`, and the \`control systems\` which make up the robot. It involves the arrangement of sensors, actuators, processors, and communication interfaces to enable the robot to perform its intended tasks effectively.\n\nIn this class, we will focus both on the **mathematical representation** of robotic systems (i.e. how to model a robot\'s structure and movement using mathematical tools) as well as the **physical design** of robotic systems (i.e. how to choose and arrange components to build a functional robot).'},
-              {id: 'b2', type: 'markdown', content: '# Outline of the Course\n\n 1. **Foundations of Spatial Architecture**: Configuration space, Rigid Bodies, and Transformations. \n 2. **Kinematics of Robotic Systems**: Forward Kinematics, Jacobian Matrix, and Inverse Kinematics. \n 3. **Dynamics & Planning**: Dynamics of Open Chains, Trajectory Planning, and Motion Planning. \n 4. **Control Systems for Robotics**: Various control strategies for robots.'},
-              {id: 'b3', type: 'markdown', content: '# Resources\n\n The content in this course is heavily sourced from the fantastic book **[📖Modern Robotics](https://modernrobotics.org/)**, written by *Kevin M. Lynch* and *Frank C. Park*.'}
+              {id: 'robai-arch-intro-1', type: 'markdown', content: '# What is Robot Architecture?\n\nRobot architecture refers to the overall design and structure of a robotic system, encompassing the \`mathematical representation\`, the \`physical construction\`, and the \`control systems\` which make up the robot. It involves the arrangement of sensors, actuators, processors, and communication interfaces to enable the robot to perform its intended tasks effectively.\n\nIn this class, we will focus both on the **mathematical representation** of robotic systems (i.e. how to model a robot\'s structure and movement using mathematical tools) as well as the **physical design** of robotic systems (i.e. how to choose and arrange components to build a functional robot).'},
+              {id: 'robai-arch-intro-2', type: 'markdown', content: '# Outline of the Course\n\n 1. **Foundations of Spatial Architecture**: Configuration space, Rigid Bodies, and Transformations. \n 2. **Kinematics of Robotic Systems**: Forward Kinematics, Jacobian Matrix, and Inverse Kinematics. \n 3. **Dynamics & Planning**: Dynamics of Open Chains, Trajectory Planning, and Motion Planning. \n 4. **Control Systems for Robotics**: Various control strategies for robots.'},
+              {id: 'robai-arch-intro-3', type: 'markdown', content: '# Resources\n\n The content in this course is heavily sourced from the fantastic book **[📖Modern Robotics](https://modernrobotics.org/)**, written by *Kevin M. Lynch* and *Frank C. Park*.'}
             ]
           },
 
-          { id: 'robot-arch-review',
+          { id: 'robai-arch-rev',
             title: 'Review of Linear Algebra',
             description: 'A refresher on linear algebra concepts essential for robotics.',
             blocks: [
-              {id: 'la-1', type: 'markdown', content: '# Review of Linear Algebra\n\nLinear algebra is the language of robotics: we use it to represent position, orientation, velocity, and force, and to compute how systems move.'},
-              {id: '1a-1-2', type: 'note', content: 'When viewing equations, you can hover over certain terms for an expanded explanations of what the variables represent and/or where the numbers are coming from.'},
-              {id: 'la-2', type: 'markdown', content: '## Vectors and Dimensionality\n\nA **vector** is an ordered list of numbers that can represent a direction, displacement, force, or velocity. The number of entries is the vector\'s **dimension**, which tells us what space it lives in.\n\n- A 2D vector has 2 components and lives in a plane\n- A 3D vector has 3 components and lives in space\n\nIn robotics, vectors are used constantly: joint velocities, end-effector positions, and force directions are all vector quantities.'},
-              {id: 'la-3', type: 'latextooltip', content: '', metadata: {
+              {id: 'robai-arch-rev-1', type: 'markdown', content: '# Review of Linear Algebra\n\nLinear algebra is the language of robotics: we use it to represent position, orientation, velocity, and force, and to compute how systems move.'},
+              {id: 'robai-arch-rev-2', type: 'note', content: 'When viewing equations, you can hover over certain terms for an expanded explanations of what the variables represent and/or where the numbers are coming from.'},
+              {id: 'robai-arch-rev-3', type: 'markdown', content: '## Vectors and Dimensionality\n\nA **vector** is an ordered list of numbers that can represent a direction, displacement, force, or velocity. The number of entries is the vector\'s **dimension**, which tells us what space it lives in.\n\n- A 2D vector has 2 components and lives in a plane\n- A 3D vector has 3 components and lives in space\n\nIn robotics, vectors are used constantly: joint velocities, end-effector positions, and force directions are all vector quantities.'},
+              {id: 'robai-arch-rev-4', type: 'latextooltip', content: '', metadata: {
                 displayMode: true,
                 parts: [
-                  {expression: '\\mathbf{v} = \\begin{bmatrix}2 \\\\ -1 \\\\ 4\\end{bmatrix} \\in \\mathbb{R}^3', blocks: [
-                    {id: 'la-3-a', type: 'markdown', content: 'This is a **3D vector** because it has 3 components. You can interpret it as movement of +2 in x, -1 in y, and +4 in z.'}
+                  {expression: '\\mathbf{v}', blocks: [
+                    {id: 'robai-arch-rev-4-intro', type: 'markdown', content: 'This is a vector, denoted in bold to distinguish it from scalar quantities. The letter "v" is commonly used to represent velocity, but it could represent any vector quantity depending on the context.'}
+                  ]},
+                  {expression: ' = ', blocks: []},
+                  {expression: '\\begin{bmatrix}2 \\\\ -1 \\\\ 4\\end{bmatrix} ', blocks: [
+                    {id: 'robai-arch-rev-4-a', type: 'markdown', content: 'This is a **3D vector** because it has 3 components. You can interpret it as movement of +2 in x, -1 in y, and +4 in z.'},
+                  ]},
+                  {expression: '\\in \\mathbb{R}^3', blocks: [
+                    {id: 'robai-arch-rev-4-b', type: 'markdown', content: 'This notation means that the vector lives in **3D space**. The \`R\` indicates these are *real numbers*, and the superscript 3 indicates the number of dimensions.'}
                   ]}
                 ]
               }},
 
-              {id: 'la-6', type: 'markdown', content: '## Unit Vectors and the Zero Vector\n\nA **unit vector** has magnitude 1, so it encodes pure direction. A **zero vector** has all components equal to 0 and represents no direction and no magnitude.\n\nUnit vectors are the building blocks of coordinate frames. The zero vector often appears as a neutral element in vector addition and as a baseline in equations.'},
-              {id: 'la-7', type: 'latextooltip', content: '', metadata: {
+              {id: 'robai-arch-rev-5', type: 'markdown', content: '## Unit Vectors and the Zero Vector\n\nA **unit vector** has magnitude 1, so it encodes pure direction. A **zero vector** has all components equal to 0 and represents no direction and no magnitude.\n\nUnit vectors are the building blocks of coordinate frames. The zero vector often appears as a neutral element in vector addition and as a baseline in equations.'},
+              {id: 'robai-arch-rev-6', type: 'latextooltip', content: '', metadata: {
                 displayMode: true,
                 parts: [
                   {expression: '\\hat{\\mathbf{u}} = \\begin{bmatrix}1 \\\\ 0 \\\\ 0\\end{bmatrix}', blocks: [
-                    {id: 'la-7-a', type: 'markdown', content: 'This is a unit vector in the x-direction. Its length is 1, so it captures direction only.'}
+                    {id: 'robai-arch-rev-6-a', type: 'markdown', content: 'This is a unit vector in the x-direction. Its length is 1, so it captures direction only.'}
                   ]},
                   {expression: '\\quad , \\quad', blocks: []},
                   {expression: '\\mathbf{0} = \\begin{bmatrix}0 \\\\ 0 \\\\ 0\\end{bmatrix}', blocks: [
-                    {id: 'la-7-b', type: 'markdown', content: 'This is the zero vector. It has magnitude 0 and does not point in any direction.'}
+                    {id: 'robai-arch-rev-6-b', type: 'markdown', content: 'This is the zero vector. It has magnitude 0 and does not point in any direction.'}
                   ]}
                 ]
               }},
 
-              {id: 'la-16', type: 'markdown', content: '## Dot Product\n\nThe **dot product** combines two vectors into a single scalar. It is useful for measuring alignment between directions and for projecting one vector onto another.\n\n- Positive value: generally similar direction\n- Zero: perpendicular\n- Negative: generally opposite direction'},
-              {id: 'la-17', type: 'latextooltip', content: '', metadata: {
+              {id: 'robai-arch-rev-7', type: 'markdown', content: '## Dot Product\n\nThe **dot product** combines two vectors into a single scalar. It is useful for measuring alignment between directions and for projecting one vector onto another.\n\n- Positive value: generally similar direction\n- Zero: perpendicular\n- Negative: generally opposite direction'},
+              {id: 'robai-arch-rev-8', type: 'latextooltip', content: '', metadata: {
                 displayMode: true,
                 parts: [
                   {expression: '\\mathbf{a} \\cdot \\mathbf{b} = \\sum_i a_i b_i', blocks: [
-                    {id: 'la-17-a', type: 'markdown', content: 'Multiply matching components and add the results. This is one of the most common operations in robotics and physics.'}
+                    {id: 'robai-arch-rev-8-a', type: 'markdown', content: 'Multiply matching components and add the results. This is one of the most common operations in robotics and physics.'}
                   ]}
                 ]
               }},
-              {id: 'la-18', type: 'dropdown', title: 'Dot Product Example', content: '', children: [
-                {id: 'la-18-1', type: 'latex', content: '\\begin{bmatrix}1 \\\\ 3 \\\\ -2\\end{bmatrix} \\cdot \\begin{bmatrix}4 \\\\ -1 \\\\ 2\\end{bmatrix} = 1(4) + 3(-1) + (-2)(2) = -3'},
-                {id: 'la-18-2', type: 'markdown', content: 'The result is negative, indicating the vectors are more opposed than aligned.'}
+              {id: 'robai-arch-rev-9', type: 'dropdown', title: 'Dot Product Example', content: '', children: [
+                {id: 'robai-arch-rev-9-1', type: 'latex', content: '\\begin{bmatrix}1 \\\\ 3 \\\\ -2\\end{bmatrix} \\cdot \\begin{bmatrix}4 \\\\ -1 \\\\ 2\\end{bmatrix} = 1(4) + 3(-1) + (-2)(2) = -3'},
+                {id: 'robai-arch-rev-9-2', type: 'markdown', content: 'The result is negative, indicating the vectors are more opposed than aligned.'}
               ]},
 
-              {id: 'la-4', type: 'markdown', content: '## Orthogonality\n\nTwo vectors are **orthogonal** if they are perpendicular. The easiest algebraic test is the dot product: if $\\mathbf{a} \\cdot \\mathbf{b}=0$, the vectors are orthogonal.'},
-              {id: 'la-4-latex', type: 'latex', content: '\\mathbf{a} \\cdot \\mathbf{b} = 0'} ,
-              {id: 'la-5', type: 'dropdown', title: 'Orthogonality Example', content: '', children: [
-                {id: 'la-5-1', type: 'latex', content: '\\mathbf{a}=\\begin{bmatrix}1 \\\\ 2\\end{bmatrix}, \\quad \\mathbf{b}=\\begin{bmatrix}2 \\\\ -1\\end{bmatrix}'},
-                {id: 'la-5-2', type: 'latex', content: '\\mathbf{a} \\cdot \\mathbf{b} = 1(2) + 2(-1) = 0'},
-                {id: 'la-5-3', type: 'markdown', content: 'Since the dot product is 0, these vectors are perpendicular.'}
+              {id: 'robai-arch-rev-10', type: 'markdown', content: '## Orthogonality\n\nTwo vectors are **orthogonal** if they are perpendicular. The easiest algebraic test is the dot product: if $\\mathbf{a} \\cdot \\mathbf{b}=0$, the vectors are orthogonal.'},
+              {id: 'robai-arch-rev-10-latex', type: 'latex', content: '\\mathbf{a} \\cdot \\mathbf{b} = 0'} ,
+              {id: 'robai-arch-rev-11', type: 'dropdown', title: 'Orthogonality Example', content: '', children: [
+                {id: 'robai-arch-rev-11-1', type: 'latex', content: '\\mathbf{a}=\\begin{bmatrix}1 \\\\ 2\\end{bmatrix}, \\quad \\mathbf{b}=\\begin{bmatrix}2 \\\\ -1\\end{bmatrix}'},
+                {id: 'robai-arch-rev-11-2', type: 'latex', content: '\\mathbf{a} \\cdot \\mathbf{b} = 1(2) + 2(-1) = 0'},
+                {id: 'robai-arch-rev-11-3', type: 'markdown', content: 'Since the dot product is 0, these vectors are perpendicular.'}
               ]},
 
-              {id: 'la-8', type: 'markdown', content: '## Matrices and Core Operations\n\nA **matrix** is a rectangular arrangement of numbers. In robotics, matrices are used to represent linear transformations, coordinate changes, and systems of equations.\n\nThe most common operations are addition/subtraction, scalar multiplication, and matrix multiplication.'},
-              {id: 'la-9', type: 'dropdown', title: 'Matrix Addition and Subtraction', content: '', children: [
-                {id: 'la-9-1', type: 'latex', content: 'A=\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix},\\; B=\\begin{bmatrix}5 & 6 \\\\ 7 & 8\\end{bmatrix}'},
-                {id: 'la-9-2', type: 'latex', content: 'A+B=\\begin{bmatrix}6 & 8 \\\\ 10 & 12\\end{bmatrix}'},
-                {id: 'la-9-3', type: 'latex', content: 'A-B=\\begin{bmatrix}-4 & -4 \\\\ -4 & -4\\end{bmatrix}'}
+              {id: 'robai-arch-rev-12', type: 'markdown', content: '## Matrices and Core Operations\n\nA **matrix** is a rectangular arrangement of numbers. In robotics, matrices are used to represent linear transformations, coordinate changes, and systems of equations.\n\nThe most common operations are addition/subtraction, scalar multiplication, and matrix multiplication.'},
+              {id: 'robai-arch-rev-13', type: 'dropdown', title: 'Matrix Addition and Subtraction', content: '', children: [
+                {id: 'robai-arch-rev-13-1', type: 'latex', content: 'A=\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix},\\; B=\\begin{bmatrix}5 & 6 \\\\ 7 & 8\\end{bmatrix}'},
+                {id: 'robai-arch-rev-13-2', type: 'latex', content: 'A+B=\\begin{bmatrix}6 & 8 \\\\ 10 & 12\\end{bmatrix}'},
+                {id: 'robai-arch-rev-13-3', type: 'latex', content: 'A-B=\\begin{bmatrix}-4 & -4 \\\\ -4 & -4\\end{bmatrix}'}
               ]},
-              {id: 'la-10', type: 'dropdown', title: 'Scalar Multiplication', content: '', children: [
-                {id: 'la-10-1', type: 'latex', content: '3A = 3\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix} = \\begin{bmatrix}3 & 6 \\\\ 9 & 12\\end{bmatrix}'}
+              {id: 'robai-arch-rev-14', type: 'dropdown', title: 'Scalar Multiplication', content: '', children: [
+                {id: 'robai-arch-rev-14-1', type: 'latex', content: '3A = 3\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix} = \\begin{bmatrix}3 & 6 \\\\ 9 & 12\\end{bmatrix}'}
               ]},
-              {id: 'la-11', type: 'dropdown', title: 'Matrix Multiplication (Square and Non-Square)', content: '', children: [
-                {id: 'la-11-1', type: 'markdown', content: 'To multiply matrices, the **inner dimensions must match**. If $A$ is $m\\times n$ and $B$ is $n\\times p$, then $AB$ exists and has size $m\\times p$.\n\nEach entry is computed as a row-column dot product: take one row from the first matrix and one column from the second matrix.'},
-                {id: 'la-11-1-latex', type: 'latex', content: '(m\\times n)(n\\times p) \\rightarrow (m\\times p)'},
-                {id: 'la-11-2', type: 'markdown', content: '### Example 1: Square Multiplication (2×2 · 2×2)'},
-                {id: 'la-11-3', type: 'latex', content: 'A=\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix},\\quad C=\\begin{bmatrix}2 & 0 \\\\ 1 & 2\\end{bmatrix}'},
-                {id: 'la-11-4', type: 'latextooltip', content: '', metadata: {
+              {id: 'robai-arch-rev-15', type: 'dropdown', title: 'Matrix Multiplication (Square and Non-Square)', content: '', children: [
+                {id: 'robai-arch-rev-15-1', type: 'markdown', content: 'To multiply matrices, the **inner dimensions must match**. If $A$ is $m\\times n$ and $B$ is $n\\times p$, then $AB$ exists and has size $m\\times p$.\n\nEach entry is computed as a row-column dot product: take one row from the first matrix and one column from the second matrix.'},
+                {id: 'robai-arch-rev-15-1-latex', type: 'latex', content: '(m\\times n)(n\\times p) \\rightarrow (m\\times p)'},
+                {id: 'robai-arch-rev-15-2', type: 'markdown', content: '### Example 1: Square Multiplication (2×2 · 2×2)'},
+                {id: 'robai-arch-rev-15-3', type: 'latex', content: 'A=\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix},\\quad C=\\begin{bmatrix}2 & 0 \\\\ 1 & 2\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-4', type: 'latextooltip', content: '', metadata: {
                   displayMode: true,
                   parts: [
                     {expression: '(AC)_{11}', blocks: [
-                      {id: 'la-11-4-a', type: 'markdown', content: 'The entry in **row 1, column 1** of the product matrix `AC`.'}
+                      {id: 'robai-arch-rev-15-4-a', type: 'markdown', content: 'The entry in **row 1, column 1** of the product matrix `AC`.'}
                     ]},
                     {expression: ' = ', blocks: []},
                     {expression: '1\\cdot2', blocks: [
-                      {id: 'la-11-4-b', type: 'markdown', content: '`1` is from row 1 of `A`, column 1 value. `2` is from column 1 of `C`, row 1 value.'}
+                      {id: 'robai-arch-rev-15-4-b', type: 'markdown', content: '`1` is from row 1 of `A`, column 1 value. `2` is from column 1 of `C`, row 1 value.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '2\\cdot1', blocks: [
-                      {id: 'la-11-4-c', type: 'markdown', content: '`2` is from row 1 of `A`, column 2 value. `1` is from column 1 of `C`, row 2 value.'}
+                      {id: 'robai-arch-rev-15-4-c', type: 'markdown', content: '`2` is from row 1 of `A`, column 2 value. `1` is from column 1 of `C`, row 2 value.'}
                     ]},
                     {expression: ' = 4', blocks: [
-                      {id: 'la-11-4-d', type: 'markdown', content: 'This finishes the dot product of row 1 of `A` with column 1 of `C`.'}
+                      {id: 'robai-arch-rev-15-4-d', type: 'markdown', content: 'This finishes the dot product of row 1 of `A` with column 1 of `C`.'}
                     ]},
                     {expression: '\\quad', blocks: []},
                     {expression: '(AC)_{12}', blocks: [
-                      {id: 'la-11-4-e', type: 'markdown', content: 'The entry in **row 1, column 2** of `AC`.'}
+                      {id: 'robai-arch-rev-15-4-e', type: 'markdown', content: 'The entry in **row 1, column 2** of `AC`.'}
                     ]},
                     {expression: ' = ', blocks: []},
                     {expression: '1\\cdot0', blocks: [
-                      {id: 'la-11-4-f', type: 'markdown', content: '`1` comes from row 1 of `A`. `0` comes from column 2 of `C`, row 1.'}
+                      {id: 'robai-arch-rev-15-4-f', type: 'markdown', content: '`1` comes from row 1 of `A`. `0` comes from column 2 of `C`, row 1.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '2\\cdot2', blocks: [
-                      {id: 'la-11-4-g', type: 'markdown', content: '`2` comes from row 1 of `A`. The second `2` comes from column 2 of `C`, row 2.'}
+                      {id: 'robai-arch-rev-15-4-g', type: 'markdown', content: '`2` comes from row 1 of `A`. The second `2` comes from column 2 of `C`, row 2.'}
                     ]},
                     {expression: ' = 4', blocks: [
-                      {id: 'la-11-4-h', type: 'markdown', content: 'This is the dot product of row 1 of `A` with column 2 of `C`.'}
+                      {id: 'robai-arch-rev-15-4-h', type: 'markdown', content: 'This is the dot product of row 1 of `A` with column 2 of `C`.'}
                     ]}
                   ]
                 }},
-                {id: 'la-11-5', type: 'latextooltip', content: '', metadata: {
+                {id: 'robai-arch-rev-15-5', type: 'latextooltip', content: '', metadata: {
                   displayMode: true,
                   parts: [
                     {expression: '(AC)_{21}', blocks: [
-                      {id: 'la-11-5-a', type: 'markdown', content: 'The entry in **row 2, column 1** of `AC`.'}
+                      {id: 'robai-arch-rev-15-5-a', type: 'markdown', content: 'The entry in **row 2, column 1** of `AC`.'}
                     ]},
                     {expression: ' = ', blocks: []},
                     {expression: '3\\cdot2', blocks: [
-                      {id: 'la-11-5-b', type: 'markdown', content: '`3` is from row 2 of `A`, column 1. `2` is from column 1 of `C`, row 1.'}
+                      {id: 'robai-arch-rev-15-5-b', type: 'markdown', content: '`3` is from row 2 of `A`, column 1. `2` is from column 1 of `C`, row 1.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '4\\cdot1', blocks: [
-                      {id: 'la-11-5-c', type: 'markdown', content: '`4` is from row 2 of `A`, column 2. `1` is from column 1 of `C`, row 2.'}
+                      {id: 'robai-arch-rev-15-5-c', type: 'markdown', content: '`4` is from row 2 of `A`, column 2. `1` is from column 1 of `C`, row 2.'}
                     ]},
                     {expression: ' = 10', blocks: [
-                      {id: 'la-11-5-d', type: 'markdown', content: 'This finishes the dot product of row 2 of `A` with column 1 of `C`.'}
+                      {id: 'robai-arch-rev-15-5-d', type: 'markdown', content: 'This finishes the dot product of row 2 of `A` with column 1 of `C`.'}
                     ]},
                     {expression: '\\quad', blocks: []},
                     {expression: '(AC)_{22}', blocks: [
-                      {id: 'la-11-5-e', type: 'markdown', content: 'The entry in **row 2, column 2** of `AC`.'}
+                      {id: 'robai-arch-rev-15-5-e', type: 'markdown', content: 'The entry in **row 2, column 2** of `AC`.'}
                     ]},
                     {expression: ' = ', blocks: []},
                     {expression: '3\\cdot0', blocks: [
-                      {id: 'la-11-5-f', type: 'markdown', content: '`3` comes from row 2 of `A`. `0` comes from column 2 of `C`, row 1.'}
+                      {id: 'robai-arch-rev-15-5-f', type: 'markdown', content: '`3` comes from row 2 of `A`. `0` comes from column 2 of `C`, row 1.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '4\\cdot2', blocks: [
-                      {id: 'la-11-5-g', type: 'markdown', content: '`4` comes from row 2 of `A`. The `2` comes from column 2 of `C`, row 2.'}
+                      {id: 'robai-arch-rev-15-5-g', type: 'markdown', content: '`4` comes from row 2 of `A`. The `2` comes from column 2 of `C`, row 2.'}
                     ]},
                     {expression: ' = 8', blocks: [
-                      {id: 'la-11-5-h', type: 'markdown', content: 'This is the dot product of row 2 of `A` with column 2 of `C`.'}
+                      {id: 'robai-arch-rev-15-5-h', type: 'markdown', content: 'This is the dot product of row 2 of `A` with column 2 of `C`.'}
                     ]}
                   ]
                 }},
-                {id: 'la-11-6', type: 'latex', content: 'AC=\\begin{bmatrix}4 & 4 \\\\ 10 & 8\\end{bmatrix}'},
-                {id: 'la-11-7', type: 'markdown', content: '### Example 2: Non-Square Multiplication (2×3 · 3×1)'},
-                {id: 'la-11-8', type: 'latex', content: 'M=\\begin{bmatrix}1 & -1 & 2 \\\\ 0 & 3 & 4\\end{bmatrix},\\quad N=\\begin{bmatrix}2 \\\\ 5 \\\\ -1\\end{bmatrix}'},
-                {id: 'la-11-9', type: 'markdown', content: 'Dimensions: $M$ is $2\\times3$, $N$ is $3\\times1$, so $MN$ is valid and the result is $2\\times1$.'},
-                {id: 'la-11-9-latex', type: 'latex', content: '(2\\times3)(3\\times1) \\rightarrow (2\\times1)'},
-                {id: 'la-11-10', type: 'latextooltip', content: '', metadata: {
+                {id: 'robai-arch-rev-15-6', type: 'latex', content: 'AC=\\begin{bmatrix}4 & 4 \\\\ 10 & 8\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-7', type: 'markdown', content: '### Example 2: Non-Square Multiplication (2×3 · 3×1)'},
+                {id: 'robai-arch-rev-15-8', type: 'latex', content: 'M=\\begin{bmatrix}1 & -1 & 2 \\\\ 0 & 3 & 4\\end{bmatrix},\\quad N=\\begin{bmatrix}2 \\\\ 5 \\\\ -1\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-9', type: 'markdown', content: 'Dimensions: $M$ is $2\\times3$, $N$ is $3\\times1$, so $MN$ is valid and the result is $2\\times1$.'},
+                {id: 'robai-arch-rev-15-9-latex', type: 'latex', content: '(2\\times3)(3\\times1) \\rightarrow (2\\times1)'},
+                {id: 'robai-arch-rev-15-10', type: 'latextooltip', content: '', metadata: {
                   displayMode: true,
                   parts: [
                     {expression: '(MN)_1', blocks: [
-                      {id: 'la-11-10-tip-1', type: 'markdown', content: 'The **first entry** of the result vector `MN`. Since `MN` is `2×1`, this is the value in row 1, column 1.'}
+                      {id: 'robai-arch-rev-15-10-tip-1', type: 'markdown', content: 'The **first entry** of the result vector `MN`. Since `MN` is `2×1`, this is the value in row 1, column 1.'}
                     ]},
                     {expression: ' = ', blocks: []},
                     {expression: '1\\cdot2', blocks: [
-                      {id: 'la-11-10-tip-2', type: 'markdown', content: '`1` comes from the **first row of M**: `[1, -1, 2]` (first element). `2` comes from the **first (and only) column of N**: `[2, 5, -1]^T` (first element).'}
+                      {id: 'robai-arch-rev-15-10-tip-2', type: 'markdown', content: '`1` comes from the **first row of M**: `[1, -1, 2]` (first element). `2` comes from the **first (and only) column of N**: `[2, 5, -1]^T` (first element).'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '(-1)\\cdot5', blocks: [
-                      {id: 'la-11-10-tip-3', type: 'markdown', content: '`-1` is the second element of row 1 in `M`. `5` is the second element of column 1 in `N`.'}
+                      {id: 'robai-arch-rev-15-10-tip-3', type: 'markdown', content: '`-1` is the second element of row 1 in `M`. `5` is the second element of column 1 in `N`.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '2\\cdot(-1)', blocks: [
-                      {id: 'la-11-10-tip-4', type: 'markdown', content: '`2` is the third element of row 1 in `M`. `-1` is the third element of column 1 in `N`.'}
+                      {id: 'robai-arch-rev-15-10-tip-4', type: 'markdown', content: '`2` is the third element of row 1 in `M`. `-1` is the third element of column 1 in `N`.'}
                     ]},
                     {expression: ' = -5', blocks: [
-                      {id: 'la-11-10-tip-5', type: 'markdown', content: 'This is the row-column dot product for row 1 of `M` with column 1 of `N`.'}
+                      {id: 'robai-arch-rev-15-10-tip-5', type: 'markdown', content: 'This is the row-column dot product for row 1 of `M` with column 1 of `N`.'}
                     ]}
                   ]
                 }},
-                {id: 'la-11-11', type: 'latextooltip', content: '', metadata: {
+                {id: 'robai-arch-rev-15-11', type: 'latextooltip', content: '', metadata: {
                   displayMode: true,
                   parts: [
                     {expression: '(MN)_2', blocks: [
-                      {id: 'la-11-11-tip-1', type: 'markdown', content: 'The **second entry** of the result vector `MN` (row 2, column 1).' }
+                      {id: 'robai-arch-rev-15-11-tip-1', type: 'markdown', content: 'The **second entry** of the result vector `MN` (row 2, column 1).' }
                     ]},
                     {expression: ' = ', blocks: []},
                     {expression: '0\\cdot2', blocks: [
-                      {id: 'la-11-11-tip-2', type: 'markdown', content: '`0` comes from the **second row of M**: `[0, 3, 4]` (first element). `2` is the first element of column 1 in `N`.'}
+                      {id: 'robai-arch-rev-15-11-tip-2', type: 'markdown', content: '`0` comes from the **second row of M**: `[0, 3, 4]` (first element). `2` is the first element of column 1 in `N`.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '3\\cdot5', blocks: [
-                      {id: 'la-11-11-tip-3', type: 'markdown', content: '`3` is the second element of row 2 in `M`. `5` is the second element of column 1 in `N`.'}
+                      {id: 'robai-arch-rev-15-11-tip-3', type: 'markdown', content: '`3` is the second element of row 2 in `M`. `5` is the second element of column 1 in `N`.'}
                     ]},
                     {expression: ' + ', blocks: []},
                     {expression: '4\\cdot(-1)', blocks: [
-                      {id: 'la-11-11-tip-4', type: 'markdown', content: '`4` is the third element of row 2 in `M`. `-1` is the third element of column 1 in `N`.'}
+                      {id: 'robai-arch-rev-15-11-tip-4', type: 'markdown', content: '`4` is the third element of row 2 in `M`. `-1` is the third element of column 1 in `N`.'}
                     ]},
                     {expression: ' = 11', blocks: [
-                      {id: 'la-11-11-tip-5', type: 'markdown', content: 'This completes the second row-column dot product.'}
+                      {id: 'robai-arch-rev-15-11-tip-5', type: 'markdown', content: 'This completes the second row-column dot product.'}
                     ]}
                   ]
                 }},
-                {id: 'la-11-12', type: 'latex', content: 'MN=\\begin{bmatrix}-5 \\\\ 11\\end{bmatrix}'},
-                {id: 'la-11-13', type: 'markdown', content: 'Matrix multiplication is generally **not commutative**, so in most cases $AB \\neq BA$ (and sometimes one order is not even defined).'},
-                {id: 'la-11-13-latex', type: 'latex', content: 'AB \\neq BA'}
+                {id: 'robai-arch-rev-15-12', type: 'latex', content: 'MN=\\begin{bmatrix}-5 \\\\ 11\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-13', type: 'markdown', content: 'Matrix multiplication is generally **not commutative**, so in most cases $AB \\neq BA$ (and sometimes one order is not even defined).'},
+                {id: 'robai-arch-rev-15-13-latex', type: 'latex', content: 'AB \\neq BA'}
               ]},
 
-              {id: 'la-12', type: 'markdown', content: '## Special Matrices and Transpose\n\nSome matrix objects appear so often that they have special names. The **identity matrix** leaves vectors unchanged, the **zero matrix** is the additive neutral element, and the **transpose** swaps rows with columns.\n\nThese ideas are foundational for coordinate transforms and matrix factorizations.'},
-              {id: 'la-13', type: 'dropdown', title: 'Identity Matrix Example', content: '', children: [
-                {id: 'la-13-1', type: 'latex', content: 'I_2 = \\begin{bmatrix}1 & 0 \\\\ 0 & 1\\end{bmatrix},\\quad A=\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}'},
-                {id: 'la-13-2', type: 'latex', content: 'I_2A = AI_2 = A'}
+              {id: 'robai-arch-rev-15-14', type: 'markdown', content: '## Special Matrices and Transpose\n\nSome matrix objects appear so often that they have special names. The **identity matrix** leaves vectors unchanged, the **zero matrix** is the additive neutral element, and the **transpose** swaps rows with columns.\n\nThese ideas are foundational for coordinate transforms and matrix factorizations.'},
+              {id: 'robai-arch-rev-15-15', type: 'dropdown', title: 'Identity Matrix Example', content: '', children: [
+                {id: 'robai-arch-rev-15-15-1', type: 'latex', content: 'I_2 = \\begin{bmatrix}1 & 0 \\\\ 0 & 1\\end{bmatrix},\\quad A=\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-15-2', type: 'latex', content: 'I_2A = AI_2 = A'}
               ]},
-              {id: 'la-14', type: 'dropdown', title: 'Transpose Example', content: '', children: [
-                {id: 'la-14-1', type: 'latex', content: 'A=\\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6\\end{bmatrix} \\Rightarrow A^T=\\begin{bmatrix}1 & 4 \\\\ 2 & 5 \\\\ 3 & 6\\end{bmatrix}'},
-                {id: 'la-14-2', type: 'markdown', content: 'Transpose swaps rows and columns.'}
+              {id: 'robai-arch-rev-15-16', type: 'dropdown', title: 'Transpose Example', content: '', children: [
+                {id: 'robai-arch-rev-15-16-1', type: 'latex', content: 'A=\\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6\\end{bmatrix} \\Rightarrow A^T=\\begin{bmatrix}1 & 4 \\\\ 2 & 5 \\\\ 3 & 6\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-16-2', type: 'markdown', content: 'Transpose swaps rows and columns.'}
               ]},
-              {id: 'la-15', type: 'dropdown', title: 'Zero Matrix Example', content: '', children: [
-                {id: 'la-15-1', type: 'latex', content: '0_{2\\times2}=\\begin{bmatrix}0 & 0 \\\\ 0 & 0\\end{bmatrix}'},
-                {id: 'la-15-2', type: 'latex', content: 'A + 0_{2\\times2} = A'}
+              {id: 'robai-arch-rev-15-17', type: 'dropdown', title: 'Zero Matrix Example', content: '', children: [
+                {id: 'robai-arch-rev-15-17-1', type: 'latex', content: '0_{2\\times2}=\\begin{bmatrix}0 & 0 \\\\ 0 & 0\\end{bmatrix}'},
+                {id: 'robai-arch-rev-15-17-2', type: 'latex', content: 'A + 0_{2\\times2} = A'}
               ]},
-              {id: 'la-19', type: 'markdown', content: '## Determinant\n\nThe **determinant** is a scalar computed from a square matrix. It tells us whether the matrix is invertible and how the transformation scales area (2D) or volume (3D).\n\nIf the determinant is 0, the transformation collapses space in at least one direction, so the matrix is not invertible.'},
-              {id: 'la-20', type: 'dropdown', title: 'Determinant Examples', content: '', children: [
-                {id: 'la-20-1', type: 'latex', content: '\\det\\begin{bmatrix}a & b \\\\ c & d\\end{bmatrix} = ad-bc'},
-                {id: 'la-20-2', type: 'latex', content: '\\det\\begin{bmatrix}2 & 1 \\\\ 5 & 3\\end{bmatrix} = 2(3)-1(5)=1'},
-                {id: 'la-20-3', type: 'latex', content: '\\det\\begin{bmatrix}2 & 4 \\\\ 1 & 2\\end{bmatrix} = 2(2)-4(1)=0'},
-                {id: 'la-20-4', type: 'markdown', content: 'A determinant of 0 means the matrix is **singular** (not invertible).'}
+              {id: 'robai-arch-rev-15-18', type: 'markdown', content: '## Determinant\n\nThe **determinant** is a scalar computed from a square matrix. It tells us whether the matrix is invertible and how the transformation scales area (2D) or volume (3D).\n\nIf the determinant is 0, the transformation collapses space in at least one direction, so the matrix is not invertible.'},
+              {id: 'robai-arch-rev-15-19', type: 'dropdown', title: 'Determinant Examples', content: '', children: [
+                {id: 'robai-arch-rev-15-19-1', type: 'latex', content: '\\det\\begin{bmatrix}a & b \\\\ c & d\\end{bmatrix} = ad-bc'},
+                {id: 'robai-arch-rev-15-19-2', type: 'latex', content: '\\det\\begin{bmatrix}2 & 1 \\\\ 5 & 3\\end{bmatrix} = 2(3)-1(5)=1'},
+                {id: 'robai-arch-rev-15-19-3', type: 'latex', content: '\\det\\begin{bmatrix}2 & 4 \\\\ 1 & 2\\end{bmatrix} = 2(2)-4(1)=0'},
+                {id: 'robai-arch-rev-15-19-4', type: 'markdown', content: 'A determinant of 0 means the matrix is **singular** (not invertible).'}
               ]}
             ]
           }
@@ -1428,24 +1468,15 @@ export const CATEGORIES: Category[] = [
             title: 'Foundations of Spatial Architecture',
             emoji: '👍',
             modules: [
-              { id: 'robai-arch-intro-intro',
+              { id: 'robai-arch-intro-confspace',
                 title: 'Configuration Space',
                 description: 'Understanding the configuration space (C-space) for robot motion planning.',
                 blocks: [
-                  // {id: 'bkt', type: 'markdowntooltip', content: '# Key Terms\n\n- Rigid Body\n- Joints\n - Rotation Matrix\n- Homogeneous Transformation Matrix\n- Configuration Space (C-space)\n\n', metadata: { 'parts' : 
-                  //   [
-                  //     {
-                  //         text: 'Rigid Body',
-                  //         blocks: [{type: 'markdown', content: 'A single solid object that does not deform. In robotics, we model components like arms, grippers, and sensors as rigid bodies. *Essentially, anything that maintains its shape under normal operating conditions.*'}]
-                  //     },
-                  //   ]
-                  // }},
-
-                  // Degrees of Freedom
-                  {id: 'dof1', type: 'markdown', content: '# Degrees of Freedom (DoF)\n\nThe **degrees of freedom** of a robotic system refer to the number of independent parameters that define its configuration. In other words, it\'s answering the question of *how many numbers (such as positions, angles, etc.) do we need to specify the exact state of the robot?*\n\nFor example, a simple robotic arm with two joints might have 2 degrees of freedom, while a humanoid robot with multiple limbs and joints could have dozens of degrees of freedom.'},
+                                    // Degrees of Freedom
+                  {id: 'robai-arch-intro-confspace-dof-1', type: 'markdown', content: '# Degrees of Freedom (DoF)\n\nThe **degrees of freedom** of a robotic system refer to the number of independent parameters that define its configuration. In other words, it\'s answering the question of *how many numbers (such as positions, angles, etc.) do we need to specify the exact state of the robot?*\n\nFor example, a simple robotic arm with two joints might have 2 degrees of freedom, while a humanoid robot with multiple limbs and joints could have dozens of degrees of freedom.'},
 
                   // Rigid Bodies
-                  {id: 'rb1', type: 'markdowntooltip', content: '# Rigid Bodies\n\nIn the broadest terms, robots can best be thought of as one or more solid objects connected together. We refer to these solid objects as **rigid bodies**, and the connections between them as **joints**.\n\n', metadata: { 'parts' : 
+                  {id: 'robai-arch-rb-1', type: 'markdowntooltip', content: '# Rigid Bodies\n\nIn the broadest terms, robots can best be thought of as one or more solid objects connected together. We refer to these solid objects as **rigid bodies**, and the connections between them as **joints**.\n\n', metadata: { 'parts' : 
                       [
                         {
                           text: 'rigid bodies',
@@ -1458,18 +1489,18 @@ export const CATEGORIES: Category[] = [
                       ]
                     }
                 },
-                  {id: 'rb2', type: 'markdown', content: 'When discussing rigid bodies, we must first categorize our bodies as **planar** or **spatial**. A planar rigid body is one in which all motion occurs within a single plane (2D), leading to 3 degrees of freedom (DoFs): two translational \`(x, y)\`, and one rotational \`(θ)\`. A spatial rigid body allows for motion in three-dimensional space (3D), resulting in 6 DoFs: three translational \`(x, y, z)\` and three rotational \`(roll, pitch, yaw)\`.'},
+                  {id: 'robai-arch-rb-2', type: 'markdown', content: 'When discussing rigid bodies, we must first categorize our bodies as **planar** or **spatial**. A planar rigid body is one in which all motion occurs within a single plane (2D), leading to 3 degrees of freedom (DoFs): two translational \`(x, y)\`, and one rotational \`(θ)\`. A spatial rigid body allows for motion in three-dimensional space (3D), resulting in 6 DoFs: three translational \`(x, y, z)\` and three rotational \`(roll, pitch, yaw)\`.'},
 
-                  {id: 'rb3', type: 'image', content: 'robarch_rb_1.png', metadata: { alt: 'Planar Rigid Body having 3 DoFs, while Spatial Rigid Body has 6 DoFs', format: 'no-shadow', maxWidth: 'full'}},
+                  {id: 'robai-arch-rb-3', type: 'image', content: 'robarch_rb_1.png', metadata: { alt: 'Planar Rigid Body having 3 DoFs, while Spatial Rigid Body has 6 DoFs', format: 'no-shadow', maxWidth: 'full'}},
 
-                  {id: 'rb4', type: 'lab', title: 'Planar Rigid Body Lab', content: 'rigid-body-planar'},
+                  // {id: 'robai-arch-rb-4', type: 'lab', title: 'Planar Rigid Body Lab', content: 'rigid-body-planar'},
 
                   // Robot Joints
-                  { id: 'j-1', type: 'markdown', content: '# Robot Joints\n\nA free-floating square or cube doesn\`t make for a very good robot, which is why we must connect our robot with **joints**. Joints allow for *constrained* motion between rigid bodies. Each type of joint has different mechanical advantages when implemented, but also mathematical implications for kinematics and dynamics. Let\'s explore the common types of joints:\n\n- **Revolute Joint** (R, 1 DoF): Also called a hinge joint, allows for rotation along the hinge axis. In other words, it constrains 5 of the 6 DoFs.\n- **Prismatic Joint** (P, 1 DoF): Allows for translational motion along a single axis, constraining 5 of the 6 DoFs.\n- **Helical Joint** (H, 1 DoF): Sometimes called screw joints, combines rotational and translational motion along a single axis. *While you may think this allows for 2 DoFs, since the rotation and translation are coupled, we only actually have 1 DoF.*\n- **Cylindrical Joint** (C, 2 DoFs): Allows for rotation and translation along a single axis, constraining 2 translational DoFs and 2 rotational DoFs.\n- **Universal Joint** (U, 2 DoFs): Allows for rotation around two perpendicular axes.\n- **Spherical Joint** (S, 3 DoFs): Also called ball-and-socket joints, allows for rotation around all three axes, constraining only the translational DoFs.'},
+                  { id: 'robai-arch-j-1', type: 'markdown', content: '# Robot Joints\n\nA free-floating square or cube doesn\`t make for a very good robot, which is why we must connect our robot with **joints**. Joints allow for *constrained* motion between rigid bodies. Each type of joint has different mechanical advantages when implemented, but also mathematical implications for kinematics and dynamics. Let\'s explore the common types of joints:\n\n- **Revolute Joint** (R, 1 DoF): Also called a hinge joint, allows for rotation along the hinge axis. In other words, it constrains 5 of the 6 DoFs.\n- **Prismatic Joint** (P, 1 DoF): Allows for translational motion along a single axis, constraining 5 of the 6 DoFs.\n- **Helical Joint** (H, 1 DoF): Sometimes called screw joints, combines rotational and translational motion along a single axis. *While you may think this allows for 2 DoFs, since the rotation and translation are coupled, we only actually have 1 DoF.*\n- **Cylindrical Joint** (C, 2 DoFs): Allows for rotation and translation along a single axis, constraining 2 translational DoFs and 2 rotational DoFs.\n- **Universal Joint** (U, 2 DoFs): Allows for rotation around two perpendicular axes.\n- **Spherical Joint** (S, 3 DoFs): Also called ball-and-socket joints, allows for rotation around all three axes, constraining only the translational DoFs.'},
 
                   // Grubler's Formula
-                  {id: 'grub-1', type: 'markdown', content: '# Grubler\'s Formula\n\nGrubler\'s formula is a fundamental equation in robotics that helps us determine the degrees of freedom (DoF) of a robotic system based on its configuration of rigid bodies and joints. The formula is given by:'},
-                  {id: 'grub-2', type: 'latextooltip', content: '', metadata: {
+                  {id: 'robai-arch-grub-1', type: 'markdown', content: '# Grubler\'s Formula\n\nGrubler\'s formula is a fundamental equation in robotics that helps us determine the degrees of freedom (DoF) of a robotic system based on its configuration of rigid bodies and joints. The formula is given by:'},
+                  {id: 'robai-arch-grub-2', type: 'latextooltip', content: '', metadata: {
                     displayMode: true,
                     parts: [
                       {expression: 'dof = ', blocks: [{id: 'dof', type: 'markdown', content: '\`dof\` stands for degrees of freedom, which represents the number of independent parameters that define the configuration of a robotic system.'}]},
@@ -1480,19 +1511,19 @@ export const CATEGORIES: Category[] = [
                     ]
                   }},
 
-                  {id: 'grub-3', type: 'dropdown', title: 'Grubler\'s Formula Example 1', content: '', children: [
-                    {id: 'grub-3-1', type: 'image', content: 'robarch_dof_ex_1.png', metadata: { alt: 'A planar robotic system with 3 rigid bodies, 3 revolute joints, and 1 prismatic joint. Each joint has 1 DoF, so the system has a total of 1 DoF.', format: 'no-shadow', maxWidth: 'full'}},
-                    {id: 'grub-3-2', type: 'markdown', content: 'Let\'s consider **why** this system has only 1 DoF. Say we put a motor at the bottom-left revolute joint. By moving this motor, all other joints move, including the sliding prismatic joint. This means that we can control the entire system by controlling just 1 joint, which is why the system has 1 DoF.\n\nIf we were to add another motor at the prismatic joint, trying to control both motors at the same time would cause one motor to break, since the prismatic joint might want to move a different direction than the revolute joint.'}
+                  {id: 'robai-arch-grub-3', type: 'dropdown', title: 'Grubler\'s Formula Example 1', content: '', children: [
+                    {id: 'robai-arch-grub-3-1', type: 'image', content: 'robarch_dof_ex_1.png', metadata: { alt: 'A planar robotic system with 3 rigid bodies, 3 revolute joints, and 1 prismatic joint. Each joint has 1 DoF, so the system has a total of 1 DoF.', format: 'no-shadow', maxWidth: 'full'}},
+                    {id: 'robai-arch-grub-3-2', type: 'markdown', content: 'Let\'s consider **why** this system has only 1 DoF. Say we put a motor at the bottom-left revolute joint. By moving this motor, all other joints move, including the sliding prismatic joint. This means that we can control the entire system by controlling just 1 joint, which is why the system has 1 DoF.\n\nIf we were to add another motor at the prismatic joint, trying to control both motors at the same time would cause one motor to break, since the prismatic joint might want to move a different direction than the revolute joint.'}
                   ]},
 
-                  {id: 'grub-4', type: 'dropdown', title: 'Grubler\'s Formula Example 2', content: '', children: [
-                    // {id: 'grub-4-1', type: 'image', content: 'robarch_dof_ex_2.png', metadata: { alt: 'A spatial robotic system with 4 rigid bodies, 4 revolute joints, and 1 cylindrical joint. The system has a total of 6 DoFs.', format: 'no-shadow', maxWidth: 'full'}},
-                    {id: 'grub-4-2', type: 'markdown', content: '... I\'ll finish this later 😴 ... want to add the *delta robot* but if you can\'t wait, check out figure 2.8 in chapter 2 of Lynch and Park\'s book Modern Robotics ...'}
+                  {id: 'robai-arch-grub-4', type: 'dropdown', title: 'Grubler\'s Formula Example 2', content: '', children: [
+                    // {id: 'robai-arch-grub-4-1', type: 'image', content: 'robarch_dof_ex_2.png', metadata: { alt: 'A spatial robotic system with 4 rigid bodies, 4 revolute joints, and 1 cylindrical joint. The system has a total of 6 DoFs.', format: 'no-shadow', maxWidth: 'full'}},
+                    {id: 'robai-arch-grub-4-2', type: 'markdown', content: '... I\'ll finish this later 😴 ... want to add the *delta robot* but if you can\'t wait, check out figure 2.8 in chapter 2 of Lynch and Park\'s book Modern Robotics ...'}
                   ]},
 
-                  {id: 'cs-1', type: 'markdown', content: '# Configuration Space & Topology\n\n## Configuration Space\n\nThe configuration space, or C-space, is a mathematical representation of all possible configurations of a robotic system. Each point in the C-space corresponds to a unique configuration of the robot, defined by its joint parameters and positions. The C-space is crucial for motion planning, as it allows us to visualize and analyze the robot\'s movement and determine feasible paths from one configuration to another.'},
+                  {id: 'robai-arch-cs-1', type: 'markdown', content: '# Configuration Space & Topology\n\n## Configuration Space\n\nThe configuration space, or C-space, is a mathematical representation of all possible configurations of a robotic system. Each point in the C-space corresponds to a unique configuration of the robot, defined by its joint parameters and positions. The C-space is crucial for motion planning, as it allows us to visualize and analyze the robot\'s movement and determine feasible paths from one configuration to another.'},
 
-                  {id: 'cs-2', type: 'plotly', title: '2D Planar configuration Space Example', content: 'robai_robarch_pointonplane.json', metadata: { height: 700, showModeBar: true } },
+                  // {id: 'robai-arch-cs-2', type: 'plotly', title: '2D Planar configuration Space Example', content: 'robai_robarch_pointonplane.json', metadata: { height: 700, showModeBar: true } },
                 ]
               },
 
