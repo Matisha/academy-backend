@@ -139,7 +139,7 @@ const CategoryCard: React.FC<{
               <p className="text-xs text-slate-500 mt-1 line-clamp-2 group-hover:text-slate-600 transition-colors">{course.description}</p>
               {/* simple hover effect for enrollment call to action */}
               <div className="mt-3 flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
-                Enroll Now ➔
+                Access Course ➔
               </div>
             </button>
           ))}

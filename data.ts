@@ -1019,7 +1019,50 @@ export const CATEGORIES: Category[] = [
 
                   
 
-                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# Sending data over UART\n\nBy default, '},
+                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# Sending data from the Microcontroller to the Computer\n\nBefore proceeding down the next secion, please review the ASCII table, found in the [🔗Variables and Datatypes Section](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).\n\nIn the Arduino langauge, there are two ways to send data from the microcontroller to the other devices: \`Serial.print()\` and \`Serial.write()\`\n\n## Serial.print() and Serial.println()'},
+                  { id: 'mc-prog-uart-9', type: 'codetooltip', content: 'Serial.print("Value is: ");\nSerial.println(123);', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {
+                        text: 'Serial.print("Value is: ");',
+                        blocks: [{id: 'mc-cat-3-4-uart-tip-1', type: 'markdown', content: '**Print text without newline.**\n\nThis will output `Value is: ` and keep the cursor on the same line for the next print statement.' }]
+                      },
+                      {
+                        text: 'Serial.println(123);',
+                        blocks: [{id: 'mc-cat-3-4-uart-tip-2', type: 'markdown', content: '**Print data with newline.**\n\nThis will output `123`, in addition to a **new line character**, which moves the cursor to the next line in the Serial Monitor.'}]
+                      },
+                    ]
+                  }},
+                  { id: 'mc-prog-uart-10', type: 'markdown', content: 'Running those code, we would see \`Value is: 123\` in the Serial Monitor.\n\nNote that when we send \`123\`, we are sending the actual \`integer\` value 123, not the characters \`1\`, \`2\`, and \`3\`. If we wanted to send the characters instead, we would need to enclose them in quotes like this: `Serial.println("123");`' },
+
+                  { id: 'mc-prog-uart-11', type: 'markdown', content: '## Serial.write()\n\nThe `Serial.write()` function sends data as raw bytes. This means that if you send an integer using `Serial.write(123);`, it will send the byte value `123` (which is `0x7B` in hexadecimal) rather than the characters `1`, `2`, and `3`. This is useful for sending binary data or when you want to communicate with another device that expects data in a specific byte format.\n\nFor example, if you want to send the string "Hello" using `Serial.write()`, you would need to send each character as a byte:\n\n```cpp\nSerial.write(\'H\');\nSerial.write(\'e\');\nSerial.write(\'l\');\nSerial.write(\'l\');\nSerial.write(\'o\');\n```\n\nThis would send the ASCII byte values for each character in "Hello".' },
+
+                  { id: 'mc-prog-uart-12', type: 'markdown', content: '# Sending data from the Computer to the Microcontroller\n\nTo receive data sent from the computer to the microcontroller, we can use the `Serial.read()` function. This function reads incoming data one byte at a time. Before reading, we should check if there is any data available using `Serial.available()`, which returns the number of bytes available to read.\n\nHere is an example of how to read data from the Serial Monitor:'},
+
+                  { id: 'mc-prog-uart-13', type: 'codetooltip', content: 'void setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  if (Serial.available() > 0) {\n    byte incomingByte = Serial.read();\n    // Do something with the byte...\n  }\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {
+                        text: 'if',
+                        blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-tip-1', type: 'markdown', content: '**Check for incoming data.**\n\n`Serial.available()` returns the number of bytes waiting to be read. If it\'s greater than 0, we know there is data to read.' }
+                        ]
+                      },
+                      {
+                        text: 'Serial.available() > 0',
+                        blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-tip-2', type: 'markdown', content: '**Condition for data availability.**\n\nThis checks if there is at least one byte of data in the serial buffer that we can read.' },
+                          { id: 'mc-cat-3-4-uart-receive-tip-3', type: 'note', content: 'It\'s important to check `Serial.available()` before calling `Serial.read()`, because if you call `Serial.read()` when there is no data available, it will return `-1`.' }
+                        ]
+                      },
+                      {
+                        text: 'byte incomingByte = Serial.read();',
+                        blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-tip-4', type: 'markdown', content: '**Read the incoming byte.**\n\n`Serial.read()` reads one byte from the serial buffer and returns it. We store this value in the variable `incomingByte`.' }
+                        ]
+                      }
+                    ]
+                  }},
                 ]
               },
 
