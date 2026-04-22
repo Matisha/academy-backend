@@ -282,29 +282,106 @@ export const CATEGORIES: Category[] = [
                 title: 'Variables and Data Types',
                 description: 'Understanding variables, data types, and how to use them in microcontroller programming.',
                 blocks: [
-                  { id: 'mc-prog-var-1', type: 'markdown', content: '# Variables and Data Types\n\nIn microcontroller programming, the processor can only understand \`1\`s and \`0\`s. As such, we have to manually tell the processor what **type** a variable is. Common data types include:\n\n- `int`: Used to store whole numbers (e.g., 1, -5, 100).\n- `float`: Used to store decimal numbers (e.g., 3.14, -0.001).\n- `boolean`: Used to store true/false values. (Note, we can also write \`HIGH\` or \`LOW\`, or \`1\` and \`0\`, which mean the same thing here).\n- `char`: Used to store single characters (e.g., \'A\', \'b\').\n\nWhen declaring a variable, you must specify its data type and name. For example:' },
+                  { id: 'mc-prog-var-0', type: 'markdown', content: '# 📦What is a Variable?\n\nA variable can be thought of as a "storage container" within the microcontroller that allows us to hold onto and manipulate data. Variables have three main components:\n\n1. **Data Type**: The type of data the variable will represent (e.g., `int`, `float`).\n2. **Name**: A unique identifier for the variable (e.g., `sensorValue`, `temperature`).\n3. **Value**: The actual data stored in the variable (e.g., `25`, `3.14`).' },
+
+                  { id: 'mc-prog-var-0b', type: 'codetooltip', content: 'int the_answer_to_life = 42;', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'int', blocks: [{ id: 'mc-cat-3-3-var-tip-0', type: 'markdown', content: 'This is the data type of the variable, which in this case is an integer (a whole number).'}]},
+                      { text: 'the_answer_to_life', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is the name of the variable, which is a unique identifier that we can use to refer to this variable in our code.'}]},
+                      { text: '42;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is the value assigned to the variable, which in this case is the integer 42.' }]}
+                    ]
+                  }},
+
+                  { id: 'mc-prog-var-0c', type: 'markdown', content: 'In this example, we have declared a variable named `the_answer_to_life` of type `int` and assigned it the value `42`. This means that whenever we use the variable `the_answer_to_life` in our code, it will represent the integer value `42`.' },
+
+                  { id: 'mc-prog-var-0c2', type: 'markdown', content:'### Initialization vs. Declaration\n\nIn programming, it\'s important to understand the difference between **initialization** and **declaration** of variables. Notice how in the above example, we: 1. State the variable type, 2. Give the variable a name,3. Assign the variable a value.\n\nThe code above is an example of both declaring and initializing a variable at the same time, which is a common practice in programming. However, it\'s also possible to declare a variable without initializing it, which means we create the variable and give it a name, but we do not assign it a value right away. This is shown in the code below:'},
+
+                  { id: 'mc-prog-var-1', type: 'codetooltip', content: 'int the_answer_to_life;', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'int', blocks: [{ id: 'mc-cat-3-3-var-tip-0', type: 'markdown', content: 'This is the data type of the variable, which in this case is an integer (a whole number).'}]},
+                      { text: 'the_answer_to_life', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is the name of the variable, which is a unique identifier that we can use to refer to this variable in our code.'}]},
+                      { text: ';', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'Notice that we have not assigned any value to this variable. This means that the variable is currently uninitialized, and its value is undefined until we assign a value to it later in the code.' }]}
+                    ]
+                    }
+                  },
+
+                  { id: 'mc-prog-var-2b', type: 'note', content: '- **Declaring** a variable means that we create a "box" to store something in, we label that box with a name, but we *don\'t actually put anything inside the box*.\n- **Initializing** a variable means that we assign a value to it for the first time, which is what we have been doing in all examples prior to this one.' },
+
+                  { id: 'mc-prog-var-0d', type: 'dropdown', content: 'Example: accessing a variable in code', children: [
+                    { id: 'mc-prog-var-0d-1', type: 'markdown', content: 'Now that we have declared our variable, we can use it in our code to perform various operations. For example, we can print the value of the variable to the serial monitor:'},
+                    { id: 'mc-prog-var-0d-2', type: 'codetooltip', content: 'int the_answer_to_life = 42;  // Initialize the variable at the top of our code\n\nvoid setup() {\n  Serial.begin(9600);\n  Serial.println(the_answer_to_life);  // This will print "42" to the serial monitor\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'Serial.println(the_answer_to_life);', blocks: [
+                          { id: 'mc-cat-3-3-var-tip-3', type: 'markdown', content: 'When the computer encounters this code and sees the variable name, it will \"replace\" the variable name with its assigned value. So, in this case, it will replace `the_answer_to_life` with `42`, and the line of code will effectively become `Serial.println(42);`, which is what gets executed and prints \"42\" to the serial monitor.'}
+                        ]}
+                      ]
+                    }}
+                  ]},
+
+                  { id: 'mc-prog-var-0e', type: 'dropdown', content: 'Example: Changing the value of a variable', children: [
+                    { id: 'mc-prog-var-0e-1', type: 'markdown', content: 'Variables are called \"variables\" because their value can vary (i.e., change) throughout the program. For example, we can change the value of our variable `the_answer_to_life` like this:'},
+                    { id: 'mc-prog-var-0e-2', type: 'codetooltip', content: 'int the_answer_to_life = 42;  // Initialize the variable at the top of our code\n\nvoid setup() {\n  Serial.begin(9600);\n  Serial.println(the_answer_to_life);  // This will print "42" to the serial monitor\n\n  the_answer_to_life = 43;  // Change the value of the variable\n  Serial.println(the_answer_to_life);  // This will now print "43" to the serial monitor\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'the_answer_to_life = 42;', blocks: [
+                          { id: 'mc-prog-var-3-3-var-tip-4', type: 'markdown', content: 'We **initialize** the variable `the_answer_to_life` with the value `42` at the beginning of our code.'}
+                        ]},
+                        { text: 'Serial.begin(9600);', blocks: [{id: 'mc-cat-3-3-var-tip-5', type: 'markdown', content: 'This is required for communication with the computer. See the [🔗UART / Serial Communication](http://localhost:3000/academy-backend/?course=microcontrollers&module=mc-prog-uart) section for more information'}]},
+                        { text: 'Serial.println(the_answer_to_life);', blocks: [
+                          { id: 'mc-cat-3-3-var-tip-6', type: 'markdown', content: 'This will print the current value of `the_answer_to_life` to the serial monitor, which is initially `42`.'}
+                        ]},
+                        { text: 'the_answer_to_life = 43;', blocks: [{id: 'mc-cat-3-3-var-tip-7', type: 'markdown', content: 'Here, we change the value of `the_answer_to_life` to `43`. This is an example of how variables can be updated throughout the program.'}]},
+                        { text: 'Serial.println(the_answer_to_life);', blocks: [{ id: 'mc-cat-3-3-var-tip-8', type: 'markdown', content: 'Now, when we print `the_answer_to_life` again, it will reflect the updated value of `43` instead of the original value of `42`.' }]}
+                      ]
+                    }}
+                  ]},
+
+                  { id: 'mc-prog-var-0f', type: 'dropdown', content: 'Example: Using variables in calculations', children: [
+                    { id: 'mc-prog-var-0f-1', type: 'markdown', content: 'Variables can also be used in calculations and expressions. For example, we can perform arithmetic operations on variables:'},
+                    { id: 'mc-prog-var-0f-2', type: 'codetooltip', content: 'int a = 5;\nint b = 10;\nint sum = a + b;\n\nvoid setup() {\n  Serial.begin(9600);\n  Serial.println(sum);  // This will print "15" to the serial monitor\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'int a = 5;', blocks: [{ id: 'mc-cat-3-3-var-tip-9', type: 'markdown', content: 'Here, we declare an integer variable, name it `a`, and assign it the value `5`.'}]},
+                        { text: 'int b = 10;', blocks: [{ id: 'mc-cat-3-3-var-tip-10', type: 'markdown', content: 'Here, we declare another integer variable, name it `b`, and assign it the value `10`.'}]},
+                        { text: 'int sum = a + b;', blocks: [{ id: 'mc-cat-3-3-var-tip-11', type: 'markdown', content: 'Here, we declare a third integer variable named `sum`, and assign it the value of `a + b`, which is the result of adding the values of `a` and `b` together. In this case, `sum` will be assigned the value `15` since `5 + 10 = 15`.'}]}
+                      ]
+                    }}
+                  ]},
+
+                  { id: 'mc-prog-var-1', type: 'markdown', content: '# 🔟Data Types\n\nIn microcontroller programming, the processor can only understand \`1\`s and \`0\`s. As such, we have to manually tell the processor what **type** a variable is. Common data types include:\n\n- `int`: Used to store whole numbers (e.g., 1, -5, 100).\n- `float`: Used to store decimal numbers (e.g., 3.14, -0.001).\n- `boolean`: Used to store true/false values. (Note, we can also write \`HIGH\` or \`LOW\`, or \`1\` and \`0\`, which mean the same thing here).\n- `char`: Used to store single characters (e.g., \'A\', \'b\').\n\nWhen declaring a variable, you must specify its data type and name. For example:' },
 
                   { id: 'mc-prog-var-2', type: 'codetooltip', content: 'int sensorValue;\nfloat temperature;\nbool isActive;\nchar grade;', metadata: {
                     language: 'cpp',
                     parts: [
-                      { text: 'sensorValue;', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is an integer variable that can store whole numbers.' }]},
-                      { text: 'temperature;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is a float variable that can store decimal numbers.' }]},
+                      { text: 'sensorValue;', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is an integer variable that can store whole numbers. Examples include `1`, `-5`, `100`, etc.' }]},
+                      { text: 'temperature;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is a float variable that can store decimal numbers. Examples include `3.14`, `-0.001`, etc.' }]},
                       { text: 'isActive;', blocks: [{ id: 'mc-cat-3-3-var-tip-3', type: 'markdown', content: 'This is a boolean variable that can store true/false values.' }]},
-                      { text: 'grade;', blocks: [{ id: 'mc-cat-3-3-var-tip-4', type: 'markdown', content: 'This is a char variable that can store single characters.' }]},
+                      { text: 'grade;', blocks: [{ id: 'mc-cat-3-3-var-tip-4', type: 'markdown', content: 'This is a char variable that can store single characters. Examples include `A`, `q`, `{`, etc.' }]},
                     ]
                   }},
 
-                  { id: 'mc-prog-var-3', type: 'markdown', content: '## Where do we put variables in our code?\n\nVariables can be declared in different parts of your code, and their location determines their **scope** (i.e., where they can be accessed from). The two main types of variable scope are:\n\n- **Global Variables**: Declared outside of any function, usually at the top of the program. They can be accessed from any part of the program.\n- **Local Variables**: Declared inside a function. They can only be accessed within that function.' },
+                  { id: 'mc-prog-var-2b', type: 'markdown', content: 'Another way to think about the concept of "types" is to remember that from the perspective of the microcontroller, all data is just a series of `1`s and `0`s. The **data type** is essentially instructions for how the microcontroller should interpret those `1`s and `0`s, as shown by the following diagram:' },
+
+                  { id: 'mc-prog-var-2c', type: 'image', content: 'mc_vars_datatypes_1.png', metadata: { alt: 'Diagram illustrating how the same binary data can be interpreted differently based on its data type' }},
+
+                  { id: 'mc-prog-var-3', type: 'markdown', content: '# 👁️Scope\n\nVariables can be declared in different parts of your code, and their location determines their **scope** (i.e., where they can be accessed from). There are two \'types\' of scopes a variable can be accessed in:' },
+
+                  { id: 'mc-prog-var-3b', type: 'note', content: '- **Global Variables**: Declared outside of any function, usually at the top of the program. They can be accessed from any part of the program.\n- **Local Variables**: Declared inside a function. They can only be accessed within that function.' },
 
                   { id: 'mc-prog-var-4', type: 'codetooltip', content: 'int globalVar = 10;\n\nvoid setup() {\n  int localVar = 5;\n}\n\nvoid loop() {\n  // globalVar can be accessed here (it exists everywhere in the program)\n  Serial.println(globalVar);  // This will work!\n\n  // localVar cannot be accessed here (it does not exist in the eyes of the void loop() {} function)\n  Serial.println(localVar);  // This will throw an error!\n}', metadata: {
                     language: 'cpp',
                     parts: [
                       { text: 'globalVar', blocks: [{ id: 'mc-cat-3-3-var-tip-5', type: 'markdown', content: 'This is a global variable that can be accessed from anywhere in the program.' }]},
-                      { text: 'localVar', blocks: [{ id: 'mc-cat-3-3-var-tip-6', type: 'markdown', content: 'This is a local variable that can only be accessed within the setup() function.' }]},
+                      { text: 'localVar', blocks: [{ id: 'mc-cat-3-3-var-tip-6', type: 'markdown', content: 'This is a local variable that can only be accessed within the setup() function. It *does not exist* from the perspective of the loop.\n\nIn other words, it\'s **local** to the `setup` function.' }]},
+                      { text: 'Serial.println(globalVar);', blocks: [{ id: 'mc-cat-3-3-var-tip-7', type: 'markdown', content: 'This will work because `globalVar` is a global variable that can be accessed from anywhere in the program.' }]},
+                      { text: 'Serial.println(localVar);', blocks: [{ id: 'mc-cat-3-3-var-tip-8', type: 'markdown', content: 'This will throw an error because `localVar` is a local variable that cannot be accessed from the `loop` function. Since it was declared **inside the `setup()` function, it is not visible outside of it.' }]}
                     ]
                   }},
 
-                  { id: 'mc-prog-var-5', type: 'markdown', content: '# The ASCII Table\n\nTo avoid confusion between different systems, a standardized method of representing characters as numbers was created. This is known as the **ASCII (American Standard Code for Information Interchange) Table**.\n\nThe ASCII Table is centered specifically around what specific \`binary numbers\` should represent - of note, which \`characters\` are represented by which combinations of \`1\`s and \`0\`s.' },
+                  { id: 'mc-prog-var-5', type: 'markdown', content: '# 📑The ASCII Table\n\nTo avoid confusion between different systems, a standardized method of representing characters as numbers was created. This is known as the **ASCII (American Standard Code for Information Interchange) Table**.\n\nThe ASCII Table is centered specifically around what specific \`binary numbers\` should represent - of note, which \`characters\` are represented by which combinations of \`1\`s and \`0\`s.' },
 
                   { id: 'mc-prog-var-6', type: 'webimage', content: 'https://web.alfredstate.edu/faculty/weimandn/miscellaneous/ascii/ASCII%20Conversion%20Chart.gif' },
 
@@ -345,6 +422,8 @@ export const CATEGORIES: Category[] = [
                   { id: 'mc-prog-var-7d', type: 'codetooltip', content: 'char myChar = 0b01001101;  // The microcontroller interprets this as the character "M" according to the ASCII Table', metadata: {language: 'cpp'}},
 
                   { id: 'mc-prog-var-7e', type: 'codetooltip', content: 'int myInt = 0b01001101;  // The microcontroller interprets this as the integer 77', metadata: {language: 'cpp'}},
+
+                  { id: 'mc-prog-var-7f', type: 'markdown', content: 'Understanding how binary values are interpreted is extremely important for when we begin the unit on [🔗Serial / UART communication](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-uart), as our program must be able to accurately interpret a series of `1s` and `0s` that arrive from other devices.'}
 
                 ]
               },
@@ -1013,13 +1092,13 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-uart-2', type: 'markdown', content: '# How is data exchanged\n\nIn UART communication, 1s and 0s are sent one by one, typically packaged in small packets called **frames**. The 1s and 0s are represented by different voltages, which typically depend on the application: \n\n- Arduino/Raspberry pi use **TTL (Transistor-Transistor Logic)**, where a \`0\` is represented by \`0V\` and a \`1\` is represented by \`3.3V\` or \`5V\`. \n- In industrail equipment, the voltage levels match the **RS-232** standard, where \`0\` is represented by \`-12V\` and \`1\` is represented by \`+12V\`.\n\nWhen there is no communication happening on the line, the line holds at a positive voltage (*referred to as idle*). When communication happens, each of the **frames** typically consists of:\n\n1. **Start bit**: Indicates the beginning of a new data packet (always `LOW`)\n2. **Data bits**: The actual data being sent (usually 8 bits, i.e. a *byte*)\n3. **Parity bit**: An optional bit used for error checking\n4. **Stop bit(s)**: Indicates the end of the data packet (always `HIGH`)' },
 
-                  { id: 'mc-prog-uart-3', type: 'webimage', content: 'https://controllerstech.com/wp-content/uploads/2025/10/arduino2_1.webp', },
+                  { id: 'mc-prog-uart-3', type: 'webimage', content: 'https://controllerstech.com/wp-content/uploads/2025/10/arduino2_1.webp', metadata: {alt: 'Image depicting the voltage levels of UART communication, showing the start bit (LOW), data bits (varies), parity bit (optional), and stop bit (HIGH). The image shows how 1s are represented by a positive 3.3V or 5V signal, while 0s are represented by a 0V signal. The line is idle at a positive voltage when no communication is happening.'}},
 
                   { id: 'mc-prog-uart-4', type: 'markdown', content: '# How fast is data exchanged?\n\nThe speed of UART communication is determined by the **baud rate**, which is the number of bits transmitted per second. Common baud rates include `9600`, `115200`, and `250000` bits per second. **Both devices communicating over UART must be set to the same baud rate to understand each other correctly**. If we want to find the amount of time it takes to send a single byte, we can use the formula:\n\n```\nTime per byte = (Start bit + Data bits + Parity bit + Stop bit) / Baud rate\n```\n\nFor example, with 8 data bits, no parity, 1 stop bit, and a baud rate of 9600:\n\n```\nTime per byte = (1 + 8 + 0 + 1) / 9600 ≈ 0.001 seconds (1 ms)\n```' },
 
                   
 
-                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# Sending data from the Microcontroller to the Computer\n\nBefore proceeding down the next secion, please review the ASCII table, found in the [🔗Variables and Datatypes Section](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).\n\nIn the Arduino langauge, there are two ways to send data from the microcontroller to the other devices: \`Serial.print()\` and \`Serial.write()\`\n\n## Serial.print() and Serial.println()'},
+                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# From Microcontroller to Computer\n\nBefore proceeding down the next secion, please review the ASCII table, found in the [🔗Variables and Datatypes Section](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).\n\nIn the Arduino langauge, there are two ways to send data from the microcontroller to the other devices: \`Serial.print()\` and \`Serial.write()\`\n\n## Serial.print() and Serial.println()'},
                   { id: 'mc-prog-uart-9', type: 'codetooltip', content: 'Serial.print("Value is: ");\nSerial.println(123);', metadata: {
                     language: 'cpp',
                     parts: [
@@ -1033,11 +1112,14 @@ export const CATEGORIES: Category[] = [
                       },
                     ]
                   }},
-                  { id: 'mc-prog-uart-10', type: 'markdown', content: 'Running those code, we would see \`Value is: 123\` in the Serial Monitor.\n\nNote that when we send \`123\`, we are sending the actual \`integer\` value 123, not the characters \`1\`, \`2\`, and \`3\`. If we wanted to send the characters instead, we would need to enclose them in quotes like this: `Serial.println("123");`' },
+                  { id: 'mc-prog-uart-10', type: 'markdown', content: 'Running those code, we would see \`Value is: 123\` in the Serial Monitor.' },
+                  { id: 'mc-prog-uart-10b', type: 'note', content: 'When you use `Serial.print()` or `Serial.println()`, the data is converted to human-readable text. For example, if you print the integer `123`, the \`Serial.print\` function automatically converts the integer numbers \`1\`, \`2\`, and \`3\` to the *characters* \`"1"\`, \`"2"\`, and \`"3"\` in the Serial Monitor.' },
 
                   { id: 'mc-prog-uart-11', type: 'markdown', content: '## Serial.write()\n\nThe `Serial.write()` function sends data as raw bytes. This means that if you send an integer using `Serial.write(123);`, it will send the byte value `123` (which is `0x7B` in hexadecimal) rather than the characters `1`, `2`, and `3`. This is useful for sending binary data or when you want to communicate with another device that expects data in a specific byte format.\n\nFor example, if you want to send the string "Hello" using `Serial.write()`, you would need to send each character as a byte:\n\n```cpp\nSerial.write(\'H\');\nSerial.write(\'e\');\nSerial.write(\'l\');\nSerial.write(\'l\');\nSerial.write(\'o\');\n```\n\nThis would send the ASCII byte values for each character in "Hello".' },
 
-                  { id: 'mc-prog-uart-12', type: 'markdown', content: '# Sending data from the Computer to the Microcontroller\n\nTo receive data sent from the computer to the microcontroller, we can use the `Serial.read()` function. This function reads incoming data one byte at a time. Before reading, we should check if there is any data available using `Serial.available()`, which returns the number of bytes available to read.\n\nHere is an example of how to read data from the Serial Monitor:'},
+
+
+                  { id: 'mc-prog-uart-12', type: 'markdown', content: '# From Computer to Microcontroller\n\nTo receive data sent from the computer to the microcontroller, we can use the `Serial.read()` function. This function reads incoming data one byte at a time. Before reading, we should check if there is any data available using `Serial.available()`, which returns the number of bytes available to read.\n\nHere is an example of how to read data from the Serial Monitor:'},
 
                   { id: 'mc-prog-uart-13', type: 'codetooltip', content: 'void setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  if (Serial.available() > 0) {\n    byte incomingByte = Serial.read();\n    // Do something with the byte...\n  }\n}', metadata: {
                     language: 'cpp',
@@ -1073,7 +1155,9 @@ export const CATEGORIES: Category[] = [
             title: 'Microcontroller Programming: Python',
             emoji: '🐍',
             modules: []
-          }
+          },
+
+
         ]
       },
 
