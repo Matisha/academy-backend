@@ -278,6 +278,67 @@ export const CATEGORIES: Category[] = [
               //   ]
               // },
 
+              { id: 'mc-prog-anat',
+                title: 'Anatomy of a Microcontroller Program',
+                description: 'Understanding the structure and components of a typical microcontroller program.',
+                blocks: [
+                  { id: 'mc-prog-anat-1', type: 'markdown', content: 'A typical microcontroller program consists of several key components that work together to control the behavior of the microcontroller. These components include:\n4. **Loop Function**: This is another special function that runs repeatedly after the setup function has completed. It contains the main logic of the program and is where you would typically read sensor data, make decisions, and control actuators.'
+                  },
+
+                  { id: 'mc-prog-anat-2a', type: 'note', content: 'Don\'t worry about the actual code itself for now - just appriciate the general structure of this program!'},
+
+                  { id: 'mc-prog-anat-3', type: 'markdown', content: '## Preprocessor Directives\n\nThese are lines of code that start with `#` and are used to include libraries or define constants. For example, `#include <Servo.h>` is a common preprocessor directive that includes a library containing functions to control **servo motors**.'},
+
+                  { id: 'mc-prog-anat-3b', type: 'codetooltip', content: '#include <Servo.h>\n#define GREEN_LED_PIN 13', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: '#include <Servo.h>', blocks: [{ id: 'mc-cat-3-3-anat-tip-0', type: 'markdown', content: 'This line of code is a preprocessor directive that tells the compiler to include the Servo library, which contains functions for controlling servo motors.'}]},
+                      { text: '#define GREEN_LED_PIN 13', blocks: [{ id: 'mc-cat-3-3-anat-tip-1', type: 'markdown', content: 'This line of code is a preprocessor directive that defines a constant named GREEN_LED_PIN with a value of 13. This means that anywhere in the code where GREEN_LED_PIN is used, it will be replaced with the value 13.'}]}
+                    ]
+                  }},
+
+                  { id: 'mc-prog-anat-4', type: 'markdown', content: '## Global Variables\n\nThese are variables that are declared outside of any function and can be accessed from anywhere in the program. They are often used to store values that need to be shared across multiple functions.'},
+
+                  { id: 'mc-prog-anat-4b', type: 'codetooltip', content: 'char my_favorite_letter = \'m\';\nint my_yellow_led = 15;', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'char my_favorite_letter = \'m\';', blocks: [{ id: 'mc-cat-3-3-anat-tip-2', type: 'markdown', content: 'This line declares a global variable named my_favorite_letter and initializes it with the value \'m\'.'}]},
+                      { text: 'int my_yellow_led = 15;', blocks: [{ id: 'mc-cat-3-3-anat-tip-3', type: 'markdown', content: 'This line declares a global variable named my_yellow_led and initializes it with the value 15, which is typically used to represent a pin number on the microcontroller.'}]}
+                    ]
+                  }},
+
+                  { id: 'mc-prog-anat-5', type: 'markdown', content: '## Setup Function\n\nThis is a special function that runs once when the microcontroller is powered on or reset. It is typically used to initialize variables, set pin modes, and perform any necessary setup tasks.\n we declare the the setup function using the syntax `void setup()`, followed by a pair of curley braces `{ ... }`. **Any code you wish to be run once upon startup should be placed within these curley braces.**.'},
+
+                  { id: 'mc-prog-anat-5b', type: 'codetooltip', content: 'void setup() {\n  Serial.begin(9600);\n  pinMode(GREEN_LED_PIN, OUTPUT);\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'void setup() {', blocks: [{ id: 'mc-cat-3-3-anat-tip-4', type: 'markdown', content: 'This line declares the setup function, which is a special function that runs once when the microcontroller is powered on or reset.'}]},
+                    ]
+                  }},
+
+                  { id: 'mc-prog-anat-6', type: 'markdown', content: '## Loop Function\n\nThis is another special function that runs repeatedly after the setup function has completed. It contains the main logic of the program and is where you would typically read sensor data, make decisions, and control actuators. Similar to the `setup()` function, we declare the loop function using the syntax `void loop()`, followed by a pair of curley braces `{ ... }`. **Any code you wish to be run repeatedly should be placed within these curley braces.**.'},
+
+                  { id: 'mc-prog-anat-6b', type: 'codetooltip', content: 'void loop() {\n  digitalWrite(GREEN_LED_PIN, HIGH);\n  delay(1000);\n  digitalWrite(GREEN_LED_PIN, LOW);\n  delay(1000);\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'void loop() {', blocks: [{ id: 'mc-cat-3-3-anat-tip-5', type: 'markdown', content: 'This line declares the loop function, which is a special function that runs repeatedly after the setup function has completed.'}]},
+                    ]
+                  }},
+
+                  { id: 'mc-prog-anat-7b', type: 'markdown', content: '## Full Program Example\n\nPutting it all together, here is an example of a complete microcontroller program that includes preprocessor directives, global variables, a setup function, and a loop function.'},
+
+                  { id: 'mc-prog-anat-7', type: 'codetooltip', content: '// PREPROCESSING DIRECTIVES\n#include <Servo.h>\n#define GREENLEDPIN 13\n\n// GLOBAL VARIABLES:\nchar my_favorite_letter = \'m\';   // My favorite letter\nint my_yellow_led = 15;          // Define a pin for the yellow LED\n\n// SETUP FUNCTION\nvoid stup() {\n  Serial.begin(9600);\n  pinMode(GREENLEDPIN, OUTPUT);\n}\n\n// PRIMARY PROGRAM LOOP\nvoid loop() {\n  digitalWrite(GREENLEDPIN, HIGH);\n  delay(1000);\n  digitalWrite(GREENLEDPIN, LOW);\n  delay(1000);\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      {text: 'PREPROCESSING DIRECTIVES', blocks: [{ id: 'mc-cat-3-3-anat-tip-0', type: 'markdown', content: 'These lines of code are preprocessor directives, which are instructions that are processed before the actual compilation of the program begins. They are used to include libraries and define constants.'}]},
+                      {text: 'GLOBAL VARIABLES', blocks: [{ id: 'mc-cat-3-3-anat-tip-1', type: 'markdown', content: 'These lines declare global variables that can be accessed from anywhere in the program.'}]},
+                      {text: 'SETUP FUNCTION', blocks: [{ id: 'mc-cat-3-3-anat-tip-2', type: 'markdown', content: 'The setup function is a special function that runs once when the microcontroller is powered on or reset. It is used to initialize variables, set pin modes, and perform any necessary setup tasks.'}]},
+                      {text: 'PRIMARY PROGRAM LOOP', blocks: [{ id: 'mc-cat-3-3-anat-tip-3', type: 'markdown', content: 'The loop function is another special function that runs repeatedly after the setup function has completed. It contains the main logic of the program and is where you would typically read sensor data, make decisions, and control actuators.'}]},
+                    ]
+                  }},
+                ]
+              },
+
               { id: 'mc-prog-variables',
                 title: 'Variables and Data Types',
                 description: 'Understanding variables, data types, and how to use them in microcontroller programming.',
@@ -353,13 +414,19 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-var-1', type: 'markdown', content: '# 🔟Data Types\n\nIn microcontroller programming, the processor can only understand \`1\`s and \`0\`s. As such, we have to manually tell the processor what **type** a variable is. Common data types include:\n\n- `int`: Used to store whole numbers (e.g., 1, -5, 100).\n- `float`: Used to store decimal numbers (e.g., 3.14, -0.001).\n- `boolean`: Used to store true/false values. (Note, we can also write \`HIGH\` or \`LOW\`, or \`1\` and \`0\`, which mean the same thing here).\n- `char`: Used to store single characters (e.g., \'A\', \'b\').\n\nWhen declaring a variable, you must specify its data type and name. For example:' },
 
-                  { id: 'mc-prog-var-2', type: 'codetooltip', content: 'int sensorValue;\nfloat temperature;\nbool isActive;\nchar grade;', metadata: {
+                  { id: 'mc-prog-var-2', type: 'codetooltip', content: 'int sensorValue = 42;\nfloat temperature = 20.15;\nbool isActive = true; // (Could also be HIGH or 1)\nchar grade = \'A\';\nbyte myBinary = 0b00100111', metadata: {
                     language: 'cpp',
                     parts: [
-                      { text: 'sensorValue;', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is an integer variable that can store whole numbers. Examples include `1`, `-5`, `100`, etc.' }]},
-                      { text: 'temperature;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is a float variable that can store decimal numbers. Examples include `3.14`, `-0.001`, etc.' }]},
-                      { text: 'isActive;', blocks: [{ id: 'mc-cat-3-3-var-tip-3', type: 'markdown', content: 'This is a boolean variable that can store true/false values.' }]},
-                      { text: 'grade;', blocks: [{ id: 'mc-cat-3-3-var-tip-4', type: 'markdown', content: 'This is a char variable that can store single characters. Examples include `A`, `q`, `{`, etc.' }]},
+                      { text: 'sensorValue', blocks: [{ id: 'mc-cat-3-3-var-tip-1', type: 'markdown', content: 'This is an integer variable that can store whole numbers. Examples include `1`, `-5`, `100`, etc.' }]},
+                      { text: '42;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is the value assigned to the variable `sensorValue` - a whole number!.' }]},
+                      { text: 'temperature', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is a float variable that can store decimal numbers. Examples include `3.14`, `-0.001`, etc.' }]},
+                      { text: '20.15;', blocks: [{ id: 'mc-cat-3-3-var-tip-2', type: 'markdown', content: 'This is the value assigned to the variable `temperature` - a decimal number! The decimal dot is important!.' }]},
+                      { text: 'isActive', blocks: [{ id: 'mc-cat-3-3-var-tip-3', type: 'markdown', content: 'This is a boolean variable that can store true/false values.' }]},
+                      { text: 'true', blocks: [{ id: 'mc-cat-3-3-var-tip-3', type: 'markdown', content: '`true`, `HIGH`, and `1` all represent a true value here, and work interchangably! For false, we can use `false`, `LOW`, or `0`' }]},
+                      { text: 'grade', blocks: [{ id: 'mc-cat-3-3-var-tip-4', type: 'markdown', content: 'This is a char variable that can store single characters. Examples include `A`, `q`, `{`, etc.' }]},
+                      { text: '\'A\';', blocks: [{ id: 'mc-cat-3-3-var-tip-4', type: 'markdown', content: 'Importantly, we surround the \'A\' with single quotes to indicate that it is a character literal.' }]},
+                      { text: 'myBinary', blocks: [{ id: 'mc-cat-3-3-var-tip-5', type: 'markdown', content: 'This is a byte variable that can store 8 bits of binary data.' }]},
+                      { text: '0b00100111', blocks: [{ id: 'mc-cat-3-3-var-tip-5', type: 'markdown', content: 'This is a binary literal that represents the byte value `39` in decimal. The `0b` prefix indicates that this is a binary number.' }]}
                     ]
                   }},
 
@@ -383,38 +450,15 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-var-5', type: 'markdown', content: '# 📑The ASCII Table\n\nTo avoid confusion between different systems, a standardized method of representing characters as numbers was created. This is known as the **ASCII (American Standard Code for Information Interchange) Table**.\n\nThe ASCII Table is centered specifically around what specific \`binary numbers\` should represent - of note, which \`characters\` are represented by which combinations of \`1\`s and \`0\`s.' },
 
-                  { id: 'mc-prog-var-6', type: 'webimage', content: 'https://web.alfredstate.edu/faculty/weimandn/miscellaneous/ascii/ASCII%20Conversion%20Chart.gif' },
+                  { id: 'mc-prog-var-5b', type: 'dropdown', content: 'Full ASCII Table', children: [
+                    { id: 'mc-prog-var-6', type: 'webimage', content: 'https://web.alfredstate.edu/faculty/weimandn/miscellaneous/ascii/ASCII%20Conversion%20Chart.gif' },
+                  ] },
+                  
 
                   { id: 'mc-prog-var-7', type: 'markdown', content: 'To illustrate this example, let\'s say that we have some arbitrary \`binary number\`, such as \`01001101\`. From the perspective of the microcontroller, this is just a series of transistors that are flipped on and off. However, we can tell the microcontroller **how to interpret this number** by storing in in an appropriate variable:'},
 
                   { id: 'mc-prog-var-7b', type: 'codetooltip', content: 'byte myByte = 0b01001101;  // The microcontroller interprets this as literally the 1s and 0s', metadata: {
                     language: 'cpp',
-                    parts: [
-                      {
-                        text: 'byte',
-                        blocks: [
-                          { id: 'mc-prog-var-7b-tip-1', type: 'markdown', content: '**Data type** for 8 bits. Simply holds binary numbers.' }
-                        ]
-                      },
-                      {
-                        text: 'myByte',
-                        blocks: [
-                          { id: 'mc-prog-var-7b-tip-2', type: 'markdown', content: '**Variable name**. We can choose any name we want here to refer to this byte of data.' }
-                        ]
-                      },
-                      {
-                        text: '0b',
-                        blocks: [
-                          { id: 'mc-prog-var-7b-tip-3', type: 'markdown', content: '**Binary literal prefix.**\n\nThis tells the compiler that the number is in binary format. Essentially, this is instructions to interpret this number as a binary value rather than an integer or hexadecimal value.' }
-                        ]
-                      },
-                      {
-                        text: '01001101',
-                        blocks: [
-                          { id: 'mc-prog-var-7b-tip-4', type: 'markdown', content: '**The binary value itself.**' }
-                        ]
-                      }
-                    ]
                   }},
 
                   { id: 'mc-prog-var-7c', type: 'markdown', content: 'However, by setting a *different variable type* to the same value, the microcontroller interprets it differently, according to the ASCII Table:'},
@@ -423,8 +467,21 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-var-7e', type: 'codetooltip', content: 'int myInt = 0b01001101;  // The microcontroller interprets this as the integer 77', metadata: {language: 'cpp'}},
 
-                  { id: 'mc-prog-var-7f', type: 'markdown', content: 'Understanding how binary values are interpreted is extremely important for when we begin the unit on [🔗Serial / UART communication](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-uart), as our program must be able to accurately interpret a series of `1s` and `0s` that arrive from other devices.'}
+                  { id: 'mc-prog-var-7f', type: 'markdown', content: 'Understanding how binary values are interpreted is extremely important for when we begin the unit on [🔗Serial / UART communication](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-uart), as our program must be able to accurately interpret a series of `1s` and `0s` that arrive from other devices.'},
 
+                  { id: 'mc-prog-var-8', type: 'markdown', content: '# 🔁Casting (converting types)\n\n**Casting** variables refers to converting a specific variable type into another. For example, we might cast an `int` to a `float` to perform a division that results in a decimal value.\n\nCasting is done by adding parenthesis in front of the value to be cast, specifying the desired type. For example...'},
+
+                  { id: 'mc-prog-var-8b', type: 'codetooltip', content: 'int a = 5;\nint b = 2;\nfloat result = (float)a / (float)b;\n\nvoid setup() {\n  Serial.begin(9600);\n  Serial.println(result);  // This will print "2.5" to the serial monitor\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'int a = 5;', blocks: [{ id: 'mc-cat-3-3-var-tip-9', type: 'markdown', content: 'Here, we declare an integer variable named `a` and assign it the value `5`.'}, { id: 'mc-cat-3-3-var-tip-10', type: 'note', content: 'Since `a` is an integer, it can only hold whole numbers.' }]},
+                      { text: 'int b = 2;', blocks: [{ id: 'mc-cat-3-3-var-tip-11', type: 'markdown', content: 'Here, we declare another integer variable named `b` and assign it the value `2`.'}, { id: 'mc-cat-3-3-var-tip-12', type: 'note', content: 'Since `b` is also an integer, it can only hold whole numbers.' }]},
+                      { text: 'float result', blocks: [{ id: 'mc-cat-3-3-var-tip-13', type: 'markdown', content: 'Here, we declare a float variable named `result`, which can hold decimal numbers.'}]},
+                      { text: '(float)a', blocks: [{ id: 'mc-cat-3-3-var-tip-14', type: 'markdown', content: 'This is an example of casting the integer variable `a` to a float. This allows us to perform a division that results in a decimal value instead of an integer division that would truncate the decimal part.' }]},
+                      { text: '(float)b', blocks: [{ id: 'mc-cat-3-3-var-tip-15', type: 'markdown', content: 'This is an example of casting the integer variable `b` to a float for the same reason as `a`.' }]},
+                      { text: 'Serial.println(result);', blocks: [{ id: 'mc-cat-3-3-var-tip-16', type: 'markdown', content: 'Since we cast both `a` and `b` to floats before performing the division, the result is a float value of `2.5` instead of an integer value of `2`.' }]},
+                    ]
+                  }},
                 ]
               },
               
@@ -1096,9 +1153,9 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-uart-4', type: 'markdown', content: '# How fast is data exchanged?\n\nThe speed of UART communication is determined by the **baud rate**, which is the number of bits transmitted per second. Common baud rates include `9600`, `115200`, and `250000` bits per second. **Both devices communicating over UART must be set to the same baud rate to understand each other correctly**. If we want to find the amount of time it takes to send a single byte, we can use the formula:\n\n```\nTime per byte = (Start bit + Data bits + Parity bit + Stop bit) / Baud rate\n```\n\nFor example, with 8 data bits, no parity, 1 stop bit, and a baud rate of 9600:\n\n```\nTime per byte = (1 + 8 + 0 + 1) / 9600 ≈ 0.001 seconds (1 ms)\n```' },
 
-                  
 
                   { id: 'mc-prog-uart-8', type: 'markdown', content: '# From Microcontroller to Computer\n\nBefore proceeding down the next secion, please review the ASCII table, found in the [🔗Variables and Datatypes Section](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).\n\nIn the Arduino langauge, there are two ways to send data from the microcontroller to the other devices: \`Serial.print()\` and \`Serial.write()\`\n\n## Serial.print() and Serial.println()'},
+
                   { id: 'mc-prog-uart-9', type: 'codetooltip', content: 'Serial.print("Value is: ");\nSerial.println(123);', metadata: {
                     language: 'cpp',
                     parts: [
@@ -1112,12 +1169,11 @@ export const CATEGORIES: Category[] = [
                       },
                     ]
                   }},
+ 
                   { id: 'mc-prog-uart-10', type: 'markdown', content: 'Running those code, we would see \`Value is: 123\` in the Serial Monitor.' },
                   { id: 'mc-prog-uart-10b', type: 'note', content: 'When you use `Serial.print()` or `Serial.println()`, the data is converted to human-readable text. For example, if you print the integer `123`, the \`Serial.print\` function automatically converts the integer numbers \`1\`, \`2\`, and \`3\` to the *characters* \`"1"\`, \`"2"\`, and \`"3"\` in the Serial Monitor.' },
 
                   { id: 'mc-prog-uart-11', type: 'markdown', content: '## Serial.write()\n\nThe `Serial.write()` function sends data as raw bytes. This means that if you send an integer using `Serial.write(123);`, it will send the byte value `123` (which is `0x7B` in hexadecimal) rather than the characters `1`, `2`, and `3`. This is useful for sending binary data or when you want to communicate with another device that expects data in a specific byte format.\n\nFor example, if you want to send the string "Hello" using `Serial.write()`, you would need to send each character as a byte:\n\n```cpp\nSerial.write(\'H\');\nSerial.write(\'e\');\nSerial.write(\'l\');\nSerial.write(\'l\');\nSerial.write(\'o\');\n```\n\nThis would send the ASCII byte values for each character in "Hello".' },
-
-
 
                   { id: 'mc-prog-uart-12', type: 'markdown', content: '# From Computer to Microcontroller\n\nTo receive data sent from the computer to the microcontroller, we can use the `Serial.read()` function. This function reads incoming data one byte at a time. Before reading, we should check if there is any data available using `Serial.available()`, which returns the number of bytes available to read.\n\nHere is an example of how to read data from the Serial Monitor:'},
 
