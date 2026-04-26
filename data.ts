@@ -672,6 +672,17 @@ export const CATEGORIES: Category[] = [
                   { id: 'mc-prog-cond-7', type: 'markdown', content: 'You can have as many `else-if` statements as you need to check for different conditions. Just remember that the program will check each condition in order, and will execute the block of code for the first condition that is true.' },
 
                   { id: 'mc-prog-cond-8', type: 'markdown', content: '# Examples'},
+
+                  { id: 'mc-prog-cond-8a', type: 'dropdown', content: 'Example: else-if statement', children: [
+                    { id: 'mc-programming-conditional-1-code', type: 'codetooltip', content: 'int sensor_temp;\nint sensor_temp_pin;\n\nvoid setup(){\n  pinMode(sensor_temp_pin, INPUT);\n}\n\nvoid loop(){\n  sensor_temp = analogRead(sensor_temp_pin);\n\n  if (sensor_temp > 30) {\n    Serial.println("WARNING! Sensor temp too high!");\n  } \n  else if (sensor_temp > 20) {\n    Serial.println("Caution! Sensor Temp is moderate.");\n  } \n  else {\n    Serial.println("Sensor Temp Normal");\n  }\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'if (sensor_temp > 30)', blocks: [{ id: 'mc-cat-3-4-cond-tip-11', type: 'markdown', content: '**Checks if the sensor temperature is above 30.**\n\nIf this condition is true, it indicates that the sensor temperature is too high, and a warning message will be printed to the Serial Monitor.' }, { id: 'mc-cat-3-4-cond-tip-12', type: 'note', content: 'In the case that this is true, none of the other conditionals will run, even if they are also true!' }]},
+                        { text: 'else if (sensor_temp > 20)', blocks: [{ id: 'mc-cat-3-4-cond-tip-13', type: 'markdown', content: '**Checks if the sensor temperature is above 20.**\n\nThis condition is only checked if the previous condition (`sensor_temp > 30`) is false. If this condition is true, it indicates that the sensor temperature is moderate, and a caution message will be printed to the Serial Monitor.' }, { id: 'mc-cat-3-4-cond-tip-14', type: 'note', content: 'In the case that this is true, the final else statement will not run, even if it is also true!' }]},
+                        { text: 'else', blocks: [{ id: 'mc-cat-3-4-cond-tip-15', type: 'markdown', content: '**Executes if all previous conditions are false.**\n\nIf the sensor temperature is not above 30 and not above 20, then it is considered normal, and a message indicating that the sensor temperature is normal will be printed to the Serial Monitor.' }]}
+                      ]
+                    }}
+                  ]}
                 ]
               },
 
