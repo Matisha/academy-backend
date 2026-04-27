@@ -434,6 +434,20 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-var-2c', type: 'image', content: 'mc_vars_datatypes_1.png', metadata: { alt: 'Diagram illustrating how the same binary data can be interpreted differently based on its data type' }},
 
+                  { id: 'mc-prog-var-8', type: 'markdown', content: '# 🔁Casting (converting types)\n\n**Casting** variables refers to converting a specific variable type into another. For example, we might cast an `int` to a `float` to perform a division that results in a decimal value.\n\nCasting is done by adding parenthesis in front of the value to be cast, specifying the desired type. For example...'},
+
+                  { id: 'mc-prog-var-8b', type: 'codetooltip', content: 'int a = 5;\nint b = 2;\nfloat result = (float)a / (float)b;\n\nvoid setup() {\n  Serial.begin(9600);\n  Serial.println(result);  // This will print "2.5" to the serial monitor\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'int a = 5;', blocks: [{ id: 'mc-cat-3-3-var-tip-9', type: 'markdown', content: 'Here, we declare an integer variable named `a` and assign it the value `5`.'}, { id: 'mc-cat-3-3-var-tip-10', type: 'note', content: 'Since `a` is an integer, it can only hold whole numbers.' }]},
+                      { text: 'int b = 2;', blocks: [{ id: 'mc-cat-3-3-var-tip-11', type: 'markdown', content: 'Here, we declare another integer variable named `b` and assign it the value `2`.'}, { id: 'mc-cat-3-3-var-tip-12', type: 'note', content: 'Since `b` is also an integer, it can only hold whole numbers.' }]},
+                      { text: 'float result', blocks: [{ id: 'mc-cat-3-3-var-tip-13', type: 'markdown', content: 'Here, we declare a float variable named `result`, which can hold decimal numbers.'}]},
+                      { text: '(float)a', blocks: [{ id: 'mc-cat-3-3-var-tip-14', type: 'markdown', content: 'This is an example of casting the integer variable `a` to a float. This allows us to perform a division that results in a decimal value instead of an integer division that would truncate the decimal part.' }]},
+                      { text: '(float)b', blocks: [{ id: 'mc-cat-3-3-var-tip-15', type: 'markdown', content: 'This is an example of casting the integer variable `b` to a float for the same reason as `a`.' }]},
+                      { text: 'Serial.println(result);', blocks: [{ id: 'mc-cat-3-3-var-tip-16', type: 'markdown', content: 'Since we cast both `a` and `b` to floats before performing the division, the result is a float value of `2.5` instead of an integer value of `2`.' }]},
+                    ]
+                  }},
+
                   { id: 'mc-prog-var-3', type: 'markdown', content: '# 👁️Scope\n\nVariables can be declared in different parts of your code, and their location determines their **scope** (i.e., where they can be accessed from). There are two \'types\' of scopes a variable can be accessed in:' },
 
                   { id: 'mc-prog-var-3b', type: 'note', content: '- **Global Variables**: Declared outside of any function, usually at the top of the program. They can be accessed from any part of the program.\n- **Local Variables**: Declared inside a function. They can only be accessed within that function.' },
@@ -469,19 +483,7 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-var-7f', type: 'markdown', content: 'Understanding how binary values are interpreted is extremely important for when we begin the unit on [🔗Serial / UART communication](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-uart), as our program must be able to accurately interpret a series of `1s` and `0s` that arrive from other devices.'},
 
-                  { id: 'mc-prog-var-8', type: 'markdown', content: '# 🔁Casting (converting types)\n\n**Casting** variables refers to converting a specific variable type into another. For example, we might cast an `int` to a `float` to perform a division that results in a decimal value.\n\nCasting is done by adding parenthesis in front of the value to be cast, specifying the desired type. For example...'},
-
-                  { id: 'mc-prog-var-8b', type: 'codetooltip', content: 'int a = 5;\nint b = 2;\nfloat result = (float)a / (float)b;\n\nvoid setup() {\n  Serial.begin(9600);\n  Serial.println(result);  // This will print "2.5" to the serial monitor\n}', metadata: {
-                    language: 'cpp',
-                    parts: [
-                      { text: 'int a = 5;', blocks: [{ id: 'mc-cat-3-3-var-tip-9', type: 'markdown', content: 'Here, we declare an integer variable named `a` and assign it the value `5`.'}, { id: 'mc-cat-3-3-var-tip-10', type: 'note', content: 'Since `a` is an integer, it can only hold whole numbers.' }]},
-                      { text: 'int b = 2;', blocks: [{ id: 'mc-cat-3-3-var-tip-11', type: 'markdown', content: 'Here, we declare another integer variable named `b` and assign it the value `2`.'}, { id: 'mc-cat-3-3-var-tip-12', type: 'note', content: 'Since `b` is also an integer, it can only hold whole numbers.' }]},
-                      { text: 'float result', blocks: [{ id: 'mc-cat-3-3-var-tip-13', type: 'markdown', content: 'Here, we declare a float variable named `result`, which can hold decimal numbers.'}]},
-                      { text: '(float)a', blocks: [{ id: 'mc-cat-3-3-var-tip-14', type: 'markdown', content: 'This is an example of casting the integer variable `a` to a float. This allows us to perform a division that results in a decimal value instead of an integer division that would truncate the decimal part.' }]},
-                      { text: '(float)b', blocks: [{ id: 'mc-cat-3-3-var-tip-15', type: 'markdown', content: 'This is an example of casting the integer variable `b` to a float for the same reason as `a`.' }]},
-                      { text: 'Serial.println(result);', blocks: [{ id: 'mc-cat-3-3-var-tip-16', type: 'markdown', content: 'Since we cast both `a` and `b` to floats before performing the division, the result is a float value of `2.5` instead of an integer value of `2`.' }]},
-                    ]
-                  }},
+                  
                 ]
               },
               
@@ -1164,8 +1166,16 @@ export const CATEGORIES: Category[] = [
 
                   { id: 'mc-prog-uart-4', type: 'markdown', content: '# How fast is data exchanged?\n\nThe speed of UART communication is determined by the **baud rate**, which is the number of bits transmitted per second. Common baud rates include `9600`, `115200`, and `250000` bits per second. **Both devices communicating over UART must be set to the same baud rate to understand each other correctly**. If we want to find the amount of time it takes to send a single byte, we can use the formula:\n\n```\nTime per byte = (Start bit + Data bits + Parity bit + Stop bit) / Baud rate\n```\n\nFor example, with 8 data bits, no parity, 1 stop bit, and a baud rate of 9600:\n\n```\nTime per byte = (1 + 8 + 0 + 1) / 9600 ≈ 0.001 seconds (1 ms)\n```' },
 
+                  { id: 'mc-prog-uart-5', type: 'markdown', content: '# Starting UART\n\nTo start UART, we need to open the port on our microcontroller using the `Serial.begin(baudrate)` function. This function initializes the serial communication at the specified baud rate.' },
 
-                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# From Microcontroller to Computer\n\nBefore proceeding down the next secion, please review the ASCII table, found in the [🔗Variables and Datatypes Section](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).\n\nIn the Arduino langauge, there are two ways to send data from the microcontroller to the other devices: \`Serial.print()\` and \`Serial.write()\`\n\n## Serial.print() and Serial.println()'},
+                  { id: 'mc-prog-uart-6', type: 'markdown', content: 'The Pico microcontroller features **three UART ports** (UART0, UART1, and UART2), which can be used for simultaneous communication with multiple devices. In contrast, the Arduino Uno has only one UART port (Serial), which is shared with the USB connection to the computer. This means that on an Arduino Uno, you cannot use the Serial Monitor while also communicating with another device over UART without additional hardware (like a software serial library or an external USB-to-serial adapter). To use UART1 or UART2 on the Pico, we say \`Serial1.begin(baudrate)\` or \`Serial2.begin(baudrate)\`.' },
+
+                  { id: 'mc-prog-uart-7', type: 'codetooltip', content: 'void setup() {\n  Serial.begin(9600);  // Starts USB Serial port\n  Serial1.begin(9600); // Starts UART1 Port (check pinout for connections)\n  Serial2.begin(9600); // Starts UART2 Port (check pinout for connections)\n}', metadata: {
+                    language: 'cpp',
+                  } },
+                  { id: 'mc-prog-uart-7a', type: 'markdown', content: '- Note, we don\'t have to use all three UART ports at the same time. The code above just shows how you would enable each of them. Use each line as needed!\n- Also, remember to ensure your baudrates on your computer, controller, or other devices all match!'},
+
+                  { id: 'mc-prog-uart-8', type: 'markdown', content: '# 🎛️From Microcontroller to Computer\n\nBefore proceeding down the next secion, please review the ASCII table, found in the [🔗Variables and Datatypes Section](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).\n\nIn the Arduino langauge, there are two ways to send data from the microcontroller to the other devices: \`Serial.print()\` and \`Serial.write()\`\n\n## Serial.print() and Serial.println()'},
 
                   { id: 'mc-prog-uart-9', type: 'codetooltip', content: 'Serial.print("Value is: ");\nSerial.println(123);', metadata: {
                     language: 'cpp',
@@ -1181,12 +1191,25 @@ export const CATEGORIES: Category[] = [
                     ]
                   }},
  
-                  { id: 'mc-prog-uart-10', type: 'markdown', content: 'Running those code, we would see \`Value is: 123\` in the Serial Monitor.' },
-                  { id: 'mc-prog-uart-10b', type: 'note', content: 'When you use `Serial.print()` or `Serial.println()`, the data is converted to human-readable text. For example, if you print the integer `123`, the \`Serial.print\` function automatically converts the integer numbers \`1\`, \`2\`, and \`3\` to the *characters* \`"1"\`, \`"2"\`, and \`"3"\` in the Serial Monitor.' },
+                  { id: 'mc-prog-uart-10', type: 'markdown', content: 'Running those code, we would see \`Value is: 123\` in the Serial Monitor.\n\nWhen you use `Serial.print()` or `Serial.println()`, the data is converted to human-readable text. For example, if you print the integer `123`, the \`Serial.print\` function automatically converts the integer numbers \`1\`, \`2\`, and \`3\` to the *characters* \`"1"\`, \`"2"\`, and \`"3"\` in the Serial Monitor.' },
 
-                  { id: 'mc-prog-uart-11', type: 'markdown', content: '## Serial.write()\n\nThe `Serial.write()` function sends data as raw bytes. This means that if you send an integer using `Serial.write(123);`, it will send the byte value `123` (which is `0x7B` in hexadecimal) rather than the characters `1`, `2`, and `3`. This is useful for sending binary data or when you want to communicate with another device that expects data in a specific byte format.\n\nFor example, if you want to send the string "Hello" using `Serial.write()`, you would need to send each character as a byte:\n\n```cpp\nSerial.write(\'H\');\nSerial.write(\'e\');\nSerial.write(\'l\');\nSerial.write(\'l\');\nSerial.write(\'o\');\n```\n\nThis would send the ASCII byte values for each character in "Hello".' },
+                  { id: 'mc-prog-uart-11', type: 'markdown', content: '## Serial.write()\n\nThe `Serial.write()` function sends data as raw bytes. This means that if you send an integer using `Serial.write(123);`, it will send the byte value `123` (which is `0x7B` in hexadecimal) rather than the characters `1`, `2`, and `3`. This is useful for sending binary data or when you want to communicate with another device that expects data in a specific byte format.' },
 
-                  { id: 'mc-prog-uart-12', type: 'markdown', content: '# From Computer to Microcontroller\n\nTo receive data sent from the computer to the microcontroller, we can use the `Serial.read()` function. This function reads incoming data one byte at a time. Before reading, we should check if there is any data available using `Serial.available()`, which returns the number of bytes available to read.\n\nHere is an example of how to read data from the Serial Monitor:'},
+                  { id: 'mc-prog-uart-11a', type: 'dropdown', content: 'Serial.print() vs Serial.write() example', children: [
+                    { id: 'mc-prog-uart-11a', type: 'codetooltip', content: 'int my_value = 65;\n\nSerial.print(my_value);\nSerial.write(my_value);', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        {text: 'my_value', blocks: [{id: 'mc-cat-3-4-uart-tip-3', type: 'markdown', content: '**Variable to send.**\n\nThis variable holds the integer value `65`.' }]},
+                        { text: 'Serial.print(my_value);', blocks: [{id: 'mc-cat-3-4-uart-tip-4', type: 'markdown', content: '**Print variable as text.**\n\nSends the **character** `6` then the **character** `5`. This will output `65` in the Serial Monitor, as human-readable text.' }]},
+                        { text: 'Serial.write(my_value);', blocks: [{id: 'mc-cat-3-4-uart-tip-5', type: 'markdown', content: '**Write variable as raw byte.**\n\nSends the **byte value** `65`, which corresponds to the ASCII character `A`. This will output `A` in the Serial Monitor, since it interprets the byte value as a character based on the ASCII encoding.' }]}
+                      ]
+                    }},
+                    { id: 'mc-prog-uart-11b', type: 'markdown', content: 'If we were to run this code, we\'d see the following outputs:\n- `65` would be printed to the console first, since `Serial.print()` sends the character `6` then `5`.\n- Next, we\'d see `A` printed to the console, since `Serial.write()` sends the byte value `65`, which corresponds to the ASCII character `A`.'},
+                  ]},
+
+                  { id: 'mc-prog-uart-11b', type: 'note', content: 'The **big takeaway** is to use `Serial.print()` for human-readable text when communicating with a Serial Monitor, and `Serial.write()` when you want to send data to another processor or device.' },
+
+                  { id: 'mc-prog-uart-12', type: 'markdown', content: '# 🖥️From Computer to Microcontroller\n\nTo receive data sent from the computer to the microcontroller, we can use the `Serial.read()` function. This function reads incoming data one byte at a time. Before reading, we should check if there is any data available using `Serial.available()`, which returns the number of bytes available to read.\n\nHere is an example of how to read data from the Serial Monitor:'},
 
                   { id: 'mc-prog-uart-13', type: 'codetooltip', content: 'void setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  if (Serial.available() > 0) {\n    byte incomingByte = Serial.read();\n    // Do something with the byte...\n  }\n}', metadata: {
                     language: 'cpp',
@@ -1194,14 +1217,20 @@ export const CATEGORIES: Category[] = [
                       {
                         text: 'if',
                         blocks: [
-                          { id: 'mc-cat-3-4-uart-receive-tip-1', type: 'markdown', content: '**Check for incoming data.**\n\n`Serial.available()` returns the number of bytes waiting to be read. If it\'s greater than 0, we know there is data to read.' }
+                          { id: 'mc-cat-3-4-uart-receive-tip-1', type: 'markdown', content: 'First, we set up a **conditional statement**, as we only want to read from the serial buffer if there is data available.' }
                         ]
                       },
                       {
-                        text: 'Serial.available() > 0',
+                        text: 'Serial.available()',
                         blocks: [
-                          { id: 'mc-cat-3-4-uart-receive-tip-2', type: 'markdown', content: '**Condition for data availability.**\n\nThis checks if there is at least one byte of data in the serial buffer that we can read.' },
-                          { id: 'mc-cat-3-4-uart-receive-tip-3', type: 'note', content: 'It\'s important to check `Serial.available()` before calling `Serial.read()`, because if you call `Serial.read()` when there is no data available, it will return `-1`.' }
+                          { id: 'mc-cat-3-4-uart-receive-tip-2', type: 'markdown', content: '`Serial.available()` returns the number of bytes available to read from the serial buffer.' },
+                          { id: 'mc-cat-3-4-uart-receive-tip-3', type: 'note', content: 'If `Serial.available()` returns `0`, it means there is no data to read, and we should not call `Serial.read()` because it would cause strange behaviour' }
+                        ]
+                      },
+                      {
+                        text: '> 0',
+                        blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-tip-4', type: 'markdown', content: 'This condition essentially says "only run the if statement if there is at least one byte of data available to read."' }
                         ]
                       },
                       {
@@ -1212,6 +1241,46 @@ export const CATEGORIES: Category[] = [
                       }
                     ]
                   }},
+
+                  { id: 'mc-prog-uart-14', type: 'markdown', content: '### ‼️Computers Send `char` types!\n\nAn important note to keep in mind is that if you are **transmitting data from a computer**, it will **always send as a `char`**. For example, if I type\ `123`, the computer is actually sending three separate `char` values: `\'1\'`, `\'2\'`, and `\'3\'`. If you want to send numbers, please see the next sections on `Serial.parseInt()`, and `Serial.parseFloat()`.' },
+
+                  
+
+
+                  // { id: 'mc-prog-uart-14', type: 'markdown', content: 'Now that we have this byte, we can do any number of things with it! For a refresher on how we can handle this data, refer to the previous sections on variables types and navigate to the section on 🔁Casting (converting types): [🔗Variable and Data Types](https://schomath.github.io/academy-backend/?course=microcontrollers&module=mc-prog-variables).' },
+
+                  { id: 'mc-prog-uart-15', type: 'dropdown', content: 'Serial.read() example 1: Toggle the LED', children: [
+                    { id: 'mc-prog-uart-15-code', type: 'codetooltip', content: 'const int ledPin = 13;\n\nvoid setup() {\n  pinMode(ledPin, OUTPUT);\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  if (Serial.available() > 0) {\n    char incoming_char = Serial.read();\n    if (incoming_char == \'1\') {\n      digitalWrite(ledPin, HIGH);\n    } \n    else if (incoming_char == \'0\') {\n      digitalWrite(ledPin, LOW);\n    }\n  }\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'char incoming_char = Serial.read();',
+                          blocks: [
+                            { id: 'mc-cat-3-4-uart-receive-ex1-tip-1', type: 'markdown', content: '**Read incoming byte as char.**\n\nSince data from the computer is sent as `char`, we store the result of `Serial.read()` in a `char` variable.' }]
+                        },
+                        { text: 'if (incoming_char',
+                          blocks: [
+                            { id: 'mc-cat-3-4-uart-receive-ex1-tip-2', type: 'markdown', content: '**Check if the char is \'1\'.**\n\nIf the incoming character is `\'1\'`, we turn the LED on.' },
+                            { id: 'mc-cat-3-4-uart-receive-ex1-tip-3', type: 'note', content: 'Remember that `\'1\'` is a character, which is different from the integer `1`. The character `\'1\'` has an ASCII byte value of `49`.' }
+                          ]
+                        },
+                        { text: '\'1\'',
+                          blocks: [
+                            { id: 'mc-cat-3-4-uart-receive-ex1-tip-3b', type: 'markdown', content: 'We use the \' single quotes to denote a character literal in C++. Remember, we\'re comparing characters, not integers.' }
+                          ]
+                        },
+                        { text: 'else if (incoming_char',
+                          blocks: [
+                            { id: 'mc-cat-3-4-uart-receive-ex1-tip-4', type: 'markdown', content: '**Check if the char is \'0\'.**\n\nIf the incoming character is `\'0\'`, we turn the LED off.' },
+                          ]
+                        },
+                        { text: '\'0\'',
+                          blocks: [
+                            { id: 'mc-cat-3-4-uart-receive-ex1-tip-4b', type: 'markdown', content: 'Again, we use single quotes to denote a character literal. The character `\'0\'` has an ASCII byte value of `48`.' }
+                          ]
+                        }
+                      ]
+                    }},
+                  ]}
                 ]
               },
 
