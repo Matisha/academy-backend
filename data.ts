@@ -1280,6 +1280,23 @@ export const CATEGORIES: Category[] = [
                         }
                       ]
                     }},
+                  ]},
+
+                  { id: 'mc-prog-uart-16', type: 'dropdown', content: 'Serial.parseInt() Example: Changing a variable value', children: [
+                    { id: 'mc-prog-uart-16-code', type: 'codetooltip', content: 'int my_fav_int = 42;\n\nvoid setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  // Check if data is available, and store it if need be:\n  if (Serial.available() > 0) {\n    int incoming_int = Serial.parseInt();\n    my_fav_int = incoming_int;\n  }\n\n  // Regardless, keep spamming console to remind everyone of my favorite int every 3 seconds:\n  Serial.print("My FAV number is: ");\n  Serial.println(my_fav_number);\n  delay(3000);\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'int my_fav_int = 42;', blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-ex2-tip-0', type: 'markdown', content: 'It\'s important that we **initialize** `my_fav_int` here at the start of our program, so that it has a default value before we receive anything from the computer. This way, if we run the program without sending any data, it will still print out `My FAV number is: 42` every 3 seconds.' }
+                        ]},
+                        { text: 'int incoming_int = Serial.parseInt();', blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-ex2-tip-1', type: 'markdown', content: '**Read incoming integer.**\n\n`Serial.parseInt()` reads the incoming data as an integer.' }
+                        ]},
+                        { text: '// Regardless, keep spamming console to remind everyone of my favorite int every 3 seconds:', blocks: [
+                          { id: 'mc-cat-3-4-uart-receive-ex2-tip-2', type: 'markdown', content: 'We choose the following to be outside of the `if (Serial.available() > 0)` statement as we ALWAYS want this code to trigger, even if there isn\'t anything sent from the computer!' }
+                        ]}
+                      ]
+                    }},
                   ]}
                 ]
               },
