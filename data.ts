@@ -1301,6 +1301,46 @@ export const CATEGORIES: Category[] = [
                 ]
               },
 
+              { id: 'mcc-prog-analog', title: 'Analog: Reading, Writing, and PWM', description: 'Working with analog sensors and outputs, and simulating signals with pulse-width modulation (PWM).', blocks: [
+                { id: 'mc-prog-analog-1', type: 'markdown', content: '# True Analog Signals\n\nWhile discrete signals are characterized by either bing *full voltage* (3.3V) or *no voltage* (0V), **analog signals** can take on voltages between these values, providing a continous adjustable range. This allows our microcontrollers to be able to write to and read from more advanced signals that can do more than just `ON` or `OFF`.' },
+
+                { id: 'mc-prog-analog-2', type: 'image', content: 'mc_prog_analog_signal.png', metadata: { alt: 'Graph showing a continuous analog signal varying smoothly between 0V and 3.3V over time, as opposed to a discrete digital signal which only switches between 0V and 3.3V with no intermediate values.', format: 'no-shadow'}},
+
+                { id: 'mc-prog-analog-3', type: 'markdown', content: '# Reading Analog Signals\n\nTo read an analog signal, we use the `analogRead(pin)` function. This function reads the voltage on the specified analog pin and returns a value that represents that voltage. The returned value is typically an integer between `0` and `1023` for a 10-bit ADC (Analog-to-Digital Converter), where `0` corresponds to `0V` and `1023` corresponds to the reference voltage (usually `3.3V` or `5V`).' },
+
+                { id: 'mc-prog-analog-3a', type: 'image', content: 'mc_prog_analog_read.png', metadata: { alt: 'Diagram showing how the `analogRead()` function maps a continuous voltage signal to a discrete integer value. The voltage range from 0V to 3.3V is divided into 1024 steps (for a 10-bit ADC), where each step corresponds to an integer value from 0 to 1023. For example, a voltage of approximately 1.65V would correspond to an `analogRead()` value of around 512.', format: 'no-shadow'}},
+
+                { id: 'mc-prog-analog-3b', type: 'dropdown', content: 'Example: Reading a potentiometer value', children: [
+                  { id: 'mc-prog-analog-3b-code', type: 'codetooltip', content: 'const int potPin = 10;\n\nvoid setup() {\n  Serial.begin(9600);\n  pinMode(potPin, INPUT);\n}\n\nvoid loop() {\n  int potValue = analogRead(potPin);\n  Serial.print("Potentiometer value: ");\n  Serial.println(potValue);\n  delay(1000);\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'const', blocks: [{id: 'mc-cat-3-4-analog-read-ex1-tip-1', type: 'markdown', content: 'This variable will be constant' }]},
+                      { text: 'int', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-2', type: 'markdown', content: 'This variable will be an integer' }
+                      ]},
+                      { text: 'potPin = 10', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-3', type: 'markdown', content: 'We will connect our potentiometer to GPIO 10!' }]},
+                      { text: 'void setup() {', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-4', type: 'markdown', content: 'Remember, setup runs once!' }
+                      ]},
+                      { text: 'Serial.begin(9600);', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-5', type: 'markdown', content: 'Start communication with the computer so we can send it data.'}]},
+                      { text: 'pinMode(potPin, INPUT);', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-6', type: 'markdown', content: 'Set the potentiometer pin as an input so we can read its value.'}]},
+                      { text: 'void loop() {', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-7', type: 'markdown', content: 'Remember, loop runs forever!' }
+                      ]},
+                      { text: 'int potValue', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-8', type: 'markdown', content: 'We declare an `integer` value and label it potValue.\nNote, since we are re-declaring this every time void loop() {...} runs, the previous value is discarded and replaced with the new value.' }
+                      ]},
+                      { text: 'analogRead(potPin)', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex1-tip-9', type: 'markdown', content: 'Read the value from the potentiometer pin. This will be an integer between 0 and 1023, representing the voltage level on that pin.'}]},
+                    ]
+                  }}
+                ]},
+              ] }
+
+
             ]
           },
 
