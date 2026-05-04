@@ -1337,7 +1337,7 @@ export const CATEGORIES: Category[] = [
                 ]
               },
 
-              { id: 'mcc-prog-analog', title: 'Analog: Reading, Writing, and PWM', description: 'Working with analog sensors and outputs, and simulating signals with pulse-width modulation (PWM).', blocks: [
+              { id: 'mcc-prog-analog', title: 'Analog: Reading and Writing', description: 'Working with analog devices.', blocks: [
                 { id: 'mc-prog-analog-1', type: 'markdown', content: '# True Analog Signals\n\nWhile discrete signals are characterized by either bing *full voltage* (3.3V) or *no voltage* (0V), **analog signals** can take on voltages between these values, providing a continous adjustable range. This allows our microcontrollers to be able to write to and read from more advanced signals that can do more than just `ON` or `OFF`.' },
 
                 { id: 'mc-prog-analog-2', type: 'image', content: 'mc_prog_analog_signal.png', metadata: { alt: 'Graph showing a continuous analog signal varying smoothly between 0V and 3.3V over time, as opposed to a discrete digital signal which only switches between 0V and 3.3V with no intermediate values.', format: 'no-shadow'}},
