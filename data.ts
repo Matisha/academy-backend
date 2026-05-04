@@ -259,11 +259,47 @@ export const CATEGORIES: Category[] = [
           //   modules: []
           // },
 
-          // { id: 'mc-hardware',
-          //   title: 'Microcontroller Hardware',
-          //   emoji: '🚀',
-          //   modules: []
-          // },
+          { id: 'mc-hardware',
+            title: 'Microcontroller Hardware',
+            emoji: '🚀',
+            modules: [
+              { id: 'mc-hw-gen', 
+                title: 'General Makeup of a Microcontroller',
+                description: 'Overview of the Raspberry Pi Pico microcontroller, its features, and applications.',
+                blocks: [
+                  { id: 'mc-hw-mu-1', type: 'markdown', content: '# What is a Microcontroller?\n\nA microcontroller is a compact integrated circuit designed to govern a specific operation in an embedded system. It typically includes a processor, memory, and input/output peripherals on a single chip.' },
+
+                  { id: 'mc-hw-mu-2', type: 'image', content: 'mc_hw_rp2040die.png', metadata: { alt: 'Image of Raspberry Pi RP2040 Microcontroller Die', format: 'no-shadow'}},
+
+                  { id: 'mc-hw-mu-10', type: 'image', content: 'mc_hw_just_chip.png', metadata: { alt: 'Image of Raspberry Pi RP2040 Microcontroller Chip', format: 'no-shadow'}},
+                ]
+              },
+
+              { id: 'mc-hw-pico',
+                title: 'Raspberry Pi Pico',
+                description: 'Overview of the Raspberry Pi Pico microcontroller, its features, and applications.',
+                blocks: [
+                  { id: 'mc-hw-pico-1', type: 'markdown', content: '# Raspberry Pi Pico\n\nThe Raspberry Pi Pico is a low-cost, high-performance microcontroller board based on the RP2040 microcontroller chip. It features:\n\n- A dual-core ARM Cortex-M0+ processor\n- 264KB of RAM\n- support for up to 16MB of external flash memory. \n\nThe Pico is designed for a wide range of applications, including embedded systems, IoT projects, and educational purposes.' },
+
+                  { id: 'mc-hw-pico-2', type: 'image', content: 'mc_hw_pico_overview.png', metadata: { alt: 'Image of Raspberry Pi Pico Microcontroller Board', format: 'no-shadow'}},
+
+                ]
+              },
+
+              {
+                id: 'mc-hw-pico-IO',
+                title: 'Raspberry Pi Pico Inputs \& Outputs',
+                description: 'Overview of the input and output capabilities of the Raspberry Pi Pico microcontroller.',
+                blocks: [
+                  { id: 'mc-hw-pico-io-1', type: 'markdown', content: '# Raspberry Pi Pico I/O Capabilities\n\nThe Raspberry Pi Pico offers a variety of input and output options, including:\n\n- **GPIO Pins**: 26 multi-function GPIO pins that can be used for digital input/output, PWM, I2C, SPI, and UART communication.\n- **Analog Inputs**: 3 ADC channels for reading analog signals.\n- **USB**: A USB 1.1 controller for communication with a host computer or other USB devices.\n- **Communication Protocols**: Support for I2C, SPI, and UART communication protocols.' },
+
+                  { id: 'mc-hw-pico-io-2', type: 'image', content: 'mc_hw_pico_pinout.png', metadata: { alt: 'Pinout diagram of Raspberry Pi Pico Microcontroller Board', format: 'no-shadow'}},
+
+                  { id: 'mc-hw-pico-io-3', type: 'note', content: 'The gray blocks refer to the pin location on the breakout board - ***and mean nothing for programming the controller!***. When programming, we typically refer to pins by their **GPIO number** (i.e. GP0, GP1, GP2, ...), which is shown in the green boxes.'},
+                ]
+              }
+            ]
+          },
 
           { id: 'mc-programming',
             title: 'Microcontroller Programming: C/C++',
@@ -1306,7 +1342,7 @@ export const CATEGORIES: Category[] = [
 
                 { id: 'mc-prog-analog-2', type: 'image', content: 'mc_prog_analog_signal.png', metadata: { alt: 'Graph showing a continuous analog signal varying smoothly between 0V and 3.3V over time, as opposed to a discrete digital signal which only switches between 0V and 3.3V with no intermediate values.', format: 'no-shadow'}},
 
-                { id: 'mc-prog-analog-3', type: 'markdown', content: '# Reading Analog Signals\n\nTo read an analog signal, we use the `analogRead(pin)` function. This function reads the voltage on the specified analog pin and returns a value that represents that voltage. The returned value is typically an integer between `0` and `1023` for a 10-bit ADC (Analog-to-Digital Converter), where `0` corresponds to `0V` and `1023` corresponds to the reference voltage (usually `3.3V` or `5V`).' },
+                { id: 'mc-prog-analog-3', type: 'markdown', content: '# 📥Reading Analog Signals\n\nSince our hardware must be specifically *designed* to read an analog signal, we must use GPIO ports that are **tied to the Pico\'s ADC (Analog-Digital Converter)**. You will notice tha these ports correspond to ports `GP26`, `GP27`, and `GP28`.\n\nTo read an analog signal, we use the `analogRead(pin)` function. This function reads the voltage on the specified analog pin and returns a value that represents that voltage. The returned value is typically an integer between `0` and `1023` for a 10-bit ADC (Analog-to-Digital Converter), where `0` corresponds to `0V` and `1023` corresponds to the reference voltage (usually `3.3V` or, in some other models, `5V`).' },
 
                 { id: 'mc-prog-analog-3a', type: 'image', content: 'mc_prog_analog_read.png', metadata: { alt: 'Diagram showing how the `analogRead()` function maps a continuous voltage signal to a discrete integer value. The voltage range from 0V to 3.3V is divided into 1024 steps (for a 10-bit ADC), where each step corresponds to an integer value from 0 to 1023. For example, a voltage of approximately 1.65V would correspond to an `analogRead()` value of around 512.', format: 'no-shadow'}},
 
@@ -1338,6 +1374,79 @@ export const CATEGORIES: Category[] = [
                     ]
                   }}
                 ]},
+
+                { id: 'mc-prog-analog-3c', type: 'dropdown', content: 'Example: Using map to get the voltage from the potentiometer value', children: [
+                  { id: 'mc-prog-analog-3c-code', type: 'codetooltip', content: 'const int potPin = 10;\n\nvoid setup() {\n  Serial.begin(9600);\n  pinMode(potPin, INPUT);  // Don\'t forget to set your potentiometer pin as input!\n}\n\nvoid loop() {\n  int potValue = analogRead(potPin);\n  float voltage = map(potValue, 0, 1023, 0, 3300) / 1000.0;\n  Serial.print("Voltage: ");\n  Serial.print(voltage);\n  Serial.println(" V");\n  delay(1000);\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'pinMode(potPin, INPUT);', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex2-tip-1', type: 'markdown', content: '**Set potentiometer pin as input.**\n\nThis allows us to read the voltage value from the potentiometer.' }
+                      ]},
+                      { text: 'float voltage', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex2-tip-1', type: 'markdown', content: 'We declare a `float` variable to store the voltage value. We use `float` instead of `int` because voltage can have decimal values.' }
+                      ]},
+                      { text: 'analogRead(potPin)', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex2-tip-3', type: 'markdown', content: 'Read the potentiometer value, which is an integer between 0 and 1023.' }
+                      ]},
+                      { text: 'map(potValue, 0, 1023, 0, 3300)', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex2-tip-4', type: 'markdown', content: '**Map potentiometer value to voltage.**\n\nThe `map()` function takes the `potValue` (which ranges from 0 to 1023) and maps it to a new range of 0 to 3300 (representing millivolts). This gives us the voltage in millivolts.' }
+                      ]},
+                      { text: '/ 1000.0', blocks: [
+                        { id: 'mc-cat-3-4-analog-read-ex2-tip-5', type: 'markdown', content: '**Convert millivolts to volts.**\n\nSince the `map()` function gives us the voltage in millivolts, we divide by 1000.0 to convert it to volts.'}
+                      ]}
+                    ]
+                  }}
+                ]},
+
+                { id: 'mc-prog-analog-4', type: 'markdown', content: '# 📤Writing Analog Signals with PWM\n\nWhile some microcontrollers have true analog output pins, the Raspberry Pi Pico does not. Instead, we can simulate an analog output using a technique called **Pulse Width Modulation (PWM)**, which we will discuss in the *next section (WIP)*.\n\nTo create an analog signal that varies between `0V` and `3.3V`, we use the `analogWrite()` function, which takes two arguments:' },
+
+                { id: 'mc-prog-analog-4b', type: 'codetooltip', content: 'analogWrite(pin, level);', metadata: {
+                  language: 'cpp',
+                  parts: [
+                    { text: 'analogWrite', blocks: [
+                      { id: 'mc-cat-3-4-analog-write-tip-1', type: 'markdown', content: 'This function is used to write an analog value (PWM signal) to a pin.' }
+                    ]},
+                    { text: 'pin', blocks: [
+                      { id: 'mc-cat-3-4-analog-write-tip-2', type: 'markdown', content: 'The GPIO pin you want to write the signal to. This pin must support PWM output (check your microcontroller\'s datasheet for details).' }
+                    ]},
+                    { text: 'level', blocks: [
+                      { id: 'mc-cat-3-4-analog-write-tip-3', type: 'markdown', content: 'The strength of an analog signal.\nPutting `0` here will give 0V, while putting `255` here will give 3.3V. Values in between will give a corresponding voltage between 0 and 3.3V.'}
+                    ]}
+                  ]
+                }},
+
+                { id: 'mc-prog-analog-4c', type: 'note', content: 'Note, we can **write** an analog signal to any GPIO pin on the Pico. However, on other microcontrollers, some pins may only be designed to work with digital signals. You can find out if your pin on your microcontroller supports analog output by checking the pinout on the datasheet and looking for pins marked with a `~`.'},
+
+                { id: 'mc-prog-analog-4d', type: 'image', content: 'mc_prog_analog_write.png', metadata: { alt: 'Graph showing how Pulse Width Modulation (PWM) simulates an analog signal. The graph depicts a series of square waves with varying duty cycles. A higher duty cycle (more time spent at HIGH voltage) corresponds to a stronger signal, while a lower duty cycle (more time spent at LOW voltage) corresponds to a weaker signal. For example, a 75% duty cycle means the signal is HIGH for 75% of the time and LOW for 25% of the time, simulating a stronger analog output.', format: 'no-shadow'}},
+
+                { id: 'mc-prog-analog-4e', type: 'dropdown', content: 'Example: Gradually Increasing brightness on an LED', children: [
+                  { id: 'mc-prog-analog-4e-code', type: 'codetooltip', content: 'const int ledPin = 9;\n\nvoid setup() {\n  pinMode(ledPin, OUTPUT);\n}\n\nvoid loop() {\n  // Fade in the LED\n  for (int brightness = 0; brightness <= 255; brightness++) {\n    analogWrite(ledPin, brightness);\n    delay(10);\n  }\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'for', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-1', type: 'markdown', content: 'To increase the brightness, we\'ll use a **for** loop.'},
+                      ]},
+                      { text: 'int brightness = 0;', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-2', type: 'markdown', content: 'We initialize the `brightness` variable to `0`,which means no brightness!' }
+                      ]},
+                      { text: 'brightness <= 255;', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-3', type: 'markdown', content: 'We want to keep increasing brightness until we reach `255`, which is the maximum brightness (corresponding to 3.3V).' }
+                      ]},
+                      { text: 'brightness++', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-4', type: 'markdown', content: 'Each time the **for** loop runs, we increase the `brightness` variable by `1`.'}
+                      ]},
+                      { text: 'analogWrite', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-5', type: 'markdown', content: 'We call the `analogWrite` function to tell the microcontroller we\'re going to set a voltage on the LED pin.'}
+                      ]},
+                      { text: 'ledPin', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-6', type: 'markdown', content: 'This is the pin we connected our LED to.'}
+                      ]},
+                      { text: 'brightness', blocks: [
+                        { id: 'mc-cat-3-4-analog-write-ex1-tip-7', type: 'markdown', content: 'This variable controls the strength of the signal we\'re sending to the LED. As `brightness` increases, the LED will get brighter!'}
+                      ]}
+                    ]
+                  }},
+                ]}
               ] }
 
 
