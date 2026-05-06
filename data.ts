@@ -129,65 +129,13 @@ export const CATEGORIES: Category[] = [
         title: 'Hydraulics & Fluid Power',
         emoji: '💧',
         description: 'Master the principles of fluid power systems and pneumatic controls.',
-        modules: [
-
-          {
-            id: 'h-mod-1',
-            title: 'Basics of Fluid Pressure',
-            description: 'Understanding Pascal\'s Law and its applications.',
-            blocks: []
-          },
-
-          { id: 'h-mod-cont',
-            title: 'Continuity Equation',
-            description: 'Understanding the principle of mass conservation in fluid flow.',
-            blocks: [
-              {id: 'h-mod-cont-1', type: 'markdown', content: '# Continuity Equation\n\nThe continuity equation is a fundamental principle in fluid dynamics that describes the conservation of mass in a fluid flow. It states that the mass flow rate of a fluid must remain constant from one cross-section of a pipe to another, assuming incompressible flow. '},
-              {id: 'h-mod-cont-2', type: 'latextooltip', content: '', metadata: {
-                displayMode: true,
-                parts: [
-                  {expression: 'A_1 ', blocks: [{id: 'a1', type: 'markdown', content: '**A1** is the cross-sectional area of the pipe at point 1.'}]},
-                  {expression: 'v_1 ', blocks: [{id: 'v2', type: 'markdown', content: '**v1** is the velocity of the fluid at the point of interest.'}]},
-                  {expression: ' = ', blocks: []},
-                  {expression: 'A_2 ', blocks: [{id: 'c3', type: 'markdown', content: '**A2** is the cross-sectional area of the pipe at point 2.'}]},
-                  {expression: 'v_2', blocks: [{id: 'v3', type: 'markdown', content: '**v2** is the velocity of the fluid at the point of interest.'}]}
-                ]
-              }}
-            ]
-          },
-
-          { id: 'h-mod-3', 
-            title: 
-            'Bernoulli\'s Equation', 
-            description: 'Understanding the principles energy conservation.', 
-            blocks: [
-              {id: 'bern-1', type: 'markdown', content: '# Bernoulli\'s Equation\n\nBernoulli\'s equation is a fundamental principle in fluid dynamics that describes the behavior of a fluid under varying conditions of flow and height. At it\'s core, Bernoulli\'s Equation compares a fluid\'s **pressure**, **velocity**, and **height** energies at two different points in a system. '},
-              {id: 'bern-2', type: 'latextooltip', content: '', metadata: {
-                displayMode: true,
-                parts: [
-                  {expression: '\\frac{P_1}{\\gamma}', blocks: [{id: 'p1', type: 'text', content: 'The pressure energy per unit weight at point 1.'}, {id: 'p2', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
-                  {expression: ' + ', blocks: []},
-                  {expression: '\\frac{v_1^2}{2g}', blocks: [{id: 'v1', type: 'text', content: 'The velocity energy per unit weight at point 1.'}, {id: 'v2', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
-                  {expression: ' + '},
-                  {expression: ' h_1 ', blocks: [{id: 'h1', type: 'text', content: 'The height energy per unit weight at point 1.'}, {id: 'h2', type: 'markdown', content: '**h** is the height of the fluid at the point of interest. This term represents the potential energy of the fluid due to its elevation.'}]},
-                  {expression: ' = ', blocks: []},
-                  {expression: '\\frac{P_2}{\\gamma}', blocks: [{id: 'p3', type: 'text', content: 'The pressure energy per unit weight at point 2.'}, {id: 'p4', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
-                  {expression: ' + ', blocks: []},
-                  {expression: '\\frac{v_2^2}{2g}', blocks: [{id: 'v3', type: 'text', content: 'The velocity energy per unit weight at point 2.'}, {id: 'v4', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
-                  {expression: ' + '},
-                  {expression: ' h_2 ', blocks: [{id: 'h3', type: 'text', content: 'The height energy per unit weight at point 2.'}, {id: 'h4', type: 'markdown', content: '**h** is the height of the fluid at the point of interest. This term represents the potential energy of the fluid due to its elevation.'}]}
-                ]
-              }}
-            ] 
-          }
-
-        ],
+        modules: [],
         moduleCategories: [
           { id: 'h-cat-1',
             title: 'Introduction',
             emoji: '⚠️',
             modules: [
-
+              
             ]
           },
           
@@ -203,11 +151,29 @@ export const CATEGORIES: Category[] = [
                 ]
               },
 
+              { id: 'h-math-continuity',
+                title: 'Continuity Equation',
+                description: 'Understanding the principle of mass conservation in fluid flow.',
+                blocks: [
+                  {id: 'h-mod-cont-1', type: 'markdown', content: '# Continuity Equation\n\nThe continuity equation is a fundamental principle in fluid dynamics that describes the conservation of mass in a fluid flow. It states that the mass flow rate of a fluid must remain constant from one cross-section of a pipe to another, assuming incompressible flow. '},
+                  {id: 'h-mod-cont-2', type: 'latextooltip', content: '', metadata: {
+                    displayMode: true,
+                    parts: [
+                      {expression: 'A_1 ', blocks: [{id: 'a1', type: 'markdown', content: '**A1** is the cross-sectional area of the pipe at point 1.'}]},
+                      {expression: 'v_1 ', blocks: [{id: 'v2', type: 'markdown', content: '**v1** is the velocity of the fluid at the point of interest.'}]},
+                      {expression: ' = ', blocks: []},
+                      {expression: 'A_2 ', blocks: [{id: 'c3', type: 'markdown', content: '**A2** is the cross-sectional area of the pipe at point 2.'}]},
+                      {expression: 'v_2', blocks: [{id: 'v3', type: 'markdown', content: '**v2** is the velocity of the fluid at the point of interest.'}]}
+                    ]
+                  }}
+                ]
+              },
+
               { id: 'h-basics-pascal',
                 title: 'Pascal\'s Law',
                 description: 'Understanding Pascal\'s Law and its applications in hydraulic systems.',
                 blocks: [
-
+                  
                 ]
               },
 
@@ -215,7 +181,29 @@ export const CATEGORIES: Category[] = [
                 title: 'Bernoulli\'s Equation',
                 description: 'Understanding Bernoulli\'s Equation and its applications in fluid dynamics.',
                 blocks: [
-
+                  {id: 'bern-1', type: 'markdown', content: '# Bernoulli\'s Equation\n\nBernoulli\'s equation is a fundamental principle in fluid dynamics that describes the behavior of a fluid under varying conditions of flow and height. At it\'s core, Bernoulli\'s Equation compares a fluid\'s **pressure**, **velocity**, and **height** energies at two different points in a system. '},
+              {id: 'bern-2', type: 'latextooltip', content: '', metadata: {
+                displayMode: true,
+                parts: [
+                  {expression: '\\frac{P_1}{\\gamma}', blocks: [{id: 'p1', type: 'text', content: 'The pressure energy per unit weight at point 1.'}, {id: 'p2', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
+                  {expression: ' + ', blocks: []},
+                  {expression: '\\frac{v_1^2}{2g}', blocks: [{id: 'v1', type: 'text', content: 'The velocity energy per unit weight at point 1.'}, {id: 'v2', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
+                  {expression: ' + '},
+                  {expression: ' h_1 ', blocks: [{id: 'h1', type: 'text', content: 'The height energy per unit weight at point 1.'}, {id: 'h2', type: 'markdown', content: '**h** is the height of the fluid at the point of interest. This term represents the potential energy of the fluid due to its elevation.'}]},
+                  {expression: ' + '},
+                  {expression: 'H_p', blocks: [{id: 'hp1', type: 'text', content: 'The head added to the system by a pump.'}, {id: 'hp2', type: 'markdown', content: '**Hp** is the head added to the system by a pump. This term represents the energy added to the fluid by a pump, which can increase the pressure, velocity, or height of the fluid.'}]},
+                  {expression: ' - '},
+                  {expression: 'H_m', blocks: [{id: 'hm1', type: 'text', content: 'The head lost from the system due to a motor.'}, {id: 'hm2', type: 'markdown', content: '**Hm** is the head lost from the system due to a motor (such as a piston). This term represents the energy extracted from the fluid by a motor, which can decrease the pressure, velocity, or height of the fluid.'}]},
+                  {expression: ' - '},
+                  {expression: 'H_l', blocks: [{id: 'hl1', type: 'text', content: 'The head lost from the system due to friction.'}, {id: 'hl2', type: 'markdown', content: '**Hl** is the head lost from the system due to friction. This term represents the energy lost from the fluid due to frictional forces as it flows through pipes, fittings, and other components.'}]},
+                  {expression: ' = ', blocks: []},
+                  {expression: '\\frac{P_2}{\\gamma}', blocks: [{id: 'p3', type: 'text', content: 'The pressure energy per unit weight at point 2.'}, {id: 'p4', type: 'markdown', content: '**P** is the pressure at the point of interest, and **γ** is the specific weight of the fluid. This term represents the potential energy stored in the fluid due to its pressure.'}]},
+                  {expression: ' + ', blocks: []},
+                  {expression: '\\frac{v_2^2}{2g}', blocks: [{id: 'v3', type: 'text', content: 'The velocity energy per unit weight at point 2.'}, {id: 'v4', type: 'markdown', content: '**v** is the velocity of the fluid at the point of interest, and **g** is the acceleration due to gravity. This term represents the kinetic energy of the fluid.'}]},
+                  {expression: ' + '},
+                  {expression: ' h_2 ', blocks: [{id: 'h3', type: 'text', content: 'The height energy per unit weight at point 2.'}, {id: 'h4', type: 'markdown', content: '**h** is the height of the fluid at the point of interest. This term represents the potential energy of the fluid due to its elevation.'}]}
+                ]
+              }}
                 ]
               }
             ]

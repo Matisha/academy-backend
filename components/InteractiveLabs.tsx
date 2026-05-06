@@ -97,3 +97,4 @@ export const LabRenderer: React.FC<LabProps> = ({ labId }) => {
   if (!LabComponent) return <div className="p-4 bg-red-50 text-red-500">Lab {labId} not found.</div>;
   return <LabComponent />;
 };
+
