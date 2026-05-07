@@ -1325,7 +1325,7 @@ export const CATEGORIES: Category[] = [
                 ]
               },
 
-              { id: 'mcc-prog-analog', title: 'Analog: Reading and Writing', description: 'Working with analog devices.', blocks: [
+              { id: 'mc-prog-analog', title: 'Analog: Reading and Writing', description: 'Working with analog devices.', blocks: [
                 { id: 'mc-prog-analog-1', type: 'markdown', content: '# True Analog Signals\n\nWhile discrete signals are characterized by either bing *full voltage* (3.3V) or *no voltage* (0V), **analog signals** can take on voltages between these values, providing a continous adjustable range. This allows our microcontrollers to be able to write to and read from more advanced signals that can do more than just `ON` or `OFF`.' },
 
                 { id: 'mc-prog-analog-2', type: 'image', content: 'mc_prog_analog_signal.png', metadata: { alt: 'Graph showing a continuous analog signal varying smoothly between 0V and 3.3V over time, as opposed to a discrete digital signal which only switches between 0V and 3.3V with no intermediate values.', format: 'no-shadow'}},
@@ -1435,7 +1435,40 @@ export const CATEGORIES: Category[] = [
                     ]
                   }},
                 ]}
-              ] }
+              ] },
+
+              { id: 'mc-prog-pwm', 
+                title: 'PWM: Simulating Analog Output', 
+                description: 'Using Pulse Width Modulation to create variable signals.', 
+                blocks: [
+
+              ]},
+
+              { id: 'mc-prog-funcs', 
+                title: 'Functions: Organizing Code into Reusable Blocks',
+                description: 'Defining and using functions to structure your code.',
+                blocks: [
+                  { id: 'mc-prog-funcs-1', type: 'markdown', content: '# What is a Function?\n\nA **function** is a reusable block of code that performs a specific task. Functions allow us to break down complex problems into smaller, more manageable pieces, and they help us avoid repeating code. In the Arduino programming language (which is based on C++), we can define our own functions to organize our code and make it more readable. When declaring a function, there are several things we must tell the computer:\n\n- **return type**: tells the computer what kind of data type to "send back" when it\'s done running (if anything!) \n- **function name**: the name of the function, which is used to call it later\n- **parameters**: the inputs the function needs to perform its task. For each "thing" we want to pass to the function, we give it a data type and a name.\n\nFunctions are used in two different ways: **declaration** and **calling**\n\n- **Declaring a function** means we specify what that function does. Think of it as creating a *to-do* list of code to run, but not actually running them yet.\n- **Calling our function** means we take the to-do list and actually run through the code.\n\nThe advantage of structuring code in this way is that if we need to execute several lines of codes in different places in our program, we can instead put it all in a `function` and just call that function in a single line of code.' },
+
+                  { id: 'mc-prog-funcs-2', type: 'codetooltip', content: 'int AddTwoNumbersTheCoolWay(int a, int b) {\n  // This is the function body.\n  // Our code goes in here!\n  return a + b;\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'int', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-1', type: 'markdown', content: 'This is the **return type** of the function. It indicates that this function will return an integer value.' }
+                      ]},
+                      { text: 'AddTwoNumbersTheCoolWay', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-2', type: 'markdown', content: 'This is the **function name**. It is used to call the function later in the code.' }
+                      ]},
+                      { text: 'int a', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-3', type: 'markdown', content: 'This is the first **parameter** of the function. It is an integer named `a` that will be used as input when we call the function.' }
+                      ]},
+                      { text: 'int b', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-4', type: 'markdown', content: 'This is the second **parameter** of the function. It is an integer named `b` that will be used as input when we call the function.' }
+                      ]},
+                    ]
+                  }},
+                ]
+              }
 
 
             ]
