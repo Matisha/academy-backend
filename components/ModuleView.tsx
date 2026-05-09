@@ -413,12 +413,17 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
         </AnimatedBlock>
       );
     case 'note':
+      const noteLabel =
+        typeof block.metadata?.noteLabel === 'string' && block.metadata.noteLabel.trim().length > 0
+          ? block.metadata.noteLabel.trim()
+          : 'Pro Tip';
+
       return (
         <AnimatedBlock>
           <div className="my-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg hover:shadow-md hover:bg-yellow-100 transition-all duration-300 cursor-default">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-lg">💡</span>
-              <span className="font-bold text-yellow-800">Pro Tip</span>
+              <span className="font-bold text-yellow-800">{noteLabel}</span>
             </div>
             <div className="text-yellow-900">
               <ReactMarkdown
@@ -428,8 +433,8 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
                   em: ({ node, ...props }) => <em {...props} />,
                   code: ({ node, ...props }) => <code className="bg-yellow-100 px-1 py-0.5 rounded text-sm font-mono" {...props} />,
                   a: ({ node, ...props }) => <a className="text-yellow-700 underline hover:text-yellow-900" {...props} />,
-                  ul: ({ node, ...props }) => <ul className="list-disc list-inside my-1" {...props} />,
-                  ol: ({ node, ...props }) => <ol className="list-decimal list-inside my-1" {...props} />,
+                  ul: ({ node, ...props }) => <ul className="list-disc list-outside pl-6 my-1" {...props} />,
+                  ol: ({ node, ...props }) => <ol className="list-decimal list-outside pl-6 my-1" {...props} />,
                   li: ({ node, ...props }) => <li className="my-0.5" {...props} />,
                 }}
               >
@@ -561,8 +566,8 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
                 h3: ({ node, ...props }) => <h3 className="text-xl font-bold mt-4 mb-2 hover:text-gray-900 transition-colors" {...props} />,
                 p: ({ node, ...props }) => <p className="text-gray-700 text-lg my-3 hover:text-gray-900 transition-colors" {...props} />,
                 a: ({ node, ...props }) => <a className="text-blue-600 text-lg underline hover:text-blue-800 hover:scale-105 transition-all duration-300 inline-block" {...props} />,
-                ul: ({ node, ...props }) => <ul className="text-lg list-disc list-inside my-3" {...props} />,
-                ol: ({ node, ...props }) => <ol className="text-lg list-decimal list-inside my-3" {...props} />,
+                ul: ({ node, ...props }) => <ul className="text-lg list-disc list-outside pl-6 my-3" {...props} />,
+                ol: ({ node, ...props }) => <ol className="text-lg list-decimal list-outside pl-6 my-3" {...props} />,
                 li: ({ node, ...props }) => <li className="text-lg my-1 hover:text-gray-900 transition-colors" {...props} />,
                 code: ({ node, ...props }) => <code className="text-lg bg-gray-100 px-2 py-1 rounded text-sm font-mono hover:bg-gray-200 transition-colors" {...props} />,
                 strong: ({ node, ...props }) => <strong className="text-lg font-bold" {...props} />,
@@ -710,8 +715,8 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
           </p>
         ),
         a: ({ node, ...props }: any) => <a className="text-blue-600 text-lg underline hover:text-blue-800 hover:scale-105 transition-all duration-300 inline-block" {...props} />,
-        ul: ({ node, ...props }: any) => <ul className="text-lg list-disc list-inside my-3" {...props} />,
-        ol: ({ node, ...props }: any) => <ol className="text-lg list-decimal list-inside my-3" {...props} />,
+        ul: ({ node, ...props }: any) => <ul className="text-lg list-disc list-outside pl-6 my-3" {...props} />,
+        ol: ({ node, ...props }: any) => <ol className="text-lg list-decimal list-outside pl-6 my-3" {...props} />,
         li: ({ node, children, ...props }: any) => (
           <li className="text-lg my-1 hover:text-gray-900 transition-colors" {...props}>
             {React.Children.map(children, (child, idx) => processNodeForTooltips(child, `li-${idx}`))}
@@ -769,8 +774,8 @@ const BlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
                 h3: ({ node, ...props }) => <h3 className="text-xl font-bold mt-4 mb-2 hover:text-gray-900 transition-colors" {...props} />,
                 p: ({ node, ...props }) => <p className="text-gray-700 text-lg my-3 hover:text-gray-900 transition-colors" {...props} />,
                 a: ({ node, ...props }) => <a className="text-blue-600 text-lg underline hover:text-blue-800 hover:scale-105 transition-all duration-300 inline-block" {...props} />,
-                ul: ({ node, ...props }) => <ul className="text-lg list-disc list-inside my-3" {...props} />,
-                ol: ({ node, ...props }) => <ol className="text-lg list-decimal list-inside my-3" {...props} />,
+                ul: ({ node, ...props }) => <ul className="text-lg list-disc list-outside pl-6 my-3" {...props} />,
+                ol: ({ node, ...props }) => <ol className="text-lg list-decimal list-outside pl-6 my-3" {...props} />,
                 li: ({ node, ...props }) => <li className="text-lg my-1 hover:text-gray-900 transition-colors" {...props} />,
                 code: ({ node, ...props }) => <code className="text-lg bg-gray-100 px-2 py-1 rounded text-sm font-mono hover:bg-gray-200 transition-colors" {...props} />,
                 strong: ({ node, ...props }) => <strong className="text-lg font-bold" {...props} />,

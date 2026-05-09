@@ -1445,40 +1445,176 @@ export const CATEGORIES: Category[] = [
               ]},
 
               { id: 'mc-prog-funcs', 
-                title: 'Functions: Organizing Code into Reusable Blocks',
+                title: 'Functions',
                 description: 'Defining and using functions to structure your code.',
                 blocks: [
-                  { id: 'mc-prog-funcs-1', type: 'markdown', content: '# What is a Function?\n\nA **function** is a reusable block of code that performs a specific task. Functions allow us to break down complex problems into smaller, more manageable pieces, and they help us avoid repeating code. In the Arduino programming language (which is based on C++), we can define our own functions to organize our code and make it more readable. When declaring a function, there are several things we must tell the computer:\n\n- **return type**: tells the computer what kind of data type to "send back" when it\'s done running (if anything!) \n- **function name**: the name of the function, which is used to call it later\n- **parameters**: the inputs the function needs to perform its task. For each "thing" we want to pass to the function, we give it a data type and a name.\n\nFunctions are used in two different ways: **declaration** and **calling**\n\n- **Declaring a function** means we specify what that function does. Think of it as creating a *to-do* list of code to run, but not actually running them yet.\n- **Calling our function** means we take the to-do list and actually run through the code.\n\nThe advantage of structuring code in this way is that if we need to execute several lines of codes in different places in our program, we can instead put it all in a `function` and just call that function in a single line of code.' },
+                  { id: 'mc-prog-funcs-1', type: 'markdown', content: '# ❓What is a Function?\n\nMuch like how variables are used to *store data* for use later, **functions** are used to *store blocks of code* for use later. A **function** is a reusable block of code that performs a specific task. Functions allow us to break down complex problems into smaller, more manageable pieces, and they help us avoid repeating code. In the Arduino programming language (which is based on C++), we can define our own functions to organize our code and make it more readable.\n\n'},
 
-                  { id: 'mc-prog-funcs-2', type: 'codetooltip', content: 'int AddTwoNumbersTheCoolWay(int a, int b) {\n  // This is the function body.\n  // Our code goes in here!\n  return a + b;\n}', metadata: {
+                  { id: 'mc-prog-funcs-1a', type: 'image', content: 'mc_prog_func_anat.png', metadata: { alt: 'Diagram showing the anatomy of a function declaration in C++. The function is defined as `float AddTwoNumbersTheCoolWay(float a, float b)`. The return type is `float`, the function name is `AddTwoNumbersTheCoolWay`, and it has two parameters: `float a` and `float b`. The function body is enclosed in curly braces `{ ... }` and contains the code that will be executed when the function is called.', format: 'no-shadow'}},
+
+                  { id: 'mc-prog-funcs-1b', type: 'markdown', content: '### ✨Return Type\n\nFunctions can *optionally* return a value after they are done executing. The **return type** of a function specifies the type of value that the function will return. If a function does not return any value, we use the return type `void`. As an example, consider the functions `digitalWrite()` and `digitalRead()`:'},
+
+                  { id: 'mc-prog-funcs-1c', type: 'codetooltip', content: 'digitalWrite(pin, value);\nbool read_value = digitalRead(pin);', metadata: {
                     language: 'cpp',
                     parts: [
-                      { text: 'int', blocks: [
-                        { id: 'mc-cat-3-4-funcs-tip-1', type: 'markdown', content: 'This is the **return type** of the function. It indicates that this function will return an integer value.' }
+                      { text: 'digitalWrite(pin, value);', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-1', type: 'markdown', content: '**digitalWrite()** does not return anything (`void`), so we cannot assign its result to a variable.' }
+                      ]},
+                      { text: 'read_value', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-2', type: 'markdown', content: '**digitalRead()** returns a `boolean` value, which we can store in the variable `read_value`.'}
+                      ]}
+                    ]
+                  }},
+
+                  { id: 'mc-prog-funcs-1d', type: 'markdown', content: '- `digitalWrite()` has a return type of `void`, since it does not return any value. It simply performs an action (writing a HIGH or LOW value to a pin) without giving us any information back.\n- `digitalRead()`, on the other hand, has a return type of `boolean`, since it returns a value that represents the state of the pin (HIGH or LOW). This allows us to store the result of `digitalRead()` in a variable and use that information later in our program.'},
+
+                  { id: 'mc-prog-funcs-1e', type: 'markdown', content: '### ✨Function Name\n\nThe **function name** is the identifier we use to call the function later in our code. It should be descriptive of what the function does. For example, `digitalWrite` is a good function name because it clearly indicates that the function is used to write a digital value to a pin.'},
+
+                  { id: 'mc-prog-funcs-1f', type: 'markdown', content: '### ✨Parameters\n\n**Parameters** are the inputs that we pass to a function when we call it. They allow us to provide the function with the information it needs to perform its task. Consider the following two function calls:'},
+
+                  { id: 'mc-prog-funcs-1g', type: 'codetooltip', content: 'digitalWrite(13, HIGH);\nmap(analogValue, 0, 1023, 0, 255);', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: '13', blocks: [{ id: 'mc-cat-3-4-funcs-tip-3', type: 'markdown', content: 'First parameter, an integer' }]},
+                      { text: 'HIGH', blocks: [{ id: 'mc-cat-3-4-funcs-tip-4', type: 'markdown', content: 'Second parameter, a boolean' }]},
+                      { text: 'analogValue', blocks: [{ id: 'mc-cat-3-4-funcs-tip-5', type: 'markdown', content: 'First parameter, a variable representing the value to be mapped' }]},
+                      { text: '0', blocks: [{ id: 'mc-cat-3-4-funcs-tip-6', type: 'markdown', content: 'Second parameter, the lower bound of the input range' }]},
+                      { text: '1023', blocks: [{ id: 'mc-cat-3-4-funcs-tip-7', type: 'markdown', content: 'Third parameter, the upper bound of the input range' }]},
+                      { text: '0', blocks: [{ id: 'mc-cat-3-4-funcs-tip-8', type: 'markdown', content: 'Fourth parameter, the lower bound of the output range' }]},
+                      { text: '255', blocks: [{ id: 'mc-cat-3-4-funcs-tip-9', type: 'markdown', content: 'Fifth parameter, the upper bound of the output range' }]}
+                    ]
+                  }},
+
+                  { id: 'mc-prog-funcs-1h', type: 'markdown', content: '- In the call `digitalWrite(13, HIGH)`, the parameters are an integer, which we set to `13`, and a boolean, which we set to `HIGH`. The `13` tells the function which pin to write to, and `HIGH` tells it what value to write.\n- In the call `map(analogValue, 0, 1023, 0, 255)`, there are five parameters: `analogValue`, `0`, `1023`, `0`, and `255`. These parameters provide the function with the information it needs to perform the mapping operation.'},
+                  
+                  // { id: 'mc-prog-funcs-1a', type: 'markdown', content: 'When declaring a function, there are several things we must tell the computer:\n\n- **return type**: should our reusable chunk of code return a value, and if so, what type of value? For example, `digitalWrite` does not return anything, since the code just writes a `HIGH` or `LOW` value to a pin. However, `digitalRead` **returns** a `boolean` value that is either HIGH or LOW - i.e. it gives us information back!\n- **function name**: the name of the function, which is used to call it later. For example, `digitalWrite` and `digitalRead` are both the names of functions.\n- **parameters**: sometimes, we want to pass our code some information to work with. These are called parameters. When we write `digitalRead(15`, the `15` is considered a *parameter* that tells the `digitalRead` function what pin to read from.\n\n# 💡How do I create and use my own functions?\nFunctions are used in two different ways: **declaration** and **calling**. *You\'ve actually already called many functions throughout this class!*\n\n- **Declaring a function** means we specify what that function does. Think of it as creating a *to-do* list of code to run, but not actually running them yet.\n- **Calling our function** means we take the to-do list and actually run through the code.\n\nThe advantage of structuring code in this way is that if we need to execute several lines of codes in different places in our program, we can instead put it all in a `function` and just call that function in a single line of code.\n\n## Declaring the Function\n\nDeclaring a function is like writing a to-do list without actually doing the tasks - in the below example, we declare the function `AddTwoNumbersTheCoolWay`, which takes in two decimal numbers (floats) and returns their sum as a float. We haven\'t actually called this function yet, so the code inside of it won\'t run until we call it later on in our program. *note, we place this code below `void loop()` and `void setup()`, but it could actually be placed anywhere in our program!*'},
+
+                  { id: 'mc-prog-func-2', type: 'markdown', content: '# 🛠️Declaring a Function\n\nDeclaring a function typically happens outside of the `void setup()` and `void loop()` functions. It involves telling the computer a few things about our chunk of code:\n- `return type` is stated first. If the function doesn\'t return anything, we say `void`.\n- `Function Name` cames next - remember, this cannot have spaces in it and cannot begin with numbers!\n - `Input Parameters` are then placed between the a set of parenthesis `(...)`. If multiple arguments are required, they are separated with a comma.\n- `The Body` of the function is then placed between curley brackets `{...}`'},
+                  
+                  { id: 'mc-prog-funcs-2a', type: 'codetooltip', content: 'void setup() {\n  //...\n}\n\nvoid loop() {\n  //...\n}\n\n// FUNCTION DECLARATION for my custom adding two numbers function\n\nfloat AddTwoNumbersTheCoolWay(float a, float b) {\n  // Create temporary variable to store the sum in:\n  float c = a + b;\n  // Return the numbers out of the function\n  return c;\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'float', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-1', type: 'markdown', content: 'This is the **return type** of the function. It indicates that this function will return a float value.' }
                       ]},
                       { text: 'AddTwoNumbersTheCoolWay', blocks: [
                         { id: 'mc-cat-3-4-funcs-tip-2', type: 'markdown', content: 'This is the **function name**. It is used to call the function later in the code.' }
                       ]},
-                      { text: 'int a', blocks: [
-                        { id: 'mc-cat-3-4-funcs-tip-3', type: 'markdown', content: 'This is the first **parameter** of the function. It is an integer named `a` that will be used as input when we call the function.' }
+                      { text: 'float a', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-3', type: 'markdown', content: 'This is the first **parameter** of the function. It is a float named `a` that will be used as input when we call the function.' }
                       ]},
-                      { text: 'int b', blocks: [
-                        { id: 'mc-cat-3-4-funcs-tip-4', type: 'markdown', content: 'This is the second **parameter** of the function. It is an integer named `b` that will be used as input when we call the function.' }
+                      { text: 'float b', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-4', type: 'markdown', content: 'This is the second **parameter** of the function. It is a float named `b` that will be used as input when we call the function.' }
                       ]},
+                      { text: '{', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-5', type: 'markdown', content: 'This curly brace indicates the start of the function body, which contains the code that will be executed when the function is called.' }
+                      ]},
+                      { text: 'float c = a + b;', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-6', type: 'markdown', content: 'Inside the function, we create a temporary variable `c` to store the sum of `a` and `b`.' }, { id: 'mc-cat-3-4-funcs-tip-7', type: 'note', content: 'The variable `c` has a scope only inside of this function - meaning the rest of my program will never have any idea that `c` exists.'}
+                      ]},
+                      { text: 'return c;', blocks: [
+                        { id: 'mc-cat-3-4-funcs-tip-8', type: 'markdown', content: 'The `return` statement sends the value of `c` back to the caller of the function. Since we declared the return type as `int`, the value of `c` will be converted to an integer before being returned.' }
+                      ]}
+                    ]},
+                  },
+
+                  { id: 'mc-prog-funcs-3', type: 'markdown', content: '# 📞Calling the Function\n\nNow that we have declared our function, we can call it from anywhere else in our program. When we call a function, we provide the necessary parameters (if any) and the code inside the function will execute. The function will then return a value if it has a return type other than `void`.' },
+
+                  { id: 'mc-prog-funcs-4', type: 'codetooltip', content: 'void setup() {\n  //...\n}\n\nvoid loop() {\n  float result = AddTwoNumbersTheCoolWay(3.5, 2.5);\n  Serial.print("The result is: ");\n  Serial.println(result);\n}\n\nfloat AddTwoNumbersTheCoolWay(float a, float b) {\n  // Create temporary variable to store the sum in:\n  float c = a + b;\n  // Return the numbers out of the function\n  return c;\n}', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'float result', blocks: [
+                        { id: 'mc-cat-3-4-funcs-call-tip-1', type: 'markdown', content: 'Since the function `AddTwoNumbersTheCoolWay` returns a `float`, we store the result in a variable of type `float`.' }
+                      ]},
+                      { text: 'AddTwoNumbersTheCoolWay(3.5, 2.5)', blocks: [
+                        { id: 'mc-cat-3-4-funcs-call-tip-2', type: 'markdown', content: 'We call the function `AddTwoNumbersTheCoolWay` and pass in the values `3.5` and `2.5` as parameters. The function will execute and return the sum of these two numbers, which will be stored in the variable `result`.' }
+                      ]}
+                    ]
+                  }},
+
+                  { id: 'mc-prog-funcs-5', type: 'markdown', content: 'Note how we use parentheses `()` to pass arguments to the function when we call it. These are called **positional arguments** as the order we pass them to the function matters. In this case...\n\n- The first argument `3.5` is assigned to the parameter `a`.\n- The second argument `2.5` is assigned to the parameter `b`.\n\nYou can then see how `a` ad `b` are added together inside of the function down in the *function definition*.\n\n# 💡Examples' },
+
+                  { id: 'mc-prog-funcs-1c1', type: 'dropdown', content: 'Example: Creating a function with No Return Type', children: [
+                    { id: 'mc-prog-funcs-1c1-code', type: 'codetooltip', content: 'void loop() {\n  delay(1000);\n  blinkLED(3);\n}\n\nvoid blinkLED(int times) {\n  for (int i = 0; i < times; i++) {\n    digitalWrite(LED_BUILTIN, HIGH);\n    delay(500);\n    digitalWrite(LED_BUILTIN, LOW);\n    delay(500);\n  }\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        {text: 'blinkLED(3);', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c1a', type: 'markdown', content: 'Here, we call the `blinkLED` function and pass it the parameter `3`, which tells the function to blink the LED 3 times.' }]},
+                        {text: 'void blinkLED', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c1b', type: 'markdown', content: 'This is the function declaration. The return type is `void`, which means this function does not return any value.' }]},
+                        {text: 'int times', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c1c', type: 'markdown', content: 'This is a parameter of type `int`. When we call the function, we can pass an integer value to it, which will be used within the function to determine how many times to blink the LED.' }]}
+                      ]
+                    }},
+                    {id: 'mc-prog-funcs-1c1a', type: 'markdown', content: '- In this example, we define a function called `blinkLED` that takes an integer parameter `times` and blinks the built-in LED that many times. Since `blinkLED` does not return any value, its return type is `void`.\n- We notice how we can pass the parameter `3` to the blink LED function, which sets `times` to 3, causing our `for` loop to execute 3 times!'}
+                  ]},
+
+                  { id: 'mc-prog-funcs-6a', type: 'dropdown', content: 'Example: Creating a function with a Return Type', children: [
+                    { id: 'mc-prog-funcs-1c2-code', type: 'codetooltip', content: 'void setup() {\n  Serial.begin(9600);\n}\n\nvoid loop() {\n  float sensorValue = readSensor();\n  Serial.print("Sensor value: ");\n  Serial.println(sensorValue);\n  delay(1000);\n}\n\nfloat readSensor() {\n  // This function automatically maps our analog value to the proper range and returns it!\n  int raw_value = analogRead(10);\n  float value = map(raw_value, 0, 1023, 0, 255);\n  return value;\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        {text: 'float sensorValue', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c2a', type: 'markdown', content: 'Here, we declare a variable `sensorValue` of type `float`. This will store the **mapped** sensor value from our function.' }]},
+                        {text: 'readSensor();', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c2b', type: 'markdown', content: 'We call the `readSensor` function, which returns a `float` value that we store in `sensorValue`.' }]},
+                        {text: 'float readSensor()', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c2c', type: 'markdown', content: 'This is the function declaration. The return type is `float`, which means this function will return a floating-point number when it is done executing.' }]},
+                        {text: 'return value;', blocks: [{ id: 'mc-cat-3-4-funcs-tip-1c2d', type: 'markdown', content: 'The `return` statement specifies the value that will be returned by the function. In this case, we return the variable `value`, which is a `float` that represents the mapped sensor value.' }]}
+                      ]
+                    }},
+                    {id: 'mc-prog-funcs-6b', type: 'markdown', content: '- In this example, we define a function called `readSensor` that reads an analog value from pin 10, maps it to a range of 0 to 255, and returns the result as a `float`. Since `readSensor` returns a value, its return type is `float`.\n- We call the `readSensor` function in our `loop()` and store the returned value in the variable `sensorValue`, which we then print to the serial monitor.'}
+                ]},
+                ]
+              },
+
+              { id: 'mc-prog-arrays',
+                title: 'Arrays',
+                description: 'Storing Multiple Values in a Single Variable',
+                blocks: [
+                  { id: 'mc-prog-arrays-1', type: 'markdown', content: '# What is an Array?\n\nAn **array** is a data structure that allows us to store multiple values in a single variable. Instead of declaring separate variables for each value, we can use an array to group them together. Each value in the array is called an **element**, and each element can be accessed using its **index**.' },
+
+                  { id: 'mc-prog-arrays-1b', type: 'note', content: '- In most programming languages, **arrays have a fixed size**, meaning you need to specify how many elements the array will hold when you declare it. This is because the computer needs to allocate a specific amount of memory for the array.\n- The index of an array typically **starts at `0`**, which means the first element is accessed with index `0`, the second element with index `1`, and so on.', metadata: { noteLabel: 'Two important Notes about Arrays in C++'}},
+
+                  { id: 'mc-prog-arrays-2', type: 'markdown', content: '# Declaring and Initializing an Array\n\nThere are two ways to declare an array in C++, depending on if we know the values we want to store at the time of declaration or not:'},
+
+                  { id: 'mc-prog-arrays-2a', type: 'codetooltip', content: 'int myArray[5];  // Here, we tell the microcontroller what size this array should be', metadata: { 
+                    language: 'cpp',
+                    parts: [
+                      {text: 'int', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-1', type: 'markdown', content: 'This indicates that the array will hold integer values.' }
+                      ]},
+                      { text: 'myArray', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-2', type: 'markdown', content: 'The name of this array, just like a variable' } ]
+                      },
+                      { text: '[5]', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-3', type: 'markdown', content: 'This indicates that the array will hold 5 elements. Remember, arrays have a fixed size in C++!' }
+                      ]}
+                    ]
+                   }},
+
+                  { id: 'mc-prog-arrays-2b', type: 'codetooltip', content: 'int myArray[5] = {10, 20, 30, 40, 50}; // Here, we actually fill the array with information', metadata: { 
+                    language: 'cpp',
+                    parts: [
+                      {text: 'int', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-4', type: 'markdown', content: 'This indicates that the array will hold integer values.' }
+                      ]},
+                      { text: 'myArray', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-5', type: 'markdown', content: 'The name of this array, just like a variable' } ]
+                      },
+                      { text: '[5]', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-6', type: 'markdown', content: 'This indicates that the array will hold 5 elements. Remember, arrays have a fixed size in C++!' }
+                      ]},
+                      { text: '= {10, 20, 30, 40, 50}', blocks: [
+                        { id: 'mc-cat-3-4-arrays-tip-7', type: 'markdown', content: 'This is the initialization of the array, where we fill it with values. The values `10`, `20`, `30`, `40`, and `50` are assigned to the elements of the array in order.' }
+                      ]}
                     ]
                   }},
                 ]
               }
 
-
+              // .. more modules here...
             ]
           },
 
-          { id: 'mc-cat-4',
-            title: 'Microcontroller Programming: Python',
-            emoji: '🐍',
-            modules: []
-          },
+          // { id: 'mc-cat-4',
+          //   title: 'Microcontroller Programming: Python',
+          //   emoji: '🐍',
+          //   modules: []
+          // },
 
 
         ]
