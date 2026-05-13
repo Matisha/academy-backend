@@ -1565,44 +1565,101 @@ export const CATEGORIES: Category[] = [
                 title: 'Arrays',
                 description: 'Storing Multiple Values in a Single Variable',
                 blocks: [
-                  { id: 'mc-prog-arrays-1', type: 'markdown', content: '# What is an Array?\n\nAn **array** is a data structure that allows us to store multiple values in a single variable. Instead of declaring separate variables for each value, we can use an array to group them together. Each value in the array is called an **element**, and each element can be accessed using its **index**.' },
+                  { id: 'mc-prog-arrays-1', type: 'markdown', content: '# Arrays in Arduino\n\nAn array is a group of values stored under one name. All items should usually be the same type. Arrays are useful when you want to store several related values, like sensor readings, LED pins, or test scores.' },
 
-                  { id: 'mc-prog-arrays-1b', type: 'note', content: '- In most programming languages, **arrays have a fixed size**, meaning you need to specify how many elements the array will hold when you declare it. This is because the computer needs to allocate a specific amount of memory for the array.\n- The index of an array typically **starts at `0`**, which means the first element is accessed with index `0`, the second element with index `1`, and so on.', metadata: { noteLabel: 'Two important Notes about Arrays in C++'}},
+                  { id: 'mc-prog-arrays-2', type: 'note', content: 'Arrays are **fixed size**. If you make an array with 5 spots, it stays at 5 spots. Also, the first item starts at index `0`.' },
 
-                  { id: 'mc-prog-arrays-2', type: 'markdown', content: '# Declaring and Initializing an Array\n\nThere are two ways to declare an array in C++, depending on if we know the values we want to store at the time of declaration or not:'},
-
-                  { id: 'mc-prog-arrays-2a', type: 'codetooltip', content: 'int myArray[5];  // Here, we tell the microcontroller what size this array should be', metadata: { 
+                  { id: 'mc-prog-arrays-3', type: 'codetooltip', content: 'int readings[5] = {10, 20, 30, 40, 50};', metadata: {
                     language: 'cpp',
                     parts: [
-                      {text: 'int', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-1', type: 'markdown', content: 'This indicates that the array will hold integer values.' }
-                      ]},
-                      { text: 'myArray', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-2', type: 'markdown', content: 'The name of this array, just like a variable' } ]
-                      },
-                      { text: '[5]', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-3', type: 'markdown', content: 'This indicates that the array will hold 5 elements. Remember, arrays have a fixed size in C++!' }
-                      ]}
-                    ]
-                   }},
-
-                  { id: 'mc-prog-arrays-2b', type: 'codetooltip', content: 'int myArray[5] = {10, 20, 30, 40, 50}; // Here, we actually fill the array with information', metadata: { 
-                    language: 'cpp',
-                    parts: [
-                      {text: 'int', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-4', type: 'markdown', content: 'This indicates that the array will hold integer values.' }
-                      ]},
-                      { text: 'myArray', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-5', type: 'markdown', content: 'The name of this array, just like a variable' } ]
-                      },
-                      { text: '[5]', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-6', type: 'markdown', content: 'This indicates that the array will hold 5 elements. Remember, arrays have a fixed size in C++!' }
-                      ]},
-                      { text: '= {10, 20, 30, 40, 50}', blocks: [
-                        { id: 'mc-cat-3-4-arrays-tip-7', type: 'markdown', content: 'This is the initialization of the array, where we fill it with values. The values `10`, `20`, `30`, `40`, and `50` are assigned to the elements of the array in order.' }
-                      ]}
+                      { text: 'int', blocks: [{ id: 'mc-prog-arrays-3a', type: 'markdown', content: 'Each item is an integer.' }] },
+                      { text: 'readings', blocks: [{ id: 'mc-prog-arrays-3b', type: 'markdown', content: 'This is the array name.' }] },
+                      { text: '[5]', blocks: [{ id: 'mc-prog-arrays-3c', type: 'markdown', content: 'This array holds 5 values.' }] },
+                      { text: '= {', blocks: [{ id: 'mc-prog-arrays-3d', type: 'markdown', content: 'These values fill the array.' }] },
+                      { text: '10, 20, 30, 40, 50', blocks: [{ id: 'mc-prog-arrays-3e', type: 'markdown', content: 'Each number goes into one spot.' }] },
+                      { text: '};', blocks: [{ id: 'mc-prog-arrays-3f', type: 'markdown', content: 'The semicolon ends the statement.' }] }
                     ]
                   }},
+
+                  { id: 'mc-prog-arrays-4', type: 'markdown', content: 'Use brackets `[]` to read or change a single item. Remember: `readings[0]` is the first item, `readings[1]` is the second, and so on.' },
+
+                  { id: 'mc-prog-arrays-5', type: 'codetooltip', content: 'int firstReading = readings[0];\nint lastReading = readings[4];', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'readings[0]', blocks: [{ id: 'mc-prog-arrays-5a', type: 'markdown', content: 'This gets the first item.' }] },
+                      { text: 'readings[4]', blocks: [{ id: 'mc-prog-arrays-5b', type: 'markdown', content: 'This gets the fifth item.' }] }
+                    ]
+                  }},
+
+                  { id: 'mc-prog-arrays-6', type: 'dropdown', content: 'Example: print every value in an array', children: [
+                    { id: 'mc-prog-arrays-6a', type: 'markdown', content: 'A `for` loop is a common way to move through every item in an array.' },
+                    { id: 'mc-prog-arrays-6b', type: 'codetooltip', content: 'int readings[] = {10, 20, 30, 40, 50};\n\nvoid setup() {\n  Serial.begin(9600);\n\n  for (int i = 0; i < 5; i++) {\n    Serial.println(readings[i]);\n  }\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'int readings[] = {10, 20, 30, 40, 50};', blocks: [{ id: 'mc-prog-arrays-6c', type: 'markdown', content: 'The array is created with 5 values.' }] },
+                        { text: 'for (int i = 0; i < 5; i++) {', blocks: [{ id: 'mc-prog-arrays-6d', type: 'markdown', content: '`i` counts through the array.' }] },
+                        { text: 'Serial.println(readings[i]);', blocks: [{ id: 'mc-prog-arrays-6e', type: 'markdown', content: 'This prints the current item.' }] }
+                      ]
+                    }}
+                  ]},
+
+                  { id: 'mc-prog-arrays-7', type: 'markdown', content: 'You can also change one item at a time. This is useful when a new sensor value comes in or when you want to update a list.' },
+
+                  { id: 'mc-prog-arrays-8', type: 'codetooltip', content: 'int scores[3] = {8, 9, 7};\nscores[1] = 10;', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'scores[1]', blocks: [{ id: 'mc-prog-arrays-8a', type: 'markdown', content: 'This points to the second item.' }] },
+                      { text: '= 10;', blocks: [{ id: 'mc-prog-arrays-8b', type: 'markdown', content: 'This changes that item.' }] }
+                    ]
+                  }},
+
+                  { id: 'mc-prog-arrays-9', type: 'dropdown', content: 'Example: turn several LEDs on and off', children: [
+                    { id: 'mc-prog-arrays-9a', type: 'markdown', content: 'Arrays work well for pin lists. Here, one loop controls three LEDs.' },
+                    { id: 'mc-prog-arrays-9b', type: 'codetooltip', content: 'const int ledPins[] = {2, 3, 4};\n\nvoid setup() {\n  for (int i = 0; i < 3; i++) {\n    pinMode(ledPins[i], OUTPUT);\n  }\n}\n\nvoid loop() {\n  for (int i = 0; i < 3; i++) {\n    digitalWrite(ledPins[i], HIGH);\n    delay(200);\n    digitalWrite(ledPins[i], LOW);\n  }\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'const int ledPins[] = {2, 3, 4};', blocks: [{ id: 'mc-prog-arrays-9c', type: 'markdown', content: 'This stores the pin numbers.' }] },
+                        { text: 'pinMode(ledPins[i], OUTPUT);', blocks: [{ id: 'mc-prog-arrays-9d', type: 'markdown', content: 'Each pin is set as an output.' }] },
+                        { text: 'digitalWrite(ledPins[i], HIGH);', blocks: [{ id: 'mc-prog-arrays-9e', type: 'markdown', content: 'This turns one LED on.' }] },
+                        { text: 'digitalWrite(ledPins[i], LOW);', blocks: [{ id: 'mc-prog-arrays-9f', type: 'markdown', content: 'This turns it off.' }] }
+                      ]
+                    }}
+                  ]},
+
+                  { id: 'mc-prog-arrays-10', type: 'markdown', content: 'If you want the size of an array, you can calculate it with `sizeof`.' },
+
+                  { id: 'mc-prog-arrays-11', type: 'codetooltip', content: 'int readings[] = {10, 20, 30, 40, 50};\nint count = sizeof(readings);', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'sizeof(readings)', blocks: [{ id: 'mc-prog-arrays-11a', type: 'markdown', content: 'This gets the total size in bytes.' }] },
+                      { text: 'count', blocks: [{ id: 'mc-prog-arrays-11c', type: 'markdown', content: 'This becomes the number of items.' }] }
+                    ]
+                  }},
+
+                  { id: 'mc-prog-arrays-12', type: 'dropdown', content: 'Example: average several sensor readings', children: [
+                    { id: 'mc-prog-arrays-12a', type: 'markdown', content: 'Here, we store several readings, add them up, and find the average.' },
+                    { id: 'mc-prog-arrays-12b', type: 'codetooltip', content: 'int readings[] = {100, 102, 98, 101, 99};\nint sum = 0;\n\nvoid setup() {\n  Serial.begin(9600);\n\n  for (int i = 0; i < 5; i++) {\n    sum += readings[i];\n  }\n\n  float average = sum / 5.0;\n  Serial.println(average);\n}', metadata: {
+                      language: 'cpp',
+                      parts: [
+                        { text: 'int readings[] = {100, 102, 98, 101, 99};', blocks: [{ id: 'mc-prog-arrays-12c', type: 'markdown', content: 'These are the sample values.' }] },
+                        { text: 'sum += readings[i];', blocks: [{ id: 'mc-prog-arrays-12d', type: 'markdown', content: 'Add each value to the total.' }] },
+                        { text: 'float average = sum / 5.0;', blocks: [{ id: 'mc-prog-arrays-12e', type: 'markdown', content: 'Divide by a decimal to keep the answer as a decimal.' }] }
+                      ]
+                    }}
+                  ]},
+
+                  { id: 'mc-prog-arrays-13', type: 'markdown', content: 'Arrays can also hold characters. A character array can store a short message.' },
+
+                  { id: 'mc-prog-arrays-14', type: 'codetooltip', content: 'char message[] = "Hi!";', metadata: {
+                    language: 'cpp',
+                    parts: [
+                      { text: 'char', blocks: [{ id: 'mc-prog-arrays-14a', type: 'markdown', content: 'Each item is a character.' }] },
+                      { text: 'message', blocks: [{ id: 'mc-prog-arrays-14b', type: 'markdown', content: 'This is the array name.' }] },
+                      { text: '"Hi!"', blocks: [{ id: 'mc-prog-arrays-14c', type: 'markdown', content: 'The text goes inside quotes.' }] }
+                    ]
+                  }},
+
+                  { id: 'mc-prog-arrays-15', type: 'markdown', content: 'A good rule is to use arrays when you have many similar values and want to process them with a loop.' },
                 ]
               }
 
